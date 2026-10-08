@@ -249,3 +249,17 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `docs/official/compatibility.md`：原先只有摘要，现已补齐 GA 主版本、生命周期、Cloud v3/v4 功能矩阵、旧 SDK/接口的迁移边界及 FAQ；动态切换日期继续引用官方实时页面。
 - `docs/official/evaluation/evaluation-methods/decision-models.md`：原先为概要稿，现已逐节补齐 Choice、Score、Yes/no 类型及边界、OpenAI 与 TypeSafe 区别、输入映射、调试、Score 字段、限制和 FAQ。特别澄清 Yes/no 为数值概率而非 Boolean Score。
 - 本轮两页仍未运行 VitePress 全量构建或示例运行；剩余长篇工作稿继续保留待验收标记，**不因本轮补齐两篇而宣称全库完整**。
+
+
+### Issue #2 逐篇验收记录（2026-10-08，禁止部署）
+
+验收状态必须以逐篇证据为准；本段与前述“映射数量”互不等价。上游基线 `langfuse/langfuse-docs@e72be49bedf5172a5224acbdf39d102ca02496d5`。
+
+| 文档 | 上游 Blob SHA | 译文 Commit SHA | 已完成检查 | 状态 / 阻塞 |
+| --- | --- | --- | --- | --- |
+| `evaluation/evaluation-methods/decision-models` | `d90d018b407990aacd65ace229e37183f9ce9029` | `1fec22ea54c3e3dc8d0d2ffeebeddab2ea92e15c` | 对照上游静态正文、3 类问题、配置表与 Score 表、四则 FAQ；补齐 Score comment 完整示例、具体 Rule/Batch 锚点，并明确讨论组件的静态替代 | **BLOCKED**：尚未取得本次构建、站内锚点与外链自动验证结果，不能标 PASS |
+| `compatibility` | 待独立登记 | 无本轮提交 | 已有扩译稿，但未完成动态矩阵独立核对 | **BLOCKED**：待完整技术验收 |
+
+**构建执行准备：** 将 `.github/workflows/validate-docs.yml` 改成在 `master` 的 `docs/**` 变更时自动运行仅构建的 CI（Commit `edea273715c20d530df608f3ac1765c317dbffc8`）。该 workflow 不含 Pages 部署步骤；`deploy.yml` 仍只支持手动 `workflow_dispatch`。本地工作环境无法解析 GitHub 域名，无法克隆安装依赖，不能以本机编译成功作为证据。此处不预先宣称 CI 通过。
+
+**未完成总验收：** 113 篇尚未逐页取得 PASS。高级 SDK 与其他高风险概要工作稿仍需把示例移回原文位置；不能以代码数量或 Markdown 页面存在视为通过。没有部署 GitHub Pages。
