@@ -382,3 +382,5 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - GitHub Actions [run 37766466714](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37766466714) 在 commit `7429ed6` 上成功：覆盖全部 **113 篇 `docs/official/`**（仓库合计 121 篇 Markdown），静态错误 **0**；导航路径有效；VitePress 1.6.4 编译成功。首次脚本对于含中文标题的锚点给出 **3 个需人工复核提示**，已对目标标题确认三处存在，并修正脚本的 Unicode 标题检查（commit `f7115d0`），需以该提交的下一次 CI 为准。
 - VitePress 存在 `>500 kB` chunk 性能警告，但并不阻止构建。以上为路径、围栏、基本锚点及**构建**检查，**不等于原文译文逐段一致性、代码示例运行成功或生产部署验收**。
 - 未部署。
+
+补充：Unicode 中文锚点检查脚本已修正（`5edd7e0`），对应 GitHub Actions [run 37766745989](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37766745989) 静态检查及构建均成功，报告只剩 1 个需要修复的英文锚点：SDK Overview 指向 Score via SDK 的 `#browser-score-ingestion`，中文版该章节实际为 `#浏览器评分`。已修改链接（`b262100`），等待该修复提交的自动验证结果。网站未部署。
