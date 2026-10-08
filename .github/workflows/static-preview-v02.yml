@@ -1,6 +1,11 @@
 name: Experimental V0.2 GitHub Pages static export
 on:
   workflow_dispatch:
+  push:
+    branches: [v0.2]
+    paths:
+      - 'scripts/prepare-static-export.py'
+      - '.github/workflows/static-preview-v02.yml'
 permissions:
   contents: read
 jobs:
