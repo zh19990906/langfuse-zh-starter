@@ -53,6 +53,8 @@ if __name__ == "__main__":
 
 ### Express / TypeScript
 
+下面是对官方示例的**启动顺序安全修订**：官方片段没有等待异步预取完成，就执行了 `app.listen()`；这里改为先完成预取、成功后启动服务。
+
 ```typescript
 import express from "express";
 import { LangfuseClient } from "@langfuse/client";
@@ -60,23 +62,29 @@ const app = express();
 const langfuse = new LangfuseClient();
 
 async function fetchPromptsOnStartup() {
-  try {
-    await langfuse.prompt.get("movie-critic");
-  } catch (error) {
-    console.error("Failed to fetch prompt on startup:", error);
-    process.exit(1);
-  }
+  // 先将生产版本写入本实例的本地缓存
+  await langfuse.prompt.get("movie-critic");
 }
 
-fetchPromptsOnStartup();
 app.get("/get-movie-prompt/:movie", async (req, res) => {
   const movie = req.params.movie;
   const prompt = await langfuse.prompt.get("movie-critic");
   const compiledPrompt = prompt.compile({ criticlevel: "expert", movie });
   res.json({ prompt: compiledPrompt });
 });
-app.listen(3000);
+
+// 预取成功后才开放端口；失败时记录错误并拒绝启动
+fetchPromptsOnStartup()
+  .then(() => app.listen(3000, () => console.log("Server ready on port 3000")))
+  .catch((error) => {
+    console.error("Failed to fetch prompt on startup:", error);
+    process.exit(1);
+  });
 ```
+
+::: warning 可用性边界
+启动预取只是保障**该实例已加载指定 Prompt**，不是平台对任意时刻、任意 Prompt 的绝对 100% SLA：如果启动失败，实例会拒绝提供服务，需由部署平台健康检查、冗余实例或重新调度处理；如希望新实例在 Langfuse 不可达时仍能启动，还应配置适当的本地 `fallback`。每个进程/实例都需要自己的预取，未预取的 Prompt 不受此机制保护。
+:::
 
 ## 方案二：回退提示词
 
