@@ -325,3 +325,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 修正 JS v3→v4 升级指南中的 SDK Overview 与后续 v4→v5 指南链接，改为本站中文页面（commit `4edaf52c7b61595af776dc09c5b4e521c6b8431c`）。
 - 特别注意：官方 Python v2→v3 源页面含 JS/TS v3→v4 的追加迁移章节，中文版本也保留此部分；这属于上游结构，暂不擅自删除。
 - 本轮属于目录结构、迁移关键点和示例数量核对，尚未完成逐句独立 PASS、实际 SDK 测试或 VitePress 构建；不部署。
+
+### ## api-and-data-platform/features/ 首批校验（2026-10-08）
+
+目录共有 7 篇。重点检查 `public-api`（官方 21 组代码）与 `export-to-blob-storage`（官方 2 组代码）。
+- Public API：将 21 组上游示例分配到 URL/认证、SDK 查询、Observations API v2、Scores API v3 等正文相关章节；原有的 2 组中文示例保留，合计 23 组（commit `659e71e`）。
+- Blob Storage 导出：将官方对象存储路径示例与 API 端点放入正文对应小节（commit `c7923be`）；**该页仍是高度压缩的中文概要，原文约 40 KB，有大量字段定义未译**，已在正文警示，不可标记 PASS。
+- 首批只验证代码位置与结构，尚未完整核对 API 字段、导出表结构、所有链接及全量构建，状态 PARTIAL。不部署。
+
