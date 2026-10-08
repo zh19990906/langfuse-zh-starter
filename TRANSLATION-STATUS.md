@@ -277,3 +277,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `evaluation/evaluation-methods/scores-via-sdk.md`：29 组上游示例已经从独立的“官方示例 1～29”尾部附录移回 Trace/Observation、浏览器、Session、ScoreConfig 等对应的中文正文章节，并标注语言与用途。
 - 静态检查：29 组代码块，围栏成对，尾部原编号标题已清除。尚未调用真实 API 或执行 SDK 示例，暂不标记最终 PASS。
 - 未部署网站。
+
+### ## evaluation/experiments/ 目录阶段校验（2026-10-08）
+
+已将 `datasets.md` 的 14 个、`experiments-via-sdk.md` 的 16 个、`experiments-ci-cd.md` 的 13 个上游代码块，重新按对应功能章节归位；复核过代码围栏数分别为 28、32、26 条。最终修正提交：`b1f07e8`、`0487859`、`3fab1d6`。本轮**仅完成示例结构和数量的静态核对**，尚需逐段技术内容对照、真实 SDK 测试和构建。因此该文件夹继续标记 PARTIAL，禁止部署。
