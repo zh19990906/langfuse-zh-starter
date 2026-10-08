@@ -47,6 +47,18 @@ SDK 支持调试日志，用于排查认证、Span 筛选、上下文传播、�
 
 Sentry 与 OTEL 可共存，但要避免初始化顺序和重复 Span Exporter 的问题。多进程、Worker、线程池要正确传播 Context；短生命周期 Worker 退出前应 Flush。
 
+## 校验补充：采样配置与行为
+
+Python SDK 初始化时使用 `sample_rate`，范围为 **0.0–1.0**；例如 `Langfuse(sample_rate=0.2)` 表示约 20% 的 Trace。也可设置 `LANGFUSE_SAMPLE_RATE="0.2"`。**未采样的 Trace，其 Observation 及关联 Score 也不会发送到 Langfuse**。
+
+JS/TS SDK 尊重 OpenTelemetry 的采样决定。可在 `NodeSDK` 中使用 `TraceIdRatioBasedSampler(0.2)`，或者通过 `LANGFUSE_SAMPLE_RATE` 设置采样率。两种语言的代码见后面的官方示例，不能把 JS/TS 采样器误用为 Python 的初始化参数。
+
+## 校验补充：隔离 TracerProvider 与多项目风险
+
+独立 TracerProvider 可以使 Langfuse Span 不发送到 Datadog、Jaeger 等其他后端，也阻止第三方库 Span 被 Langfuse 捕获；但**不同 Provider 仍共享 OpenTelemetry 当前 Context**，因而可能出现父节点属于其他 Provider、子节点被导出而父节点缺失的情况。
+
+Python 多项目路由目前为**实验性功能**。Langfuse 自身创建的 Span 携带项目 Public Key，Processor 据此路由；第三方 OpenTelemetry 库生成的 Span 往往没有该 Key。如果它们通过导出过滤，**可能同时发送到多个项目**。在最外层被 `@observe()` 包装的函数调用中传递 `langfuse_public_key`，并验证第三方 Instrumentation 的隔离行为；仅有多个客户端实例不等于完成了租户隔离。
+
 ## 官方技术示例（保留原始可执行语法）
 
 以下是源文档中的全部代码块与配置示例，代码保持原文，不自动翻译变量名，以免破坏运行行为。
