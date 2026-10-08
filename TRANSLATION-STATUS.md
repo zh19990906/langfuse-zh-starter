@@ -12,8 +12,10 @@
 - `evaluation/overview.mdx` → `docs/official/evaluation/overview.md`
 - `observability/data-model.mdx` → `docs/official/observability/data-model.md`
 - `observability/troubleshooting-and-faq.mdx` → `docs/official/observability/troubleshooting-and-faq.md`（静态文字翻译，动态组件未翻译）
+- `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
+- `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前完成页面：5 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：7 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
