@@ -369,3 +369,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 抽查 `index`、`v4`、`security-and-guardrails`、`evaluation/get-started/offline`、`evaluation/get-started/online`、`observability/data-model`、`prompt-management/get-started` 共 7 篇，核对原文及中文章节和代码围栏数量。Online 评估教程英文 8 组示例、中文版 4 组，是因把相邻的 CLI 安装命令合并展示，暂未认定漏示例；Prompt Management 快速入门中文版多了补充示例。已修复其中 6 篇共 39 处指向相应英文文档的正文链接，改用本地中文路径。提交 `06d78ef`、`56a7806`、`e052919`、`e41dc77`、`df7ac4d`、`62a5784`。
 
 此批属于结构/链接初检，不等于 7 篇完整逐段翻译或 Markdown 构建验收。继续遵守不部署限制。
+
+### Compatibility 与 Demo 专项补充（2026-10-08）
+
+- `compatibility.md`：补充 Cloud 与自托管 Server/SDK/API/导出/评估器分项核对步骤，强调静态矩阵不能代替实时官方筛选与具体补丁版本验证（commit `fb49d399ace3b176d9f5287faa69e78c74ddc587`）。
+- `demo.md`：补充多人共享演示项目的隐私提醒、Trace 检查流程，说明官方交互式 Demo 组件并未本地实现（commit `fc2a5a01e948462d7bce588eae541fecc12ab536`）。
+- 仍需进一步核对上游动态组件的全部兼容条件，并执行站点构建检查；不部署。
