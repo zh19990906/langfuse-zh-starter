@@ -15,63 +15,8 @@ Langfuse Experiment Runner 可以在 Python 或 TypeScript 代码中运行自己
 
 Task 函数接收 DatasetItem 或本地样本，返回模型执行结果。Evaluator 使用 Output、Expected Output、Input 和 Metadata 计算 Score。SDK 负责追踪、关联、并发与结果汇总。
 
-### 基础使用
 
-可先使用本地样本列表运行实验。定义 Task 和 Evaluator 后，调用 Experiment Runner，使用结果格式化函数输出总结。
-
-### 使用托管 Dataset
-
-先从 Langfuse 获取 Dataset，再运行 `dataset.run_experiment()`（Python）或 `dataset.runExperiment()`（JS/TS），产生可在 UI 比较的实验记录。
-
-## 高级功能
-
-### Evaluator
-
-可配置多种逐项 Evaluator，包括确定性匹配、业务规则和 LLM 裁判。Evaluator 应返回明确定义的 Score。
-
-### Run-level Evaluator
-
-Run Evaluator 处理整次实验的输出，计算平均质量、成功率或自定义汇总指标，Score 关联整个 DatasetRun。
-
-### 多模态实验
-
-任务可以处理图像或其他媒体，使用媒体引用和支持该类型的模型。
-
-### Async Task 与 Evaluator
-
-异步任务可并发执行，要控制 Provider 限流、费用和共享状态。
-
-### 配置参数
-
-Runner 通常支持任务函数、Evaluator、实验名、描述、元数据以及并发等参数，确切字段参阅 SDK Reference。
-
-## Autoevals 集成
-
-可以结合 Autoevals 等外部评分库，把结果写入 Langfuse Score。
-
-## 可选：从 UI 触发 SDK 实验
-
-在 Dataset 设置中配置 Webhook，点击 UI 按钮触发外部执行服务。Webhook 接收请求后启动自有应用 Runner，并写回 Langfuse；注意认证、幂等、重试和执行状态。
-
-[相关实验比较](/official/evaluation/experiments/compare-experiments)。
-
-## 精校补充：Runner 的执行边界
-
-Experiment SDK 在**自己的应用环境**调用 Task，不是在 Langfuse 服务器上运行用户的 Python/TypeScript 业务函数。Runner 负责关联 DatasetItem、Trace、Evaluator Score 和 DatasetRun。
-
-**逐项 Evaluator** 对某个 Task Output 与 Expected Output 打分；**Run-level Evaluator** 则聚合整次 Experiment 的结果。两者适用对象不同，不能把 Run-level 指标误写为每个样本的 Score。
-
-使用托管 Dataset 时，应尽量固定 [Dataset Version](/official/evaluation/experiments/datasets)，否则在两次实验间增删或修改样本会影响可比性。异步 Task、Evaluator 的并发配置还应考虑模型限流、成本与工具副作用。
-
-### 通过 UI Webhook 触发外部执行
-
-UI 中设置的 Experiment Webhook 负责触发**外部运行器**，并不意味着 Langfuse 在 UI 内执行自定义 Task 代码。Webhook 接收端应校验来源、按事件 ID 幂等处理重试、记录运行失败并安全保存模型与项目密钥。
-
-## 原文中的技术示例
-
-以下保留源文档所有代码与配置块，以避免翻译程序标识符造成错误。
-
-### 官方示例 1
+**官方示例（本地数据实验，分别使用 Python 和 TypeScript Runner。）**
 
 ```python
 from langfuse import get_client
@@ -106,9 +51,6 @@ result = langfuse.run_experiment(
 # Use format method to display results
 print(result.format())
 ```
-
-
-### 官方示例 2
 
 ```typescript
 import { OpenAI } from "openai";
@@ -167,8 +109,12 @@ console.log(await result.format());
 await otelSdk.shutdown();
 ```
 
+### 基础使用
 
-### 官方示例 3
+可先使用本地样本列表运行实验。定义 Task 和 Evaluator 后，调用 Experiment Runner，使用结果格式化函数输出总结。
+
+
+**官方示例（从 Langfuse 读取 Dataset，再执行 Experiment。）**
 
 ```python
 from langfuse import get_client
@@ -200,9 +146,6 @@ result = dataset.run_experiment(
 print(result.format())
 ```
 
-
-### 官方示例 4
-
 ```typescript
 // Get dataset from Langfuse
 const dataset = await langfuse.dataset.get("my-evaluation-dataset");
@@ -221,8 +164,14 @@ console.log(await result.format());
 await otelSdk.shutdown();
 ```
 
+### 使用托管 Dataset
 
-### 官方示例 5
+先从 Langfuse 获取 Dataset，再运行 `dataset.run_experiment()`（Python）或 `dataset.runExperiment()`（JS/TS），产生可在 UI 比较的实验记录。
+
+## 高级功能
+
+
+**官方示例（多个逐项 Evaluator 的 Python 与 TypeScript 用法。）**
 
 ```python
 from langfuse import Evaluation
@@ -247,9 +196,6 @@ result = langfuse.run_experiment(
 
 print(result.format())
 ```
-
-
-### 官方示例 6
 
 ```typescript
 // Define evaluation functions
@@ -290,8 +236,12 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
+### Evaluator
 
-### 官方示例 7
+可配置多种逐项 Evaluator，包括确定性匹配、业务规则和 LLM 裁判。Evaluator 应返回明确定义的 Score。
+
+
+**官方示例（汇总整个 Run 的指标；与单项 Evaluator 不同。）**
 
 ```python
 from langfuse import Evaluation
@@ -321,9 +271,6 @@ result = langfuse.run_experiment(
 
 print(result.format())
 ```
-
-
-### 官方示例 8
 
 ```typescript
 const averageAccuracy = async ({ itemResults }) => {
@@ -357,8 +304,12 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
+### Run-level Evaluator
 
-### 官方示例 9
+Run Evaluator 处理整次实验的输出，计算平均质量、成功率或自定义汇总指标，Score 关联整个 DatasetRun。
+
+
+**官方示例（处理媒体/图像 DatasetItem。）**
 
 ```python
 from langfuse import get_client
@@ -387,9 +338,6 @@ result = dataset.run_experiment(
 )
 ```
 
-
-### 官方示例 10
-
 ```typescript
 import {
   LangfuseClient,
@@ -417,8 +365,12 @@ const result = await dataset.runExperiment({
 });
 ```
 
+### 多模态实验
 
-### 官方示例 11
+任务可以处理图像或其他媒体，使用媒体引用和支持该类型的模型。
+
+
+**官方示例（异步 Task/Evaluator 的用法。）**
 
 ```python
 import asyncio
@@ -445,9 +397,6 @@ result = langfuse.run_experiment(
 print(result.format())
 ```
 
-
-### 官方示例 12
-
 ```typescript
 import OpenAI from "openai";
 
@@ -473,8 +422,12 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
+### Async Task 与 Evaluator
 
-### 官方示例 13
+异步任务可并发执行，要控制 Provider 限流、费用和共享状态。
+
+
+**官方示例（运行器的并发及其他配置选项。）**
 
 ```python
 result = langfuse.run_experiment(
@@ -495,9 +448,6 @@ result = langfuse.run_experiment(
 
 print(result.format())
 ```
-
-
-### 官方示例 14
 
 ```typescript
 const result = await langfuse.experiment.run({
@@ -520,8 +470,16 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
+### 配置参数
 
-### 官方示例 15
+Runner 通常支持任务函数、Evaluator、实验名、描述、元数据以及并发等参数，确切字段参阅 SDK Reference。
+
+## Autoevals 集成
+
+可以结合 Autoevals 等外部评分库，把结果写入 Langfuse Score。
+
+
+**官方示例（Autoevals 第三方评估器集成示例。）**
 
 ```python
 from langfuse.experiment import create_evaluator_from_autoevals
@@ -538,9 +496,6 @@ result = langfuse.run_experiment(
 
 print(result.format())
 ```
-
-
-### 官方示例 16
 
 ```typescript
 import { Factuality, Levenshtein } from "autoevals";
@@ -570,8 +525,27 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
+## 可选：从 UI 触发 SDK 实验
+
+在 Dataset 设置中配置 Webhook，点击 UI 按钮触发外部执行服务。Webhook 接收请求后启动自有应用 Runner，并写回 Langfuse；注意认证、幂等、重试和执行状态。
+
+[相关实验比较](/official/evaluation/experiments/compare-experiments)。
+
+## 精校补充：Runner 的执行边界
+
+Experiment SDK 在**自己的应用环境**调用 Task，不是在 Langfuse 服务器上运行用户的 Python/TypeScript 业务函数。Runner 负责关联 DatasetItem、Trace、Evaluator Score 和 DatasetRun。
+
+**逐项 Evaluator** 对某个 Task Output 与 Expected Output 打分；**Run-level Evaluator** 则聚合整次 Experiment 的结果。两者适用对象不同，不能把 Run-level 指标误写为每个样本的 Score。
+
+使用托管 Dataset 时，应尽量固定 [Dataset Version](/official/evaluation/experiments/datasets)，否则在两次实验间增删或修改样本会影响可比性。异步 Task、Evaluator 的并发配置还应考虑模型限流、成本与工具副作用。
+
+### 通过 UI Webhook 触发外部执行
+
+UI 中设置的 Experiment Webhook 负责触发**外部运行器**，并不意味着 Langfuse 在 UI 内执行自定义 Task 代码。Webhook 接收端应校验来源、按事件 ID 幂等处理重试、记录运行失败并安全保存模型与项目密钥。
+
+
 ::: info 翻译状态
-已完成核心章节中文说明并保留全部代码；原文部分深层细节、表格及动态 FAQ 仍待逐段翻译与复核。此页暂不计入“完整验收”文档。
+已将原文代码块按章节位置重新整理，仍待执行版本兼容与构建验证。此页暂不计入“完整验收”文档。
 :::
 
 原文：[通过 SDK 运行实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)。
