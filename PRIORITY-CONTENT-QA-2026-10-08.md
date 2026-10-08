@@ -38,3 +38,9 @@
 - 对 12 篇大型技术文档，静态条款和代码完整性仍存在更深层次的逐段核对空间；特别是 Compat 的动态矩阵和实时切换日期、外部供应商行为、Blob Storage 真实对象存储 ETL，以及涉及密钥的工作流，仍需环境相关验证。不要把这些未经执行的测试标为通过。
 - 已有的 113 篇站内链接/Markdown/VitePress 构建 CI 是另外的质量门槛。后续应以最新修订后的 CI 结果为准。
 - 其余动态 FAQ、Ask AI、Docs MCP 等页面尚未在本轮复核。**不得因为定点补查结束而提前部署**。
+
+## 第二优先级补查：动态内容替代（7 篇）
+
+已对照 `ask-ai.md`、`docs-mcp.md`，以及 Administration、Evaluation、Observability、Prompt Management 四个模块的 `troubleshooting-and-faq.md` 与 `observability/sdk/troubleshooting-and-faq.md`。`Ask AI` 的 `EmbeddedAIChat`、Docs MCP 的安装 MDX 组件、四个 FAQ 的动态 `FaqPreview`/`GhDiscussionsPreview` 均已在中文版**明确说明不在静态 VitePress 内运行**并提供官方实时页面或安装文档链接。SDK FAQ 是静态技术文本，中文包含身份验证、Trace 缺失、上下文和媒体等排错说明。
+
+**结论**：这 7 篇的动态组件处理属于已明确披露的静态替代方案，不是遗漏的可执行本地组件；是否将动态交互原样移植，属于额外产品功能项目，不应冒充已实现。此轮只核对既有替代策略，未改动文件，不代表动态 FAQ 的实时问答已被翻译或离线复制。
