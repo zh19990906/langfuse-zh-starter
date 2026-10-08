@@ -19,6 +19,29 @@ Langfuse Public API 用于摄入 Trace、查询 Observation 和 Score、分析 M
 
 ### 区域地址
 
+**区域 Base URL：官方示例**
+
+```
+/api/public
+```
+
+```
+https://us.cloud.langfuse.com/api/public
+```
+
+```
+https://cloud.langfuse.com/api/public
+```
+
+```
+https://jp.cloud.langfuse.com/api/public
+```
+
+```
+https://hipaa.cloud.langfuse.com/api/public
+```
+
+
 | 地区 | Base URL |
 | --- | --- |
 | Europe | `https://cloud.langfuse.com` |
@@ -29,9 +52,132 @@ Langfuse Public API 用于摄入 Trace、查询 Observation 和 Score、分析 M
 
 ### 发送认证请求
 
+**认证请求和响应：官方示例**
+
+```bash
+curl -u public-key:secret-key https://cloud.langfuse.com/api/public/projects
+```
+
+```json
+{
+  "data": [
+    {
+      "id": "clxxxx",
+      "name": "My Project",
+      "organization": {
+        "id": "clyyyy",
+        "name": "My Org"
+      }
+    }
+  ]
+}
+```
+
+
 通过 `curl -u "$LANGFUSE_PUBLIC_KEY:$LANGFUSE_SECRET_KEY"` 设置 Basic Auth。需要注意分页、限流、API 版本与错误响应。
 
 ## 通过 SDK 查询
+
+**SDK 访问：官方示例**
+
+```python
+from langfuse import get_client
+
+langfuse = get_client()
+
+# Retrieve row-level observations via Observations API v2
+observations = langfuse.api.observations.get_many(
+    trace_id="trace-id",
+    fields="core,basic,usage",
+    limit=100,
+)
+
+# Retrieve aggregates via Metrics API v2
+metrics = langfuse.api.metrics.metrics(query="""
+{
+  "view": "observations",
+  "metrics": [{"measure": "totalCost", "aggregation": "sum"}],
+  "dimensions": [{"field": "providedModelName"}],
+  "filters": [],
+  "fromTimestamp": "2025-05-01T00:00:00Z",
+  "toTimestamp": "2025-05-13T00:00:00Z"
+}
+""")
+
+# explore more endpoints via Intellisense
+langfuse.api.*
+await langfuse.async_api.*
+```
+
+```ts
+import { LangfuseClient } from '@langfuse/client';
+
+const langfuse = new LangfuseClient();
+
+// Retrieve row-level observations via Observations API v2
+const observations = await langfuse.api.observations.getMany({
+  traceId: "trace-id",
+  fields: "core,basic,usage",
+  limit: 100,
+});
+
+// Retrieve aggregates via Metrics API v2
+const metrics = await langfuse.api.metrics.metrics({
+  query: JSON.stringify({
+    view: "observations",
+    metrics: [{ measure: "totalCost", aggregation: "sum" }],
+    dimensions: [{ field: "providedModelName" }],
+    filters: [],
+    fromTimestamp: "2025-05-01T00:00:00Z",
+    toTimestamp: "2025-05-13T00:00:00Z"
+  })
+});
+
+// explore more endpoints via Intellisense
+langfuse.api.*
+```
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.langfuse</groupId>
+    <artifactId>langfuse-java</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+
+<repositories>
+  <repository>
+    <id>github</id>
+    <name>GitHub Package Registry</name>
+    <url>https://maven.pkg.github.com/langfuse/langfuse-java</url>
+  </repository>
+</repositories>
+```
+
+```java
+import com.langfuse.client.LangfuseClient;
+import com.langfuse.client.resources.prompts.types.PromptMetaListResponse;
+import com.langfuse.client.core.LangfuseClientApiException;
+
+LangfuseClient client = LangfuseClient.builder()
+  .url("https://cloud.langfuse.com") // 🇪🇺 EU data region
+  // Other Langfuse data regions:
+  // .url("https://us.cloud.langfuse.com") // 🇺🇸 US
+  // .url("https://jp.cloud.langfuse.com") // 🇯🇵 Japan
+  // .url("https://hipaa.cloud.langfuse.com") // ⚕️ HIPAA
+  // .url("http://localhost:3000") // 🏠 Local deployment
+  .credentials("pk-lf-...", "sk-lf-...")
+  .build();
+
+try {
+  PromptMetaListResponse prompts = client.prompts().list();
+} catch (LangfuseClientApiException error) {
+  System.out.println(error.getBody());
+  System.out.println(error.getStatusCode());
+}
+```
+
 
 Python 与 TypeScript 的 `langfuse.api` 提供类型化生成客户端，可访问 Observation、Metric、Score 等接口，详见[通过 SDK 查询](/official/api-and-data-platform/features/query-via-sdk)。
 
@@ -42,6 +188,13 @@ Python 与 TypeScript 的 `langfuse.api` 提供类型化生成客户端，可访
 ## 读取 Observation
 
 ### Observations API v2
+
+**Observation 读取端点：官方示例**
+
+```
+GET /api/public/v2/observations
+```
+
 
 用于按 Trace、Session、Name、Time、Type 等筛选并读取 Observation。对应自托管 Langfuse v4 的新数据模型。
 
@@ -55,13 +208,78 @@ Python 与 TypeScript 的 `langfuse.api` 提供类型化生成客户端，可访
 
 ### 选择字段组
 
+**字段组：官方示例**
+
+```
+?fields=core,basic,usage
+```
+
+
 可以通过 `fields` 参数只读取所需列，降低响应体大小和查询开销。
 
 ### Filter 和分页
 
+**筛选与分页：官方示例**
+
+```bash
+curl -G \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v2/observations" \
+  --data-urlencode 'fromStartTime=2025-12-15T00:00:00Z' \
+  --data-urlencode 'toStartTime=2025-12-16T00:00:00Z' \
+  --data-urlencode 'filter=[{"type":"string","column":"name","operator":"does not contain","value":"healthcheck"}]'
+```
+
+```bash
+# Fetch a page for one trace
+curl \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v2/observations?fields=core,basic,usage&traceId=your-trace-id&limit=100"
+
+# Response includes: "meta": { "cursor": "eyJsYXN0..." }
+# Pass it back to fetch the next page
+curl \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v2/observations?fields=core,basic,usage&traceId=your-trace-id&limit=100&cursor=eyJsYXN0..."
+```
+
+```bash
+curl \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v2/observations?isRootObservation=true&fromStartTime=2025-12-15T00:00:00Z&toStartTime=2025-12-16T00:00:00Z"
+```
+
+
 支持结构化 Filter、时间范围以及 Cursor Pagination。分页时固定筛选条件，传回上一页的 Cursor，直到没有新 Cursor 为止；不要用时间戳替代 Cursor 避免丢数据。
 
 ## Scores API v3
+
+**Score v3 接口示例：官方示例**
+
+```
+GET /api/public/v3/scores
+```
+
+```
+?fields=details,subject,annotation
+```
+
+```json
+{ "kind": "observation", "id": "obs-1", "traceId": "trace-1" }
+```
+
+```bash
+curl \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v3/scores?name=hallucination,toxicity&dataType=NUMERIC&valueMax=0.5"
+```
+
+```bash
+curl \
+  -H "Authorization: Basic <BASIC AUTH HEADER>" \
+  "https://cloud.langfuse.com/api/public/v3/scores?traceId=trace-1,trace-2&fields=details,subject"
+```
+
 
 新版 Score 接口支持区分 Numeric、Categorical、Boolean、Text，并通过 `subject` 关联评分所属对象。读取时可用字段组和 Filter 减少数据量。
 
@@ -134,251 +352,9 @@ curl -u public-key:secret-key \
 
 **新接入应使用 OpenTelemetry OTLP/HTTP Endpoint**：`POST /api/public/otel/v1/traces`。旧 `POST /api/public/ingestion` 的 Trace/Observation 事件已弃用；Cloud 切换时间应核对[官方迁移指南](https://langfuse.com/integrations/native/opentelemetry/migration-to-v4)。当前 Score Helper 仍通过旧端点发送 `score-create`，该事件在切换后继续受支持。不能把旧 Ingestion API 作为新项目推荐方案。
 
-## 官方代码与请求示例
 
-以下示例保留原文代码内容和请求字段，尚未逐一运行验证。
-
-### 官方示例 1
-
-```text
-/api/public
-```
-
-### 官方示例 2
-
-```text
-https://us.cloud.langfuse.com/api/public
-```
-
-### 官方示例 3
-
-```text
-https://cloud.langfuse.com/api/public
-```
-
-### 官方示例 4
-
-```text
-https://jp.cloud.langfuse.com/api/public
-```
-
-### 官方示例 5
-
-```text
-https://hipaa.cloud.langfuse.com/api/public
-```
-
-### 官方示例 6
-
-```bash
-curl -u public-key:secret-key https://cloud.langfuse.com/api/public/projects
-```
-
-### 官方示例 7
-
-```json
-{
-  "data": [
-    {
-      "id": "clxxxx",
-      "name": "My Project",
-      "organization": {
-        "id": "clyyyy",
-        "name": "My Org"
-      }
-    }
-  ]
-}
-```
-
-### 官方示例 8
-
-```python
-from langfuse import get_client
-
-langfuse = get_client()
-
-# Retrieve row-level observations via Observations API v2
-observations = langfuse.api.observations.get_many(
-    trace_id="trace-id",
-    fields="core,basic,usage",
-    limit=100,
-)
-
-# Retrieve aggregates via Metrics API v2
-metrics = langfuse.api.metrics.metrics(query="""
-{
-  "view": "observations",
-  "metrics": [{"measure": "totalCost", "aggregation": "sum"}],
-  "dimensions": [{"field": "providedModelName"}],
-  "filters": [],
-  "fromTimestamp": "2025-05-01T00:00:00Z",
-  "toTimestamp": "2025-05-13T00:00:00Z"
-}
-""")
-
-# explore more endpoints via Intellisense
-langfuse.api.*
-await langfuse.async_api.*
-```
-
-### 官方示例 9
-
-```ts
-import { LangfuseClient } from '@langfuse/client';
-
-const langfuse = new LangfuseClient();
-
-// Retrieve row-level observations via Observations API v2
-const observations = await langfuse.api.observations.getMany({
-  traceId: "trace-id",
-  fields: "core,basic,usage",
-  limit: 100,
-});
-
-// Retrieve aggregates via Metrics API v2
-const metrics = await langfuse.api.metrics.metrics({
-  query: JSON.stringify({
-    view: "observations",
-    metrics: [{ measure: "totalCost", aggregation: "sum" }],
-    dimensions: [{ field: "providedModelName" }],
-    filters: [],
-    fromTimestamp: "2025-05-01T00:00:00Z",
-    toTimestamp: "2025-05-13T00:00:00Z"
-  })
-});
-
-// explore more endpoints via Intellisense
-langfuse.api.*
-```
-
-### 官方示例 10
-
-```xml
-<dependencies>
-  <dependency>
-    <groupId>com.langfuse</groupId>
-    <artifactId>langfuse-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </dependency>
-</dependencies>
-
-<repositories>
-  <repository>
-    <id>github</id>
-    <name>GitHub Package Registry</name>
-    <url>https://maven.pkg.github.com/langfuse/langfuse-java</url>
-  </repository>
-</repositories>
-```
-
-### 官方示例 11
-
-```java
-import com.langfuse.client.LangfuseClient;
-import com.langfuse.client.resources.prompts.types.PromptMetaListResponse;
-import com.langfuse.client.core.LangfuseClientApiException;
-
-LangfuseClient client = LangfuseClient.builder()
-  .url("https://cloud.langfuse.com") // 🇪🇺 EU data region
-  // Other Langfuse data regions:
-  // .url("https://us.cloud.langfuse.com") // 🇺🇸 US
-  // .url("https://jp.cloud.langfuse.com") // 🇯🇵 Japan
-  // .url("https://hipaa.cloud.langfuse.com") // ⚕️ HIPAA
-  // .url("http://localhost:3000") // 🏠 Local deployment
-  .credentials("pk-lf-...", "sk-lf-...")
-  .build();
-
-try {
-  PromptMetaListResponse prompts = client.prompts().list();
-} catch (LangfuseClientApiException error) {
-  System.out.println(error.getBody());
-  System.out.println(error.getStatusCode());
-}
-```
-
-### 官方示例 12
-
-```text
-GET /api/public/v2/observations
-```
-
-### 官方示例 13
-
-```text
-?fields=core,basic,usage
-```
-
-### 官方示例 14
-
-```bash
-curl -G \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v2/observations" \
-  --data-urlencode 'fromStartTime=2025-12-15T00:00:00Z' \
-  --data-urlencode 'toStartTime=2025-12-16T00:00:00Z' \
-  --data-urlencode 'filter=[{"type":"string","column":"name","operator":"does not contain","value":"healthcheck"}]'
-```
-
-### 官方示例 15
-
-```bash
-# Fetch a page for one trace
-curl \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v2/observations?fields=core,basic,usage&traceId=your-trace-id&limit=100"
-
-# Response includes: "meta": { "cursor": "eyJsYXN0..." }
-# Pass it back to fetch the next page
-curl \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v2/observations?fields=core,basic,usage&traceId=your-trace-id&limit=100&cursor=eyJsYXN0..."
-```
-
-### 官方示例 16
-
-```bash
-curl \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v2/observations?isRootObservation=true&fromStartTime=2025-12-15T00:00:00Z&toStartTime=2025-12-16T00:00:00Z"
-```
-
-### 官方示例 17
-
-```text
-GET /api/public/v3/scores
-```
-
-### 官方示例 18
-
-```text
-?fields=details,subject,annotation
-```
-
-### 官方示例 19
-
-```json
-{ "kind": "observation", "id": "obs-1", "traceId": "trace-1" }
-```
-
-### 官方示例 20
-
-```bash
-curl \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v3/scores?name=hallucination,toxicity&dataType=NUMERIC&valueMax=0.5"
-```
-
-### 官方示例 21
-
-```bash
-curl \
-  -H "Authorization: Basic <BASIC AUTH HEADER>" \
-  "https://cloud.langfuse.com/api/public/v3/scores?traceId=trace-1,trace-2&fields=details,subject"
-```
-
-::: info 翻译状态
-已提供主要章节的中文说明并保留官方代码块。原文完整字段参考、复杂示例说明和部分表格仍需要逐段精校，此页暂不计入“完整验收”。
+::: info 精校状态
+上游 21 组代码已按章节归位，另保留中文原有 2 组示例。接口详细字段、SDK 实际运行仍待核对，尚未通过全文验收。
 :::
 
-原文：[Langfuse Public API](https://langfuse.com/docs/api-and-data-platform/features/public-api)。
+原文：[Public API](https://langfuse.com/docs/api-and-data-platform/features/public-api)。
