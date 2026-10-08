@@ -12,10 +12,10 @@ description: 将 Langfuse 提示词版本与 Trace 关联，分析不同版本�
 
 ## 如何建立关联
 
-官方文档使用可复用的 MDX 交互组件展示不同 SDK 的关联方法。你可以在[原文的操作示例](https://langfuse.com/docs/prompt-management/features/link-to-traces#how-to-link-prompts-to-traces)查看完整代码。本页的组件示例尚未移植。
+官方文档使用可复用的 MDX 交互组件展示不同 SDK 的关联方法。你可以在[原文的操作示例](/official/prompt-management/features/link-to-traces)查看完整代码。本页的组件示例尚未移植。
 
 ::: info
-如果实际使用的是[回退提示词（Fallback Prompt）](https://langfuse.com/docs/prompt-management/features/guaranteed-availability#fallback)，则不会创建关联。
+如果实际使用的是[回退提示词（Fallback Prompt）](/official/prompt-management/features/guaranteed-availability)，则不会创建关联。
 :::
 
 ## 指标参考
@@ -27,7 +27,7 @@ description: 将 Langfuse 提示词版本与 Trace 关联，分析不同版本�
 - 生成输出 Token 数中位数；
 - 生成成本中位数；
 - 生成次数；
-- [评分](https://langfuse.com/docs/evaluation/scores/data-model#scores)中位数；
+- [评分](/official/evaluation/scores/data-model)中位数；
 - 首次与最近一次生成的时间戳。
 
 ---
