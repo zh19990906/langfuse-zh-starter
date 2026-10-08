@@ -12,11 +12,11 @@ description: Dataset、DatasetItem、DatasetRun、DatasetRunItem 与实验任务
 
 | 方式 | 适用情况 |
 | --- | --- |
-| [SDK 实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk) | Python 或 JS/TS Experiment Runner |
+| [SDK 实验](/official/evaluation/experiments/experiments-via-sdk) | Python 或 JS/TS Experiment Runner |
 | [UI 实验](/official/evaluation/experiments/experiments-via-ui) | 从 Dataset 页面测试 Prompt 或模型 |
 | [OpenTelemetry 实验](/official/evaluation/experiments/experiments-via-opentelemetry) | 其他语言、自定义 OTLP 或重摄入实验 Trace |
 
-已有实验创建后，可以通过 [Experiments API](https://langfuse.com/docs/api-and-data-platform/features/public-api#experiments)读取 Run、Item 和 Score。**没有公开的 REST API 用于创建新的 Experiment Run**；旧 `POST /api/public/dataset-run-items` 已弃用。
+已有实验创建后，可以通过 [Experiments API](/official/api-and-data-platform/features/public-api)读取 Run、Item 和 Score。**没有公开的 REST API 用于创建新的 Experiment Run**；旧 `POST /api/public/dataset-run-items` 已弃用。
 
 ## 对象
 
@@ -238,12 +238,12 @@ Run Evaluator 对**整个实验**的结果评分并计算聚合指标。针对 L
 - [Python `RunEvaluatorFunction`](https://python.reference.langfuse.com/langfuse/experiment#RunEvaluatorFunction)
 - [JS/TS `RunEvaluator`](https://js.reference.langfuse.com/types/_langfuse_client.RunEvaluator.html)
 
-完整使用示例参阅 [SDK 实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)；不通过 SDK 摄入实验 Trace 参阅 [OpenTelemetry 实验](/official/evaluation/experiments/experiments-via-opentelemetry)。
+完整使用示例参阅 [SDK 实验](/official/evaluation/experiments/experiments-via-sdk)；不通过 SDK 摄入实验 Trace 参阅 [OpenTelemetry 实验](/official/evaluation/experiments/experiments-via-opentelemetry)。
 
 ## 本地数据集
 
-使用 Langfuse v4 及当前 SDK 时，[本地数据实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)无需托管 Dataset，也会显示在 **Experiments** 下。每次 Task 执行还会创建 Trace 供排障。详见[比较实验](/official/evaluation/experiments/compare-experiments)。
+使用 Langfuse v4 及当前 SDK 时，[本地数据实验](/official/evaluation/experiments/experiments-via-sdk)无需托管 Dataset，也会显示在 **Experiments** 下。每次 Task 执行还会创建 Trace 供排障。详见[比较实验](/official/evaluation/experiments/compare-experiments)。
 
 ---
 
-原文：[Experiments Data Model](https://langfuse.com/docs/evaluation/experiments/data-model) · 非官方中文翻译。
+原文：[Experiments Data Model](/official/evaluation/experiments/data-model) · 非官方中文翻译。
