@@ -263,3 +263,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 **构建执行准备：** 将 `.github/workflows/validate-docs.yml` 改成在 `master` 的 `docs/**` 变更时自动运行仅构建的 CI（Commit `edea273715c20d530df608f3ac1765c317dbffc8`）。该 workflow 不含 Pages 部署步骤；`deploy.yml` 仍只支持手动 `workflow_dispatch`。本地工作环境无法解析 GitHub 域名，无法克隆安装依赖，不能以本机编译成功作为证据。**CI 实测结果：PASS**。GitHub Actions [Validate Chinese Docs Build #37761467429](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37761467429) 已完成，结论 `success`，对应 Commit `edea273715c20d530df608f3ac1765c317dbffc8`；该提交包含此前 `decision-models` 修复。构建通过不代表 113 篇翻译或链接验收通过。
 
 **未完成总验收：** 113 篇尚未逐页取得 PASS。高级 SDK 与其他高风险概要工作稿仍需把示例移回原文位置；不能以代码数量或 Markdown 页面存在视为通过。没有部署 GitHub Pages。
+
+### evaluation/evaluation-methods 文件夹校验批次（2026-10-08）
+
+- 范围：`docs/official/evaluation/evaluation-methods/`（6 篇：annotation-queues、scores-via-ui、decision-models、llm-as-a-judge、code-evaluators、scores-via-sdk）。
+- **本批完成修复**：`llm-as-a-judge.md` 从简略工作稿改为按原文章节组织的中文说明（评估目标、变量映射、多模态、Worker、API、故障排查、FAQ）；`code-evaluators.md` 增补 Context/Score 字段、执行器限制、超时和调试信息。
+- `decision-models.md` 已在此前批次补齐正文，`scores-via-sdk.md` 已修正关键 API 类型；但它们**尚未完成全部代码段上下文映射和运行验证**。
+- `annotation-queues.md`、`scores-via-ui.md` 仍需最终逐段核对；本批未给整个文件夹标记 PASS。
+- 未执行 VitePress Build，未部署。
