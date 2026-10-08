@@ -144,7 +144,11 @@ import { CallbackHandler } from "@langfuse/langchain";
 const handler = new CallbackHandler({ version: "1.0" });
 ```
 
-SDK 属性传播限制由上游复用组件提供，参见[官方原文](https://langfuse.com/docs/observability/features/releases-and-versioning)。
+## Version 属性的传播约束
+
+官方 `PropagationRestrictionsCallout` 规定：传播的 `version` **必须是字符串，长度不超过 200 个字符**；无效值会被丢弃并给出警告。应在 Trace 执行流程**尽早**调用 `propagate_attributes(version=...)` 或 `propagateAttributes({ version: ... }, callback)`，确保所有需要比较版本的 Observation 都能继承该值。调用前已经创建的 Observation 不会自动回填，因此会影响按版本聚合的质量、延迟与成本指标。
+
+参阅[SDK 添加属性](/official/observability/sdk/instrumentation#添加属性)及[官方原文](https://langfuse.com/docs/observability/features/releases-and-versioning)。
 
 ## 相关资源
 
