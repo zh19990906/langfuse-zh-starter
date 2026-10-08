@@ -260,6 +260,6 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 | `evaluation/evaluation-methods/decision-models` | `d90d018b407990aacd65ace229e37183f9ce9029` | `1fec22ea54c3e3dc8d0d2ffeebeddab2ea92e15c` | 对照上游静态正文、3 类问题、配置表与 Score 表、四则 FAQ；补齐 Score comment 完整示例、具体 Rule/Batch 锚点，并明确讨论组件的静态替代 | **BLOCKED**：尚未取得本次构建、站内锚点与外链自动验证结果，不能标 PASS |
 | `compatibility` | 待独立登记 | 无本轮提交 | 已有扩译稿，但未完成动态矩阵独立核对 | **BLOCKED**：待完整技术验收 |
 
-**构建执行准备：** 将 `.github/workflows/validate-docs.yml` 改成在 `master` 的 `docs/**` 变更时自动运行仅构建的 CI（Commit `edea273715c20d530df608f3ac1765c317dbffc8`）。该 workflow 不含 Pages 部署步骤；`deploy.yml` 仍只支持手动 `workflow_dispatch`。本地工作环境无法解析 GitHub 域名，无法克隆安装依赖，不能以本机编译成功作为证据。此处不预先宣称 CI 通过。
+**构建执行准备：** 将 `.github/workflows/validate-docs.yml` 改成在 `master` 的 `docs/**` 变更时自动运行仅构建的 CI（Commit `edea273715c20d530df608f3ac1765c317dbffc8`）。该 workflow 不含 Pages 部署步骤；`deploy.yml` 仍只支持手动 `workflow_dispatch`。本地工作环境无法解析 GitHub 域名，无法克隆安装依赖，不能以本机编译成功作为证据。**CI 实测结果：PASS**。GitHub Actions [Validate Chinese Docs Build #37761467429](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37761467429) 已完成，结论 `success`，对应 Commit `edea273715c20d530df608f3ac1765c317dbffc8`；该提交包含此前 `decision-models` 修复。构建通过不代表 113 篇翻译或链接验收通过。
 
 **未完成总验收：** 113 篇尚未逐页取得 PASS。高级 SDK 与其他高风险概要工作稿仍需把示例移回原文位置；不能以代码数量或 Markdown 页面存在视为通过。没有部署 GitHub Pages。
