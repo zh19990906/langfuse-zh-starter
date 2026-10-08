@@ -103,11 +103,17 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `api-and-data-platform/features/cli.mdx` → `docs/official/api-and-data-platform/features/cli.md`（正文翻译，尚未最终验收）
 - `api-and-data-platform/overview.mdx` → `docs/official/api-and-data-platform/overview.md`（正文翻译，尚未最终验收）
 - `prompt-management/get-started.mdx` → `docs/official/prompt-management/get-started.md`（部分翻译/组件或示例待补）
-- `prompt-management/data-model.mdx` → `docs/official/prompt-management/data-model.md`（部分翻译/组件或示例待补）
+- `prompt-management/data-model.mdx` → `docs/official/prompt-management/data-model.md`（正文已补齐，发布前待验收）
 - `observability/features/log-levels.mdx` → `docs/official/observability/features/log-levels.md`（部分翻译/组件或示例待补）
 - `observability/features/sessions.mdx` → `docs/official/observability/features/sessions.md`（部分翻译/组件或示例待补）
 - `observability/features/users.mdx` → `docs/official/observability/features/users.md`（部分翻译/组件或示例待补）
-- `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（部分翻译/组件或示例待补）
+- `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（主要 SDK 集成示例已补齐，发布前待验收）
 - `observability/features/observation-types.mdx` → `docs/official/observability/features/observation-types.md`（部分翻译/组件或示例待补）
 
 **60 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
+
+### 翻译补齐批次（未部署）
+
+- 已将 `prompt-management/data-model` 从概要扩展为对应上游完整正文：Text/Chat、动态渲染、缓存、版本、标签、发布与回滚。
+- 已为 `observability/features/tags` 补充 Python / TypeScript 的 OpenAI、LangChain 与手动 Observation 使用示例。
+- 中文映射总数仍为 **60 / 113**；这次是补齐已有页面，而非新增篇数。
