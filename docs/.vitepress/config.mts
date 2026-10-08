@@ -52,6 +52,8 @@ export default defineConfig({
         { text: 'Web Callouts', link: '/official/observability/features/web-callouts' },
         { text: 'Agent 访问可观测性', link: '/official/observability/features/agentic-access' },
         { text: 'SDK 升级路径', link: '/official/observability/sdk/upgrade-path/index' },
+        { text: 'JS/TS v3 升级 v4', link: '/official/observability/sdk/upgrade-path/js-v3-to-v4' },
+        { text: 'Langfuse v4', link: '/official/v4' },
         { text: '提示词文件夹', link: '/official/prompt-management/features/folders' },
         { text: '提示词变量', link: '/official/prompt-management/features/variables' },
         { text: '消息占位符', link: '/official/prompt-management/features/message-placeholders' },
