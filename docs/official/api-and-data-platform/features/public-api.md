@@ -283,6 +283,35 @@ curl \
 
 新版 Score 接口支持区分 Numeric、Categorical、Boolean、Text，并通过 `subject` 关联评分所属对象。读取时可用字段组和 Filter 减少数据量。
 
+
+### Scores API v3：完整筛选契约（对照官方原文）
+
+**`value` 随 `dataType` 改变 JSON 类型**，读取端不要统一转换为数字：
+
+| `dataType` | `value` JSON 类型 | 含义 |
+| --- | --- | --- |
+| `NUMERIC` | number | 数值评分 |
+| `BOOLEAN` | boolean | `true` / `false` |
+| `CATEGORICAL` | string | 类别名称 |
+| `TEXT` | string | 文本评分 |
+| `CORRECTION` | string | 纠正文本；无纠正时为空字符串 |
+
+请求 `subject` 字段组时，可使用 `kind` 判断评分唯一关联的对象：`trace` 指 Trace ID；`observation` 指 Observation ID 且包含上级 `traceId`；`session` 指 Session ID；`experiment` 指 Dataset Run ID。示例：
+
+```json
+{ "kind": "observation", "id": "obs-1", "traceId": "trace-1" }
+```
+
+**筛选规则：**
+
+- `id`、`name`、`source`、`dataType`、`environment`、`configId`、`queueId`、`authorUserId`、`traceId`、`sessionId`、`observationId`、`experimentId` 等多数筛选参数接受逗号分隔值。**同一参数内部 OR、不同参数之间 AND**：`name=hallucination,toxicity&source=EVAL` 表示两个名字中任意一个、且来源为 EVAL。
+- 精确 `value` 可接收逗号分隔值，但必须指定单个 `dataType`，且限 `NUMERIC`、`BOOLEAN` 或 `CATEGORICAL`。数值区间 `valueMin` / `valueMax` 均**包含边界**，要求 `dataType=NUMERIC`。
+- `traceId`、`sessionId`、`experimentId` 三者互斥；`observationId` 必须同时提供 `traceId`，因为 Observation ID 限定在 Trace 范围内。
+- `source` 和 `dataType` 的枚举值大小写不敏感。时间筛选 `fromTimestamp` 含起点、`toTimestamp` **不含终点**。
+- 不合法的组合返回 HTTP 400，并非静默忽略。Scores v3 使用 Cursor 分页：默认 50，最多 100 条；后续请求必须维持相同筛选条件并带上 `meta.cursor`。
+
+**Observations API v2 分页对照：**使用 `cursor` 而不是 Offset，`limit` 默认 50、最大 1,000。响应 `meta.cursor` 不存在或为 `null` 时结束。结果按 `startTime` 降序排列（最新优先）。Cloud 请求计入组织级通用 API 限流，自托管实例没有强制的该项限流。
+
 ## Experiments API
 
 用于读取实验运行、实验 Item 和对应 Score，适合自动生成实验报告。Experiment Run 的创建通常由 SDK Runner 或 UI/OTEL 实现，而非直接调用旧的 DatasetRunItem 写入接口。
