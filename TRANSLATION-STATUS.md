@@ -209,3 +209,6 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `content/docs/api-and-data-platform/features/export-to-blob-storage.mdx` → `docs/official/api-and-data-platform/features/export-to-blob-storage.md`（Blob Storage 导出）
 
 **重要：113/113 只代表已建立中文页面映射，不代表 113 篇完整翻译。** 本轮短篇 Demo、Glossary 进行了内容迁移；其余大型技术页面目前为**中文主要章节+源代码完整保留的工作译稿**，英文源的复杂表格、FAQ、完整示例解读和部分细节仍需逐段翻译、人工核对。以前的译文也存在待补齐组件。以上工作尚未执行统一 VitePress Build，也未部署网站，不能宣称“全部翻译完成”。
+
+### SDK 精校批次（未部署）
+- `observability/sdk/overview.mdx` → `docs/official/observability/sdk/overview.md`：已对照官方源文补齐完整中文正文、安装配置、OTEL 关系、浏览器注意事项和代码示例，替换旧概要式工作稿。其余工作稿仍待逐篇精校。
