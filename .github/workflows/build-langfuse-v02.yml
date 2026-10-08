@@ -1,0 +1,41 @@
+name: Build Langfuse Chinese Docs V0.2
+on:
+  workflow_dispatch:
+  push:
+    branches: [v0.2]
+    paths:
+      - 'overrides/**'
+      - 'scripts/apply-langfuse-zh.py'
+      - '.github/workflows/build-langfuse-v02.yml'
+      - 'V0.2-README.md'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout official Langfuse docs
+        uses: actions/checkout@v4
+        with:
+          repository: langfuse/langfuse-docs
+          path: upstream
+      - name: Apply Chinese translations
+        run: python3 scripts/apply-langfuse-zh.py upstream
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.8.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: upstream/pnpm-lock.yaml
+      - name: Install and build static output
+        working-directory: upstream
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build:static
+      - uses: actions/upload-artifact@v4
+        with:
+          name: langfuse-docs-zh-static
+          path: upstream/out
