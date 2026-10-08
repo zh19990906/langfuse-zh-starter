@@ -20,7 +20,9 @@ Dataset 是可重复使用的测试样本集合，每个 DatasetItem 包含 Inpu
 支持手工添加、批量 CSV 导入、从生产 Trace 添加。输入结构应与 Task 或 Prompt 模板的变量契约一致，期望输出应适合所选 Evaluator。
 
 
-**官方示例（多模态 DatasetItem 的 Python/TypeScript 示例。媒体引用应按当前 SDK 解析，避免直接复用过期签名 URL。）**
+## 多模态 Item
+
+**多模态 DatasetItem：官方代码示例**
 
 ```python
 from langfuse import get_client
@@ -65,12 +67,13 @@ await langfuse.dataset.createItem({
 const dataset = await langfuse.dataset.get("visual-qa");
 ```
 
-## 多模态 Item
 
 数据集可以保存媒体引用，在实验中重新解析。媒体的访问权限和签名链接可能过期，需要使用 SDK 的媒体解析机制。
 
 
-**官方示例（在子目录中创建与读取 Dataset，名称必须包含完整的 Folder 路径。）**
+## Dataset Folder
+
+**创建和读取文件夹中的 Dataset：官方代码示例**
 
 ```python
 dataset_name = "evaluation/qa-dataset"
@@ -102,12 +105,13 @@ await langfuse.dataset.create(datasetName);
 await langfuse.dataset.get(encodedName);
 ```
 
-## Dataset Folder
 
 Dataset 名称可以通过路径组织，例如按团队、功能或评估任务分层；通过 SDK 创建/获取时使用完整名称。
 
 
-**官方示例（按时间戳读取特定 Dataset 版本。）**
+## 版本控制
+
+**读取版本化 Dataset：官方代码示例**
 
 ```python
 from langfuse import get_client
@@ -145,12 +149,8 @@ const datasetAtVersion = await langfuse.dataset.get("my-dataset", {
 const datasetLatest = await langfuse.dataset.get("my-dataset");
 ```
 
-## 版本控制
 
-可以按历史时间戳获取 Dataset 的特定状态，保证多轮 Experiment 使用相同版本。归档与编辑 Item 会影响最新状态，比较实验时需固定版本。
-
-
-**官方示例（使用固定 Dataset 版本运行可复现的实验。）**
+**运行固定版本实验：官方代码示例**
 
 ```python
 from datetime import datetime, timezone
@@ -200,12 +200,13 @@ const result = await versionedDataset.runExperiment({
 });
 ```
 
+
+可以按历史时间戳获取 Dataset 的特定状态，保证多轮 Experiment 使用相同版本。归档与编辑 Item 会影响最新状态，比较实验时需固定版本。
+
+
 ## Schema 约束
 
-通过 Schema Enforcement 检查 DatasetItem 的 Input 和 Expected Output，减少无效数据进入实验。
-
-
-**官方示例（Dataset Schema 的 Python 与 TypeScript 配置示例。）**
+**Dataset Schema：官方代码示例**
 
 ```python
 langfuse.create_dataset(
@@ -263,12 +264,13 @@ await langfuse.createDataset({
 });
 ```
 
+
+通过 Schema Enforcement 检查 DatasetItem 的 Input 和 Expected Output，减少无效数据进入实验。
+
+
 ## 合成数据与生产数据
 
-既可以生成合成测试样本，也可以从生产 Observation 选择真实失败案例，并进行必要的隐私脱敏。
-
-
-**官方示例（从生产 Trace 创建 DatasetItem 的代码。）**
+**从 Trace 生成样本：官方代码示例**
 
 ```python
 langfuse.create_dataset_item(
@@ -298,12 +300,13 @@ await langfuse.dataset.createItem({
 });
 ```
 
+
+既可以生成合成测试样本，也可以从生产 Observation 选择真实失败案例，并进行必要的隐私脱敏。
+
+
 ## 批量加入与归档
 
-大批量追加样本时，应管理稳定 ID 和版本变化；不再有效的案例可归档，而不必永久删除。
-
-
-**官方示例（编辑或归档已有 DatasetItem 的代码。）**
+**修改或归档样本：官方代码示例**
 
 ```python
 langfuse.create_dataset_item(
@@ -326,6 +329,10 @@ await langfuse.dataset.createItem({
   status: "ARCHIVED",
 });
 ```
+
+
+大批量追加样本时，应管理稳定 ID 和版本变化；不再有效的案例可归档，而不必永久删除。
+
 
 ## Dataset Run
 
