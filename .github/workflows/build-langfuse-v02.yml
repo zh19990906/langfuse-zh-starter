@@ -34,8 +34,5 @@ jobs:
         working-directory: upstream
         run: |
           pnpm install --frozen-lockfile
-          pnpm build:static
-      - uses: actions/upload-artifact@v4
-        with:
-          name: langfuse-docs-zh-static
-          path: upstream/out
+          pnpm build
+      # Server build validation only. Static export is blocked by upstream dynamic API routes.
