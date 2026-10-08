@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：7 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：21 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -33,3 +33,22 @@
 ## 许可
 
 Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该许可证和版权声明；对品牌与第三方资源需另行核查。
+
+## 新增翻译批次（尚未部署）
+
+- `observability/features/mcp-tracing.mdx`
+- `observability/features/agentic-access.mdx`
+- `observability/sdk/upgrade-path/index.mdx`
+- `prompt-management/features/folders.mdx`
+- `prompt-management/features/composability.mdx`
+- `prompt-management/features/link-to-traces.mdx`（嵌入式 SDK 示例需迁移）
+- `prompt-management/features/agentic-access.mdx`
+- `prompt-management/features/n8n-node.mdx`
+- `evaluation/experiments/experiments-via-opentelemetry.mdx`
+- `evaluation/agentic-access.mdx`
+- `api-and-data-platform/features/export-from-ui.mdx`
+- `administration/spend-alerts.mdx`
+- `docs-mcp.mdx`（安装组件尚未迁移）
+- `ask-ai.mdx`（交互式组件未迁移）
+
+注意：21 篇指已经建立对应中文 Markdown 文件的页面数，**不是 21 篇都经过完整内容验收**。嵌入的动态 MDX 组件需要单独迁移或明确链接到官方实现。计划累积到约 50 篇并复核后再统一部署。
