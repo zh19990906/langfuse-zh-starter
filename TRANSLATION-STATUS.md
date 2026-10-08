@@ -234,3 +234,12 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `evaluation/evaluation-methods/scores-via-sdk.md`：澄清创建/读取评分 API、稳定评分 ID 与名称的区别、Browser 端密钥安全与 Score v3 读取类型。
 - `evaluation/experiments/experiments-via-sdk.md`：澄清 Runner 执行位置、逐项和 Run-level Evaluator、Dataset 固定版本及 UI Webhook 外部执行的关系。
 - 以上为局部技术修正，仍需把原来的按编号排列代码块逐一对应中文说明。尚未执行构建或部署，不标为整篇完整验收。
+
+### 全库验收阻塞清单（2026-10-08）
+
+- 已确认源仓库和中文仓库的官方页面文件数均为 **113**；该数量只能证明源文件映射，不是正文翻译验收。
+- 对 12 篇高风险长文进行结构抽查，**12/12 仍明确包含“待精校/工作译稿”提示**，其中 10 篇含集中编号的代码示例；当前不能认定代码示例与说明一一对应。
+- 高风险页面包括：`compatibility`、`observability/sdk/{advanced-features,instrumentation}`、`observability/features/{multi-modality,token-and-cost-tracking}`、`evaluation/experiments/{datasets,experiments-via-sdk,experiments-ci-cd}`、`evaluation/evaluation-methods/{scores-via-sdk,llm-as-a-judge,decision-models}`、`api-and-data-platform/features/public-api`。
+- 本轮 12 篇抽查代码围栏数量均为偶数；**这不是语法编译或示例运行通过**。
+- 尚未完成全部 113 篇的逐句比对、所有站内锚点与外链验证、SDK 示例运行及 VitePress 全量构建。本项目 **禁止因 113/113 页面映射而宣称全量验收成功**。
+- 由于当前执行环境无法直接连接 GitHub 克隆仓库，且可用 GitHub 接口无法触发构建验证工作流，因此本阶段无法在本机完成真实构建；部署维持关闭。
