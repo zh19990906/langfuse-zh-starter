@@ -1,11 +1,5 @@
 name: Deploy Langfuse Chinese Docs (VitePress)
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'docs/**'
-      - 'package.json'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 permissions:
   contents: read
