@@ -363,3 +363,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### Metrics 和 Scores 首轮技术审查（2026-10-08）
 
 对照官方原文核对 `metrics/` 3 篇和 `evaluation/scores/` 3 篇的章节与代码围栏。Metrics API v2 的 `scores-boolean` 视图提供 `booleanValue` 分组/筛选和数值化 `value` 的平均值；与 Scores API v3 读取 JSON `BOOLEAN` Score 的实际布尔 `value` 类型不同。已在 `metrics/features/metrics-api.md` 和 `evaluation/scores/overview.md` 分别加入类型契约说明，并将部分正文英文文档链接调整为本地中文路径（`9b108bb`、`cd5d7f4`）。其余四篇未在本轮修改。六篇仅完成首轮对照，仍未执行全量翻译逐句验收、API 运行测试及 VitePress 构建，未部署。
+
+### Overview/Quickstart 首批检查（2026-10-08）
+
+抽查 `index`、`v4`、`security-and-guardrails`、`evaluation/get-started/offline`、`evaluation/get-started/online`、`observability/data-model`、`prompt-management/get-started` 共 7 篇，核对原文及中文章节和代码围栏数量。Online 评估教程英文 8 组示例、中文版 4 组，是因把相邻的 CLI 安装命令合并展示，暂未认定漏示例；Prompt Management 快速入门中文版多了补充示例。已修复其中 6 篇共 39 处指向相应英文文档的正文链接，改用本地中文路径。提交 `06d78ef`、`56a7806`、`e052919`、`e41dc77`、`df7ac4d`、`62a5784`。
+
+此批属于结构/链接初检，不等于 7 篇完整逐段翻译或 Markdown 构建验收。继续遵守不部署限制。
