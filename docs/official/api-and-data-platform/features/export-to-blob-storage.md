@@ -15,6 +15,19 @@ Langfuse 支持将大量追踪及相关数据按计划导出到外部对象存�
 
 ### 创建 Integration
 
+**导出对象路径示意（原文）**
+
+```text
+{prefix}{project-id}/
+├── observations_v2/
+│   └── {timestamp}.{parquet|json|jsonl|csv}[.gz]
+├── scores/
+│   └── {timestamp}.{parquet|json|jsonl|csv}[.gz]
+└── manifests/
+    └── {timestamp}.json
+```
+
+
 在项目设置中选择数据导出集成，配置对象存储服务、Bucket、Prefix 与访问权限。Cloud 与自托管支持的 Storage Provider、权限要求和运行时间可能不同。
 
 ::: warning
@@ -26,6 +39,14 @@ Langfuse 支持将大量追踪及相关数据按计划导出到外部对象存�
 新版导出以 Enriched Observation 为核心，可以选择字段组，在保留业务所需数据的同时控制导出量。
 
 ### API 配置
+
+**查询和更新导出集成 API**
+
+```http
+GET /api/public/integrations/blob-storage
+PUT /api/public/integrations/blob-storage
+```
+
 
 也可通过 Public API 创建或管理数据导出 Integration。Schema 和允许字段组可能随 Langfuse 版本变化，应使用最新 API Reference 验证。
 
@@ -67,31 +88,7 @@ Langfuse v4 的 Observation 优先数据模型改变了旧 Trace/Observation 的
 
 如导出缺失、延迟或数据不完整，应检查 Integration 状态、Manifest、Bucket 权限、对象存储 Region、导出时间范围以及旧版数据模型是否匹配。
 
-## 官方代码与请求示例
 
-以下示例保留原文代码内容和请求字段，尚未逐一运行验证。
-
-### 官方示例 1
-
-```text
-{prefix}{project-id}/
-├── observations_v2/
-│   └── {timestamp}.{parquet|json|jsonl|csv}[.gz]
-├── scores/
-│   └── {timestamp}.{parquet|json|jsonl|csv}[.gz]
-└── manifests/
-    └── {timestamp}.json
-```
-
-### 官方示例 2
-
-```http
-GET /api/public/integrations/blob-storage
-PUT /api/public/integrations/blob-storage
-```
-
-::: info 翻译状态
-已提供主要章节的中文说明并保留官方代码块。原文完整字段参考、复杂示例说明和部分表格仍需要逐段精校，此页暂不计入“完整验收”。
+::: warning 精校待办
+官方 Blob Storage 导出文档约 40 KB，包含大量源类型、字段映射和导出流程细节。本中文页仍为摘要稿，只完成示例归位，**不得视为完整翻译或最终验收通过**。如需实施生产 ETL，请优先核对[官方完整字段定义](https://langfuse.com/docs/api-and-data-platform/features/export-to-blob-storage)。
 :::
-
-原文：[导出到 Blob Storage](https://langfuse.com/docs/api-and-data-platform/features/export-to-blob-storage)。
