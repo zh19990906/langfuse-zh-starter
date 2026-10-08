@@ -297,3 +297,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### ## observability/features/ 第二批范围校验（2026-10-08）
 
 对照官方全文核对 8 篇较短的功能文档：`agent-graphs`、`agentic-access`、`observation-types`、`sampling`、`queuing-batching`、`trace-ids-and-distributed-tracing`、`mcp-tracing`、`log-levels`。其中 `observation-types` 原文 8 组代码而旧译稿只有 3 组、`sampling` 8 vs 2、`trace-ids` 7 vs 2、`log-levels` 6 vs 2；已向四篇补充按 SDK 场景分组的官方完整示例和关键用法说明。注意：因旧示例可能已有重写版本，**新旧示例存在重复内容，待下一轮整合**；本轮不能把追加示例视为页面 PASS。其他四篇未发现同类示例缺失，但仍未逐句验收。提交：`de0bbea`、`3444d68`、`49c75ef`、`921f449`。未运行构建/SDK 测试，未部署。
+
+### ## observability/features/ 第三批校验（2026-10-08）
+
+本批检查：`alerts`、`comments`、`corrections`、`environments`、`events-table-charts`、`filter-search-bar`、`full-text-search`、`masking`（8 篇）。上游代码块数量分别为 1、1、6、9、0、2、2、7；中文版对应为 1、1、6、9、0、4、2、7。`filter-search-bar` 的额外代码块仍需逐条核对，不能直接据此判为漏译或错误。
+
+已直接修复三篇的重要说明：`masking.md` 明确 Python `mask_otel_spans` 与旧 `mask` 的执行阶段、覆盖范围、异常/批次丢弃和其他 Exporter 独立脱敏风险（`c7a9d6c`）；`alerts.md` 增补 NO_DATA 通知边界与 Webhook HMAC 校验要求（`3c666e2`）；`filter-search-bar.md` 补充语法类型及 UI 版本注意事项（`412e469`）。
+
+本轮是目录结构及技术风险校验，仍未完成八篇逐句完整验收；没有运行 VitePress 构建，未部署，状态 PARTIAL。
