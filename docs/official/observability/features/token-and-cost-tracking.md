@@ -30,7 +30,9 @@ flowchart LR
 ```
 
 
-SDK 集成通常自动读取 Provider 返回的 Usage；Langfuse 根据 Model ID 匹配价格定义推算 Cost。无法匹配模型时，可手动提供 Usage/Cost 或添加自定义价格配置。
+SDK 集成通常自动读取 Provider 返回的 Usage；Langfuse 根据 Generation 的 `model` 字段匹配 Model Definition（含各计费类别的单位价格），用已知的用量推算 Cost。无法匹配模型时，可手动提供 Usage/Cost 或添加自定义价格配置。
+
+**摄入值优先于推断值**：如果某一计费类别的 Usage / Cost 已通过 SDK 或 API 上报，应优先保留真实上报值，而不是重新以 Tokenizer 或价格表覆盖。此机制也适用于 `embedding` 类型的 Observation；不同 Provider 的 `cached_tokens`、`audio_tokens` 等细分类别应与其计价单位对应。
 
 ## 模型定义与价格
 
