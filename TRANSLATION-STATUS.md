@@ -375,3 +375,10 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `compatibility.md`：补充 Cloud 与自托管 Server/SDK/API/导出/评估器分项核对步骤，强调静态矩阵不能代替实时官方筛选与具体补丁版本验证（commit `fb49d399ace3b176d9f5287faa69e78c74ddc587`）。
 - `demo.md`：补充多人共享演示项目的隐私提醒、Trace 检查流程，说明官方交互式 Demo 组件并未本地实现（commit `fc2a5a01e948462d7bce588eae541fecc12ab536`）。
 - 仍需进一步核对上游动态组件的全部兼容条件，并执行站点构建检查；不部署。
+
+### 全站结构 QA 与 VitePress 构建（2026-10-08）
+
+- 新增 `scripts/qa-docs.mjs` 和 `npm run qa:docs`，纳入 `.github/workflows/validate-docs.yml`，工作流只执行静态检查与构建，不部署。
+- GitHub Actions [run 37766466714](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37766466714) 在 commit `7429ed6` 上成功：覆盖全部 **113 篇 `docs/official/`**（仓库合计 121 篇 Markdown），静态错误 **0**；导航路径有效；VitePress 1.6.4 编译成功。首次脚本对于含中文标题的锚点给出 **3 个需人工复核提示**，已对目标标题确认三处存在，并修正脚本的 Unicode 标题检查（commit `f7115d0`），需以该提交的下一次 CI 为准。
+- VitePress 存在 `>500 kB` chunk 性能警告，但并不阻止构建。以上为路径、围栏、基本锚点及**构建**检查，**不等于原文译文逐段一致性、代码示例运行成功或生产部署验收**。
+- 未部署。
