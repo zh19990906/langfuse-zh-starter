@@ -5,6 +5,9 @@ on:
     branches: [master]
     paths:
       - '.github/workflows/validate-docs.yml'
+      - 'docs/**'
+      - 'package.json'
+      - 'package-lock.json'
 permissions:
   contents: read
 jobs:
