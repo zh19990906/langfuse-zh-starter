@@ -165,7 +165,7 @@ export function verifyLangfuseWebhook(
   maxAgeSeconds = 300
 ): boolean {
   if (!signatureHeader) return false;
-  const match = /^t=(\\d+),v1=([a-fA-F0-9]{64})$/.exec(signatureHeader);
+  const match = /^t=(\d+),v1=([a-fA-F0-9]{64})$/.exec(signatureHeader);
   if (!match) return false;
 
   const timestamp = Number(match[1]);
