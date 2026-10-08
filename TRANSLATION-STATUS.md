@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：74 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：76 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -110,32 +110,32 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（主要 SDK 集成示例已补齐，发布前待验收）
 - `observability/features/observation-types.mdx` → `docs/official/observability/features/observation-types.md`（部分翻译/组件或示例待补）
 
-**74 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
+**76 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
 
 ### 翻译补齐批次（未部署）
 
 - 已将 `prompt-management/data-model` 从概要扩展为对应上游完整正文：Text/Chat、动态渲染、缓存、版本、标签、发布与回滚。
 - 已为 `observability/features/tags` 补充 Python / TypeScript 的 OpenAI、LangChain 与手动 Observation 使用示例。
-- 中文映射总数仍为 **74 / 113**；这次是补齐已有页面，而非新增篇数。
+- 中文映射总数仍为 **76 / 113**；这次是补齐已有页面，而非新增篇数。
 
 ### 本轮继续补齐（未部署）
 
 - `observability/features/sessions.md` 补入 Python、TypeScript、OpenAI、LangChain 等完整上下文传播示例。
 - `observability/features/users.md` 补入手动 Observation、TypeScript 包装器、OpenAI 与 LangChain 接入示例。
 - `prompt-management/get-started.md` 从官方 `components-mdx/prompt-create.mdx` 与 `components-mdx/prompt-use.mdx` 迁入创建提示词和运行时使用示例，包含 Python、TypeScript、HTTP API、OpenAI、LangChain 和 Vercel AI SDK；动态 FAQ 仍须链接官方。
-- **中文映射页面数仍为 74 / 113。** 此轮是补齐，不新增映射。
+- **中文映射页面数仍为 76 / 113。** 此轮是补齐，不新增映射。
 
 ### 新增官方译文（未部署）
 - `observability/sdk/upgrade-path/js-v3-to-v4.mdx` → `docs/official/observability/sdk/upgrade-path/js-v3-to-v4.md`（正文及代码迁移示例已翻译）
 - `v4.mdx` → `docs/official/v4.md`（正文已翻译；交互时间线和图示未复刻）
 
-**中文映射页面总计 74 / 113；这不代表 62 篇全部完成技术验收。**
+**中文映射页面总计 76 / 113；这不代表 62 篇全部完成技术验收。**
 
 ### 本轮新增两篇（未部署）
 - `observability/features/filter-search-bar.mdx` → `docs/official/observability/features/filter-search-bar.md`（正文和语法示例已翻译）
 - `prompt-management/features/webhooks-slack-integrations.mdx` → `docs/official/prompt-management/features/webhooks-slack-integrations.md`（正文、签名验证代码及 Slack 步骤已翻译）
 
-**74 / 113 为中文页面映射数量，不等于完整验收数量。**
+**76 / 113 为中文页面映射数量，不等于完整验收数量。**
 
 ### 本次新增 10 篇完整正文译文（未部署）
 
@@ -150,4 +150,10 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `content/docs/evaluation/get-started/online.mdx` → `docs/official/evaluation/get-started/online.md`
 - `content/docs/api-and-data-platform/features/query-via-sdk.mdx` → `docs/official/api-and-data-platform/features/query-via-sdk.md`
 
-10 篇正文中的表格、代码、提示与主要静态内容均已翻译；外部视频保留链接、上游运行时动态内容以官方实时来源替代。**累计映射页 74 / 113**，完整验收仍独立进行。本批次未触发 Pages 部署。
+10 篇正文中的表格、代码、提示与主要静态内容均已翻译；外部视频保留链接、上游运行时动态内容以官方实时来源替代。**累计映射页 76 / 113**，完整验收仍独立进行。本批次未触发 Pages 部署。
+
+### 新增两篇官方完整正文译文（未部署）
+- `administration/scim-and-org-api.mdx` → `docs/official/administration/scim-and-org-api.md`（组织 API、SCIM、Okta 设置与故障排除）
+- `evaluation/experiments/experiments-via-ui.mdx` → `docs/official/evaluation/experiments/experiments-via-ui.md`（数据集映射、配置与实验比较）
+
+**累计 76 / 113 个中文映射页；部分旧页仍待补齐，尚未统一验收。**
