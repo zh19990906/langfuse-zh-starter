@@ -293,3 +293,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 本目录共 27 篇。优先检查了两篇大体量、原有“编号示例尾部附录”的工作稿：`multi-modality.md`（13 组官方代码示例）与 `token-and-cost-tracking.md`（10 组）。已把各组代码按外部媒体、附件、引用解析、S3；以及成本流程、模型定义、手动成本上报、OpenAI Usage 兼容的章节重新归位，静态确认围栏数量一致。提交：`163f263`、`4a736b4`。
 
 这只是目录的**第一批结构校验**，其余 25 篇及两篇所有段落、动态组件与运行验证仍需逐篇复核。未执行 VitePress 构建、未部署，目录状态 PARTIAL。
+
+### ## observability/features/ 第二批范围校验（2026-10-08）
+
+对照官方全文核对 8 篇较短的功能文档：`agent-graphs`、`agentic-access`、`observation-types`、`sampling`、`queuing-batching`、`trace-ids-and-distributed-tracing`、`mcp-tracing`、`log-levels`。其中 `observation-types` 原文 8 组代码而旧译稿只有 3 组、`sampling` 8 vs 2、`trace-ids` 7 vs 2、`log-levels` 6 vs 2；已向四篇补充按 SDK 场景分组的官方完整示例和关键用法说明。注意：因旧示例可能已有重写版本，**新旧示例存在重复内容，待下一轮整合**；本轮不能把追加示例视为页面 PASS。其他四篇未发现同类示例缺失，但仍未逐句验收。提交：`de0bbea`、`3444d68`、`49c75ef`、`921f449`。未运行构建/SDK 测试，未部署。
