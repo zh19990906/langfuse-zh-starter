@@ -70,7 +70,7 @@ langfuse = Langfuse(
 
 如果同时配置 `blocked_instrumentation_scopes` 和 `should_export_span`，前者仍会执行硬性拒绝，优先级更高。
 
-**可能的 Trace 树断裂：**父 Span 或中间 Span 被筛掉而子 Span 保留时会出现孤立节点。使用 `Langfuse(debug=True)` 或 `LANGFUSE_DEBUG="True"` 检查丢弃记录，在自定义过滤器中允许必要 Scope。参考[高级功能](https://langfuse.com/docs/observability/sdk/advanced-features)与[OTEL 排障](https://langfuse.com/faq/all/existing-otel-setup#unwanted-spans-in-langfuse)。
+**可能的 Trace 树断裂：**父 Span 或中间 Span 被筛掉而子 Span 保留时会出现孤立节点。使用 `Langfuse(debug=True)` 或 `LANGFUSE_DEBUG="True"` 检查丢弃记录，在自定义过滤器中允许必要 Scope。参考[高级功能](/official/observability/sdk/advanced-features)与[OTEL 排障](https://langfuse.com/faq/all/existing-otel-setup#unwanted-spans-in-langfuse)。
 
 ### `update_current_trace()` 拆成三个方法
 
@@ -202,7 +202,7 @@ Observation 成为统一基础概念，通过 `as_type` 区分类型：
 
 ### 移除 `DatasetItemClient.run()`
 
-改用 [Experiment SDK](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk) 的 `dataset.run_experiment()`，自动传播运行 Metadata 与 DatasetItem 关联关系。
+改用 [Experiment SDK](/official/evaluation/experiments/experiments-via-sdk) 的 `dataset.run_experiment()`，自动传播运行 Metadata 与 DatasetItem 关联关系。
 
 **v3：**
 
@@ -246,7 +246,7 @@ handler = CallbackHandler(update_trace=True, trace_context={...})
 handler = CallbackHandler(trace_context={...})
 ```
 
-仍可以在外层 Observation 中使用 `propagate_attributes()` 向 LangChain 子节点传播 User、Session、Tag 等属性，详见[属性配置](https://langfuse.com/docs/observability/sdk/instrumentation#add-attributes)。
+仍可以在外层 Observation 中使用 `propagate_attributes()` 向 LangChain 子节点传播 User、Session、Tag 等属性，详见[属性配置](/official/observability/sdk/instrumentation#添加属性)。
 
 ### 移除的类型
 
