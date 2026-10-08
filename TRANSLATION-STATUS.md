@@ -271,3 +271,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `decision-models.md` 已在此前批次补齐正文，`scores-via-sdk.md` 已修正关键 API 类型；但它们**尚未完成全部代码段上下文映射和运行验证**。
 - `annotation-queues.md`、`scores-via-ui.md` 仍需最终逐段核对；本批未给整个文件夹标记 PASS。
 - 未执行 VitePress Build，未部署。
+
+### Scores via SDK 专项代码重排（2026-10-08）
+
+- `evaluation/evaluation-methods/scores-via-sdk.md`：29 组上游示例已经从独立的“官方示例 1～29”尾部附录移回 Trace/Observation、浏览器、Session、ScoreConfig 等对应的中文正文章节，并标注语言与用途。
+- 静态检查：29 组代码块，围栏成对，尾部原编号标题已清除。尚未调用真实 API 或执行 SDK 示例，暂不标记最终 PASS。
+- 未部署网站。
