@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：25 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：29 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -58,3 +58,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `administration/troubleshooting-and-faq.mdx` → `docs/official/administration/troubleshooting-and-faq.md`（动态 FAQ 待迁移）
 - `evaluation/troubleshooting-and-faq.mdx` → `docs/official/evaluation/troubleshooting-and-faq.md`（动态 FAQ 与讨论待迁移）
 - `prompt-management/troubleshooting-and-faq.mdx` → `docs/official/prompt-management/troubleshooting-and-faq.md`（动态 FAQ 与讨论待迁移）
+
+### 后续新增四篇（尚未部署）
+- `observability/features/full-text-search.mdx` → `docs/official/observability/features/full-text-search.md`
+- `observability/features/queuing-batching.mdx` → `docs/official/observability/features/queuing-batching.md`
+- `metrics/overview.mdx` → `docs/official/metrics/overview.md`
+- `evaluation/evaluation-methods/scores-via-ui.mdx` → `docs/official/evaluation/evaluation-methods/scores-via-ui.md`
