@@ -12,6 +12,17 @@ Masking 用于控制应用发送到 Langfuse 的[追踪](/official/observability
 
 更多关于存储数据的安全与隐私措施，参阅[官方安全与合规概览](https://langfuse.com/security)。
 
+## 精校提示：Python Masking 两种 Hook 的行为差异
+
+| Hook | 官方推荐状态 | 作用时间 | 覆盖范围 |
+| --- | --- | --- | --- |
+| `mask_otel_spans` | **新项目推荐** | Langfuse 决定导出哪些 OpenTelemetry Span 且完成媒体处理后，在导出阶段同步执行 | 经过当前 Langfuse Processor 导出的 Langfuse 和第三方 Instrumentation Span 的原始 OTEL 属性 |
+| `mask` | 旧版兼容方式 | Langfuse SDK API 创建或更新属性时同步执行 | 仅 SDK API 传入的数据，不涵盖第三方 Instrumentation 的最终原始 Span |
+
+`mask_otel_spans` 接收批次 Span 的只读快照，返回需要修改的稀疏 Patch。它**只影响当前 Langfuse SDK 的导出副本**，其他 OTEL Exporter（如 Datadog）收到的数据不会因此自动脱敏，必须单独配置。
+
+其失败行为需要特别注意：Hook 抛异常或返回无效 `MaskOtelSpansResult` 时，整个导出批次会被丢弃；单个 `OtelSpanPatch` 无效时，只丢弃对应 Span；无效的属性值可能导致该属性被删除。通常 Hook 在批处理线程执行，但 Flush 和 Shutdown 时也可能在调用线程执行，因此务必保持轻量且可预测。
+
 ## 配置 Masking
 
 ### Python SDK
