@@ -15,39 +15,8 @@ description: 在 CI/CD 中运行实验——Langfuse 官方文档中文整理。
 
 可在 GitHub Actions 中调用 Langfuse 实验工具，使用 Repository Secrets 保存 Langfuse 和模型 Provider Key。不要把敏感 Key 写入 YAML。
 
-### 定义实验
 
-Task 调用真实 Agent，并对每个 DatasetItem 运行。Evaluator 返回 Score；实验执行应尽量使用稳定 Dataset 版本。
-
-### Action 的 Input 与 Output
-
-可通过 Action Input 指定实验配置、数据集、基线和阈值；从 Output 读取实验 ID、质量指标及对比结果，形成 CI 报告。
-
-### 失败策略
-
-质量回退超过允许范围时使用非零退出码使 Job 失败；阈值应考虑评价器的统计噪声。
-
-### Action 输出
-
-可以保存实验链接、逐项失败明细和汇总指标，便于 PR 审核者对比。
-
-### 额外 Secrets
-
-给 CI 分配最小权限，限制 API Key 的读写范围，并使用 GitHub Secret 或等效密钥管理器。
-
-## 与批准的 Baseline 比较
-
-选定已发布或人工确认的 Baseline Run，不应每次运行时无条件重置 Baseline。按同一 Dataset 版本比较，降低结果偏差。
-
-## 其他 CI/CD 系统
-
-同样的实验命令也可以在 GitLab CI、Jenkins、Buildkite 等系统运行；核心是执行 SDK Task、采集 Score、比较阈值并返回成功或失败状态。
-
-## 原文中的技术示例
-
-以下保留源文档所有代码与配置块，以避免翻译程序标识符造成错误。
-
-### 官方示例 1
+**官方示例（GitHub Actions 工作流示例：密钥通过 Secrets 提供。）**
 
 ```yaml
 name: Langfuse experiment gate
@@ -99,8 +68,12 @@ jobs:
           github_token: ${{ github.token }}
 ```
 
+### 定义实验
 
-### 官方示例 2
+Task 调用真实 Agent，并对每个 DatasetItem 运行。Evaluator 返回 Score；实验执行应尽量使用稳定 Dataset 版本。
+
+
+**官方示例（实验定义与脚本示例。）**
 
 ```python
 from langfuse import RunnerContext
@@ -119,9 +92,6 @@ def experiment(context: RunnerContext):
     )
 ```
 
-
-### 官方示例 3
-
 ```ts
 import type { ExperimentTaskParams, RunnerContext } from "@langfuse/client";
 
@@ -138,8 +108,16 @@ export async function experiment(context: RunnerContext) {
 }
 ```
 
+### Action 的 Input 与 Output
 
-### 官方示例 4
+可通过 Action Input 指定实验配置、数据集、基线和阈值；从 Output 读取实验 ID、质量指标及对比结果，形成 CI 报告。
+
+### 失败策略
+
+质量回退超过允许范围时使用非零退出码使 Job 失败；阈值应考虑评价器的统计噪声。
+
+
+**官方示例（对质量回退设定失败阈值的示例。）**
 
 ```python
 from langfuse import Evaluation, RegressionError, RunnerContext
@@ -200,9 +178,6 @@ def avg_accuracy(*, item_results, **kwargs):
     ]
     return Evaluation(name="avg_accuracy", value=sum(scores) / len(scores) if scores else 0.0)
 ```
-
-
-### 官方示例 5
 
 ```ts
 import {
@@ -281,8 +256,12 @@ async function avgAccuracy({
 }
 ```
 
+### Action 输出
 
-### 官方示例 6
+可以保存实验链接、逐项失败明细和汇总指标，便于 PR 审核者对比。
+
+
+**官方示例（读取 GitHub Action 输出以显示结果。）**
 
 ```yaml
 - uses: langfuse/experiment-action@<release tag>
@@ -297,8 +276,12 @@ async function avgAccuracy({
   run: printf '%s' "$RESULT_JSON" > experiment-result.json
 ```
 
+### 额外 Secrets
 
-### 官方示例 7
+给 CI 分配最小权限，限制 API Key 的读写范围，并使用 GitHub Secret 或等效密钥管理器。
+
+
+**官方示例（附加所需 Secrets 的配置示例。）**
 
 ```yaml
 - uses: langfuse/experiment-action@<release tag>
@@ -312,8 +295,12 @@ async function avgAccuracy({
     dataset_name: support-agent-regression-set
 ```
 
+## 与批准的 Baseline 比较
 
-### 官方示例 8
+选定已发布或人工确认的 Baseline Run，不应每次运行时无条件重置 Baseline。按同一 Dataset 版本比较，降低结果偏差。
+
+
+**官方示例（与批准 Baseline 比较的命令和配置示例。）**
 
 ```json
 {
@@ -323,9 +310,6 @@ async function avgAccuracy({
   "cases": { "standard": true, "sale": false }
 }
 ```
-
-
-### 官方示例 9
 
 ```python
 import json
@@ -391,9 +375,6 @@ def check_approved_baseline(result, *, dataset_version: str | datetime):
             threshold=0.0,
         )
 ```
-
-
-### 官方示例 10
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -463,8 +444,15 @@ export function checkApprovedBaseline(
 }
 ```
 
+## 其他 CI/CD 系统
 
-### 官方示例 11
+同样的实验命令也可以在 GitLab CI、Jenkins、Buildkite 等系统运行；核心是执行 SDK Task、采集 Score、比较阈值并返回成功或失败状态。
+
+
+## 其他 CI/CD 参考实现代码
+
+
+**官方示例（其他 CI/CD 系统的集成示例。）**
 
 ```json
 [
@@ -475,9 +463,6 @@ export function checkApprovedBaseline(
   }
 ]
 ```
-
-
-### 官方示例 12
 
 ```python
 import hashlib
@@ -534,9 +519,6 @@ def test_application_checks():
     finally:
         langfuse.flush()
 ```
-
-
-### 官方示例 13
 
 ```typescript
 import { createHash } from "node:crypto";
@@ -600,8 +582,9 @@ it("passes every required application check", async () => {
 }, 60_000); // Adjust for the runtime of your application and case set.
 ```
 
+
 ::: info 翻译状态
-已完成核心章节中文说明并保留全部代码；原文部分深层细节、表格及动态 FAQ 仍待逐段翻译与复核。此页暂不计入“完整验收”文档。
+已将原文代码块按章节位置重新整理，仍待执行版本兼容与构建验证。此页暂不计入“完整验收”文档。
 :::
 
 原文：[在 CI/CD 中运行实验](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd)。
