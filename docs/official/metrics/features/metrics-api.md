@@ -46,6 +46,10 @@ v2 采用基于宽 Observation 表的优化数据架构，减少每次查询的�
 | `scores-categorical` | 查询类别（字符串）评分 |
 | `scores-boolean` | 查询布尔评分，可按 `booleanValue` 分组或筛选，也可计算 `value` 平均值得到 True 比率 |
 
+::: info Score BOOLEAN 与 Metrics 聚合
+Metrics v2 的 `scores-boolean` 视图提供 `booleanValue` 用于分组和筛选，并能对数值化的 `value` 做平均计算 True 比率。此处的指标聚合字段语义不同于 Scores API v3 返回的 JSON 布尔 `value`；集成时请按各端点的 Schema 单独解析。
+:::
+
 ### 返回行数限制
 
 默认 `config.row_limit` 为 **100 行/查询**。可以手动覆盖，最大 **1,000 行**。
@@ -73,7 +77,7 @@ v2 特有的 `isRootObservation` 布尔维度用于标记应用入口。
 ]
 ```
 
-关于物理根节点和逻辑根节点的区别，参阅[逻辑根 Observation](https://langfuse.com/docs/api-and-data-platform/features/public-api#logical-root-observations)。
+关于物理根节点和逻辑根节点的区别，参阅[逻辑根 Observation](/official/api-and-data-platform/features/public-api)。
 
 ### 按指标排序
 
@@ -99,9 +103,9 @@ curl \
 ```
 
 ::: info 数据新鲜度
-官方页面通过动态组件展示数据延迟说明，本站不复制实时状态。应以[原文 Metrics API](https://langfuse.com/docs/metrics/features/metrics-api)为准。
+官方页面通过动态组件展示数据延迟说明，本站不复制实时状态。应以[原文 Metrics API](/official/metrics/features/metrics-api)为准。
 :::
 
 ---
 
-原文：[Metrics API](https://langfuse.com/docs/metrics/features/metrics-api) · 非官方中文翻译。
+原文：[Metrics API](/official/metrics/features/metrics-api) · 非官方中文翻译。
