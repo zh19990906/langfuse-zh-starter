@@ -86,13 +86,13 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `prompt-management/features/variables.mdx` → `docs/official/prompt-management/features/variables.md`（正文已翻译；发布前仍需验收）
 - `prompt-management/features/message-placeholders.mdx` → `docs/official/prompt-management/features/message-placeholders.md`（正文已翻译；发布前仍需验收）
 - `prompt-management/features/guaranteed-availability.mdx` → `docs/official/prompt-management/features/guaranteed-availability.md`（正文已翻译；发布前仍需验收）
-- `observability/features/sampling.mdx` → `docs/official/observability/features/sampling.md`（**部分翻译 / 待补充完整技术内容**）
-- `observability/features/pulse.mdx` → `docs/official/observability/features/pulse.md`（**部分翻译 / 待补充完整技术内容**）
-- `observability/features/events-table-charts.mdx` → `docs/official/observability/features/events-table-charts.md`（**部分翻译 / 待补充完整技术内容**）
-- `observability/features/user-feedback.mdx` → `docs/official/observability/features/user-feedback.md`（**部分翻译 / 待补充完整技术内容**）
-- `observability/features/trace-ids-and-distributed-tracing.mdx` → `docs/official/observability/features/trace-ids-and-distributed-tracing.md`（**部分翻译 / 待补充完整技术内容**）
+- `observability/features/sampling.mdx` → `docs/official/observability/features/sampling.md`（**部分翻译 / 待补充 SDK 示例**）
+- `observability/features/pulse.mdx` → `docs/official/observability/features/pulse.md`（正文已补齐，发布前待验收）
+- `observability/features/events-table-charts.mdx` → `docs/official/observability/features/events-table-charts.md`（正文已补齐，发布前待验收）
+- `observability/features/user-feedback.mdx` → `docs/official/observability/features/user-feedback.md`（正文已补齐，发布前待验收）
+- `observability/features/trace-ids-and-distributed-tracing.mdx` → `docs/official/observability/features/trace-ids-and-distributed-tracing.md`（**部分翻译 / 待补充 SDK 示例**）
 - `administration/audit-logs.mdx` → `docs/official/administration/audit-logs.md`（正文已翻译；发布前仍需验收）
 - `metrics/features/metrics-api.mdx` → `docs/official/metrics/features/metrics-api.md`（正文已翻译；发布前仍需验收）
 - `evaluation/experiments/compare-experiments.mdx` → `docs/official/evaluation/experiments/compare-experiments.md`（正文已翻译；发布前仍需验收）
 
-**重要：50 / 113 表示有中文映射文件，并非 50 篇完成翻译。** 本轮 11 篇中 3 篇（Pulse、事件表格与图表、用户反馈）目前仅为中文导览，未翻译完整原文；采样与 Trace ID 页也仍有部分框架示例待迁移。发布前必须逐页检查，不应把上述页面算作完整译文。
+**重要：50 / 113 表示有中文映射文件，并非 50 篇完成翻译。** 本轮 11 篇中 Pulse、事件表格与图表、用户反馈已补齐原文正文和技术示例。采样与 Trace ID 页仍有部分 SDK / 框架示例待移植。发布前必须逐页检查，不应把上述页面算作完整译文。
