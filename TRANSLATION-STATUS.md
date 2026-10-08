@@ -419,3 +419,5 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - **引用**：Prompt Management Overview、Experiments Data Model、Billable Units、Annotation Queues 补改已存在的中文站内链接及错误的“原文”回链。
 
 正文修订 `ae4a0c5` 的 GitHub Actions [#37779116285](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779116285) 已成功：113 篇官方文档、121 篇 Markdown，Errors 0、Anchor Warnings 0、VitePress Build 通过。之后另有 GitHub Webhook 安全说明补充 `f7b8c4b`；其 CI 结果应单独核实。本批仅为**16 篇定点证据复查**，不等于全文 PASS；未部署。
+
+补充验证：GitHub Webhook 安全文档最终内容修订 `f7b8c4b` 的 [Actions run 37779472841](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779472841) 已确认 **success**：113 篇官方中文页 / 121 篇 Markdown，静态 Errors 0、Anchor Warnings 0，VitePress Build 成功。仅为 Markdown/构建测试，未运行真正的 GitHub Dispatch 或 HMAC 服务器，未部署。
