@@ -7,7 +7,7 @@ description: 理解 Langfuse 的 Observation、Trace、Session 与 OpenTelemetry
 
 本页介绍 Langfuse 如何组织和采集应用数据。理解数据模型后，你会更容易排查问题和分析追踪记录。
 
-准备开始实践？参阅[追踪快速开始](https://langfuse.com/docs/observability/get-started)，生成第一条 Trace。
+准备开始实践？参阅[追踪快速开始](/official/observability/get-started)，生成第一条 Trace。
 
 ## Observation、Trace 与 Session
 
@@ -15,7 +15,7 @@ Langfuse 将应用数据组织为三个核心概念：**Observation（观测步�
 
 ### Observation 与 Trace
 
-`Observation` 表示应用执行的单个步骤，比如 LLM 调用、工具调用、检索操作等。Observation 可以嵌套以体现应用结构。Langfuse 支持多种面向 LLM 的[观测类型](https://langfuse.com/docs/observability/features/observation-types)，例如 Generation 和 Event。（Langfuse 将 Span 统称为 Observation，同时 Span 也是一种特定的 Observation 类型。）
+`Observation` 表示应用执行的单个步骤，比如 LLM 调用、工具调用、检索操作等。Observation 可以嵌套以体现应用结构。Langfuse 支持多种面向 LLM 的[观测类型](/official/observability/features/observation-types)，例如 Generation 和 Event。（Langfuse 将 Span 统称为 Observation，同时 Span 也是一种特定的 Observation 类型。）
 
 `Trace` 代表一次请求或操作。例如：用户提出一个问题、聊天机器人处理并给出最终回答的整个过程。具有相同 `trace_id` 的 Observation 会被逻辑上归入同一个 Trace。
 
@@ -27,7 +27,7 @@ Trace 级别的属性（例如 `user_id`、`session_id`、`tags`、`metadata`）
 
 ### Session
 
-你可以选择将多个 Trace 组成一个 [Session（会话）](https://langfuse.com/docs/observability/features/sessions)，把同一次用户交互中的追踪关联在一起。典型示例是聊天应用中的一个对话线程。
+你可以选择将多个 Trace 组成一个 [Session（会话）](/official/observability/features/sessions)，把同一次用户交互中的追踪关联在一起。典型示例是聊天应用中的一个对话线程。
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ flowchart TD
 
 ![Langfuse 会话页面](https://langfuse.com/images/docs/session.png)
 
-对于多轮对话或多步骤工作流，建议使用 Session。添加方法见 [Session 文档](https://langfuse.com/docs/observability/features/sessions)。
+对于多轮对话或多步骤工作流，建议使用 Session。添加方法见 [Session 文档](/official/observability/features/sessions)。
 
 ## 添加属性
 
@@ -48,11 +48,11 @@ flowchart TD
 
 | 属性 | 用途 |
 | --- | --- |
-| [Environment（环境）](https://langfuse.com/docs/observability/features/environments) | 区分 `production`、`staging`、`development` 等部署环境 |
-| [Tag（标签）](https://langfuse.com/docs/observability/features/tags) | 按功能、API 端点或工作流对追踪分类 |
-| [User（用户）](https://langfuse.com/docs/observability/features/users) | 记录触发 Trace 的最终用户 |
-| [Metadata（元数据）](https://langfuse.com/docs/observability/features/metadata) | 以灵活的键值对存储自定义信息 |
-| [Release & Version（发布与版本）](https://langfuse.com/docs/observability/features/releases-and-versioning) | 跟踪应用版本与组件变更 |
+| [Environment（环境）](/official/observability/features/environments) | 区分 `production`、`staging`、`development` 等部署环境 |
+| [Tag（标签）](/official/observability/features/tags) | 按功能、API 端点或工作流对追踪分类 |
+| [User（用户）](/official/observability/features/users) | 记录触发 Trace 的最终用户 |
+| [Metadata（元数据）](/official/observability/features/metadata) | 以灵活的键值对存储自定义信息 |
+| [Release & Version（发布与版本）](/official/observability/features/releases-and-versioning) | 跟踪应用版本与组件变更 |
 
 ## Langfuse 如何采集数据
 
@@ -68,7 +68,7 @@ Langfuse 基于 [OpenTelemetry](https://opentelemetry.io/) 构建。OpenTelemetr
 
 埋点是在应用中加入记录执行过程的代码。启用后，Langfuse 通过 OpenTelemetry 捕获相关事件，并组织为 Trace 与 Observation。
 
-[快速开始指南](https://langfuse.com/docs/observability/get-started)介绍了如何为函数添加追踪。
+[快速开始指南](/official/observability/get-started)介绍了如何为函数添加追踪。
 
 ### 后台处理
 
@@ -98,7 +98,7 @@ sequenceDiagram
 
 脚本、一次性任务等程序执行完后很快退出，可能在缓冲队列发送之前结束进程，导致追踪数据丢失。
 
-因此，**短生命周期应用必须在退出前显式调用 [`flush()`](https://langfuse.com/docs/observability/features/queuing-batching#manual-flushing)**，强制导出器发送所有缓冲追踪。
+因此，**短生命周期应用必须在退出前显式调用 [`flush()`](/official/observability/features/queuing-batching)**，强制导出器发送所有缓冲追踪。
 
 ```mermaid
 sequenceDiagram
