@@ -120,6 +120,19 @@ Evaluator 未指定独立模型时使用 Project Default Model。修改项目默
 
 ## 通过 API 管理
 
+使用 Evaluators 与 Evaluation Rules API 可以程序化创建、读取、修改评估器并将其附加到 Rule。Observation 级 Rule 可用布尔字段 `isRootObservation` 和 `=`、`<>` 运算符筛选逻辑根 Observation；下面是官方示例：
+
+```json
+{
+  "type": "boolean",
+  "column": "isRootObservation",
+  "operator": "=",
+  "value": true
+}
+```
+
+详见 [Evaluators API](https://api.reference.langfuse.com/#tag/evaluators) 和 [Evaluation Rules API](https://api.reference.langfuse.com/#tag/evaluationrules) 的最新请求字段与响应 Schema。
+
 除了 UI，还可以通过 [Public API](/official/api-and-data-platform/features/public-api)管理：
 
 - **Evaluators**：保存裁判 Prompt、变量、默认映射、结构化 Score 定义及可选模型配置。每个 Evaluator 有稳定 ID，更新定义会产生新版本；已启用 Rule 使用最新版本。
