@@ -4,7 +4,7 @@ description: 收集真实用户对 LLM 或 Agent 输出的评价，并用于数�
 ---
 # 用户反馈
 
-用户反馈可以衡量 AI 是否真正帮助了用户。它能帮助团队发现质量问题、建立更好的评估数据集，并根据真实体验确定改进优先级。在 Langfuse 中，反馈作为 [Score（评分）](https://langfuse.com/docs/evaluation/scores/overview)存储并关联到 Trace。
+用户反馈可以衡量 AI 是否真正帮助了用户。它能帮助团队发现质量问题、建立更好的评估数据集，并根据真实体验确定改进优先级。在 Langfuse 中，反馈作为 [Score（评分）](/official/evaluation/scores/overview)存储并关联到 Trace。
 
 ![用户反馈示例](https://langfuse.com/images/docs/observability/user-feedback-example.png)
 
@@ -129,7 +129,7 @@ else:
 
 ![LLM-as-a-Judge 反馈评估](https://langfuse.com/images/docs/observability/llm-as-a-judge-feedback.png)
 
-实现方式见 [LLM-as-a-Judge 评估器](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)。
+实现方式见 [LLM-as-a-Judge 评估器](/official/evaluation/evaluation-methods/llm-as-a-judge)。
 
 ## 示例应用
 
