@@ -94,7 +94,7 @@ new LangfuseSpanProcessor({ shouldExportSpan: () => true });
 ```
 
 
-Langfuse 的智能默认过滤器倾向导出 Langfuse 创建的 Span、带 `gen_ai.*` 属性的 Span 和已知 LLM 框架 Span；HTTP、数据库和内部框架 Span 可能被排除。需要保留自定义 Scope 时，在默认过滤逻辑基础上添加自己的判断。
+Langfuse 的智能默认过滤器在**满足以下任意一项**时导出 Span：由 Langfuse SDK 创建（Scope 为 `langfuse-sdk`）、具有至少一个 `gen_ai.*` 属性、或者来自已知 LLM Instrumentation（例如 `openinference.*`、`langsmith`、`haystack`、`litellm`、`agent_framework`、`strands-agents`、`vllm`、`opentelemetry.instrumentation.anthropic`）。可以在 Langfuse 的 `metadata.scope.name` 查看 Scope；过滤掉的 Span 不会显示。HTTP、数据库和内部框架 Span 可能被排除。需要保留自定义 Scope 时，在默认过滤逻辑基础上添加自己的判断。
 
 ::: warning
 强行导出全部 Span 可能增加可观测性噪声与摄入成本。过滤中间父节点还可能使 Trace 树断开；应在测试环境核对父子关系。
