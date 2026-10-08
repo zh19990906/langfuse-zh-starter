@@ -285,6 +285,8 @@ uvicorn main:app --reload --port 8000
 
 生产环境务必使用签名密钥和 `x-langfuse-signature` 校验原始请求体（参阅[HMAC 示例](/official/prompt-management/features/webhooks-slack-integrations)）；仅给 PAT 必需的仓库权限，并处理重试、事件去重和并发冲突。**官方 FastAPI 示例只验证 Payload 结构，没有实现 HMAC 验签；不要在未加固时公开使用。**
 
+另外，该示例没有持久化处理过的 Webhook `event.id`，收到同一事件的重试并不保证不会生成重复提交；若两个请求同时更新同一文件，读取到的 GitHub SHA 可能过期并发生 `409` 冲突。生产接收端需要根据事件 ID 做持久化去重、限制并发或重试冲突，并处理提示词标签撤销、历史版本以及单一 `GITHUB_FILE_PATH` 被多个 Prompt 覆盖的问题。
+
 ---
 
-原文：[GitHub Integration](https://langfuse.com/docs/prompt-management/features/github-integration) · 非官方中文翻译；完整保留所有官方代码与示例。
+原文：[GitHub Integration](https://langfuse.com/docs/prompt-management/features/github-integration) · 非官方中文翻译；保留原文流程和 FastAPI 示例，GitHub Actions 中两段 Shell 示例已做安全加固改写，尚未实测。
