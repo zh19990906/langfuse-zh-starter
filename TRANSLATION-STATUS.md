@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：50 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：60 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -96,3 +96,18 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `evaluation/experiments/compare-experiments.mdx` → `docs/official/evaluation/experiments/compare-experiments.md`（正文已翻译；发布前仍需验收）
 
 **重要：50 / 113 表示有中文映射文件，并非 50 篇完成翻译。** 本轮 11 篇中 Pulse、事件表格与图表、用户反馈已补齐原文正文和技术示例。采样与 Trace ID 页仍有部分 SDK / 框架示例待移植。发布前必须逐页检查，不应把上述页面算作完整译文。
+
+### 本轮新增第 51–60 个中文页面（未部署）
+
+- `api-and-data-platform/features/agent-skill.mdx` → `docs/official/api-and-data-platform/features/agent-skill.md`（部分翻译/组件或示例待补）
+- `api-and-data-platform/features/cli.mdx` → `docs/official/api-and-data-platform/features/cli.md`（正文翻译，尚未最终验收）
+- `api-and-data-platform/overview.mdx` → `docs/official/api-and-data-platform/overview.md`（正文翻译，尚未最终验收）
+- `prompt-management/get-started.mdx` → `docs/official/prompt-management/get-started.md`（部分翻译/组件或示例待补）
+- `prompt-management/data-model.mdx` → `docs/official/prompt-management/data-model.md`（部分翻译/组件或示例待补）
+- `observability/features/log-levels.mdx` → `docs/official/observability/features/log-levels.md`（部分翻译/组件或示例待补）
+- `observability/features/sessions.mdx` → `docs/official/observability/features/sessions.md`（部分翻译/组件或示例待补）
+- `observability/features/users.mdx` → `docs/official/observability/features/users.md`（部分翻译/组件或示例待补）
+- `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（部分翻译/组件或示例待补）
+- `observability/features/observation-types.mdx` → `docs/official/observability/features/observation-types.md`（部分翻译/组件或示例待补）
+
+**60 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
