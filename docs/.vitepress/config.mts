@@ -28,6 +28,8 @@ export default defineConfig({
       { text: '官方文档中文翻译', items: [
         { text: '可观测性与追踪', link: '/official/observability/overview' },
         { text: '追踪核心概念', link: '/official/observability/data-model' },
+        { text: '环境配置', link: '/official/observability/features/environments' },
+        { text: '元数据', link: '/official/observability/features/metadata' },
         { text: '疑难解答与 FAQ', link: '/official/observability/troubleshooting-and-faq' },
         { text: '提示词管理', link: '/official/prompt-management/overview' },
         { text: 'LLM 应用评估', link: '/official/evaluation/overview' }
