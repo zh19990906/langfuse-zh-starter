@@ -13,45 +13,7 @@ Langfuse 对 Generation 记录模型名称、Token 使用量与 Cost，支持分
 
 ## 计算原理
 
-SDK 集成通常自动读取 Provider 返回的 Usage；Langfuse 根据 Model ID 匹配价格定义推算 Cost。无法匹配模型时，可手动提供 Usage/Cost 或添加自定义价格配置。
-
-## 模型定义与价格
-
-### Usage
-
-输入 Token、输出 Token、缓存读取/写入 Token、推理 Token 等可能分别计费，应保留模型和 Provider 返回的原始语义。
-
-### Cost
-
-可以使用平台内置的模型价格表，也可为自有模型和合同价格添加自定义 Model Definition；自定义价格应以实际合同和计量单位为准。
-
-### Pricing Tier
-
-不同上下文长度、缓存与批量服务可能适用不同价格层级。配置分层价格后，应按请求属性及匹配优先级选择正确规则。
-
-## 手动摄入 Usage 和 Cost
-
-SDK 支持在 Generation 上显式传递 `usage_details`、`cost_details`（或相应 JS/TS 命名）。手动设置 Cost 可以覆盖自动估算。
-
-### Usage Bucket 相互独立
-
-某些 Provider 把缓存 Token 算入 Input Token 汇总，另一些使用独立的 Bucket。为了避免重复计算，必须对输入、输出、缓存及其他字段使用官方约定的数据契约。
-
-### 与 OpenAI Usage Schema 兼容
-
-OpenAI 的 `prompt_tokens`、`completion_tokens`、`total_tokens` 及 Details 字段可以映射到 Langfuse 的 Usage，具体字段转换由 SDK/后端进行。
-
-## 排查成本不准确
-
-先检查 Model Name 是否能匹配 Definition，再核对 Usage Bucket、价格单位、货币、输入输出维度、缓存计费以及覆盖值。如果跨版本出现差异，应检查 SDK 升级和自定义模型定义。
-
-[成本分析与 Metrics API](/official/metrics/features/metrics-api)。
-
-## 官方技术示例（保留原始可执行语法）
-
-以下是源文档中的全部代码块与配置示例，代码保持原文，不自动翻译变量名，以免破坏运行行为。
-
-### 示例 1
+**用量与价格计算流程：官方示例**
 
 ```mermaid
 flowchart LR
@@ -67,7 +29,12 @@ flowchart LR
   B -->|multiply by usage| G
 ```
 
-### 示例 2
+
+SDK 集成通常自动读取 Provider 返回的 Usage；Langfuse 根据 Model ID 匹配价格定义推算 Cost。无法匹配模型时，可手动提供 Usage/Cost 或添加自定义价格配置。
+
+## 模型定义与价格
+
+**模型与 Tokenizer 定义：官方示例**
 
 ```bash
 GET    /api/public/models
@@ -75,8 +42,6 @@ POST   /api/public/models
 GET    /api/public/models/{id}
 DELETE /api/public/models/{id}
 ```
-
-### 示例 3
 
 ```json
 {
@@ -86,7 +51,22 @@ DELETE /api/public/models/{id}
 }
 ```
 
-### 示例 4
+
+### Usage
+
+输入 Token、输出 Token、缓存读取/写入 Token、推理 Token 等可能分别计费，应保留模型和 Provider 返回的原始语义。
+
+### Cost
+
+可以使用平台内置的模型价格表，也可为自有模型和合同价格添加自定义 Model Definition；自定义价格应以实际合同和计量单位为准。
+
+### Pricing Tier
+
+不同上下文长度、缓存与批量服务可能适用不同价格层级。配置分层价格后，应按请求属性及匹配优先级选择正确规则。
+
+## 手动摄入 Usage 和 Cost
+
+**手动报告用量和成本：官方示例**
 
 ```python
 from langfuse import get_client
@@ -126,8 +106,6 @@ with langfuse.start_as_current_observation(
     )
 ```
 
-### 示例 5
-
 ```ts
 import { startObservation } from "@langfuse/tracing";
 
@@ -163,8 +141,6 @@ generation.update({
 
 generation.end();
 ```
-
-### 示例 6
 
 ```python
 from langfuse import observe, get_client
@@ -216,8 +192,6 @@ def main():
 main()
 ```
 
-### 示例 7
-
 ```ts
 import { startActiveObservation, startObservation } from "@langfuse/tracing";
 
@@ -247,8 +221,6 @@ await startActiveObservation("context-manager", async (span) => {
 });
 ```
 
-### 示例 8
-
 ```ts
 import { observe, updateActiveObservation } from "@langfuse/tracing";
 
@@ -273,7 +245,16 @@ const tracedFetchData = observe(fetchData, {
 const result = await tracedFetchData("API");
 ```
 
-### 示例 9
+
+SDK 支持在 Generation 上显式传递 `usage_details`、`cost_details`（或相应 JS/TS 命名）。手动设置 Cost 可以覆盖自动估算。
+
+### Usage Bucket 相互独立
+
+某些 Provider 把缓存 Token 算入 Input Token 汇总，另一些使用独立的 Bucket。为了避免重复计算，必须对输入、输出、缓存及其他字段使用官方约定的数据契约。
+
+### 与 OpenAI Usage Schema 兼容
+
+**OpenAI Usage 字段兼容：官方示例**
 
 ```python
 from langfuse import get_client
@@ -305,8 +286,6 @@ with langfuse.start_as_current_observation(
     )
 ```
 
-### 示例 10
-
 ```ts
 import { startObservation } from "@langfuse/tracing";
 
@@ -334,8 +313,18 @@ generation.end();
 ```
 
 
-::: info 翻译状态
-本页已完成主要章节的中文整理，并保存官方代码块；源文档的复杂表格、FAQ 和部分细节尚需逐段精校，因此当前标记为**待完善译稿**，不应视为完整质量验收。
+OpenAI 的 `prompt_tokens`、`completion_tokens`、`total_tokens` 及 Details 字段可以映射到 Langfuse 的 Usage，具体字段转换由 SDK/后端进行。
+
+## 排查成本不准确
+
+先检查 Model Name 是否能匹配 Definition，再核对 Usage Bucket、价格单位、货币、输入输出维度、缓存计费以及覆盖值。如果跨版本出现差异，应检查 SDK 升级和自定义模型定义。
+
+[成本分析与 Metrics API](/official/metrics/features/metrics-api)。
+
+
+
+::: info 校验状态
+已根据原文将 10 组代码示例归位到对应章节，尚未完成所有动态组件、复杂表格、SDK 运行测试及全量构建的最终验收。
 :::
 
-原文：[模型 Token 与成本追踪](https://langfuse.com/docs/observability/features/token-and-cost-tracking)。
+原文：[官方文档](https://langfuse.com/docs/observability/features/token-and-cost-tracking)。
