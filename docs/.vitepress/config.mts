@@ -55,6 +55,8 @@ export default defineConfig({
         { text: 'SDK 升级路径', link: '/official/observability/sdk/upgrade-path/index' },
         { text: 'JS/TS v3 升级 v4', link: '/official/observability/sdk/upgrade-path/js-v3-to-v4' },
         { text: 'Langfuse v4', link: '/official/v4' },
+        { text: 'SCIM 与组织 API', link: '/official/administration/scim-and-org-api' },
+        { text: 'UI 提示词实验', link: '/official/evaluation/experiments/experiments-via-ui' },
         { text: '产品路线图', link: '/official/roadmap' },
         { text: 'Langfuse Assistant', link: '/official/langfuse-assistant' },
         { text: '提示词缓存', link: '/official/prompt-management/features/caching' },
