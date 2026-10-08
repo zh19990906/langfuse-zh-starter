@@ -58,4 +58,88 @@ https://<hostname>/project/{projectId}/users/{userId}
 
 还可以通过[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)和 [Metrics API](/official/metrics/features/metrics-api)查询每用户成本、Token 数与 Trace 数。
 
-原文：[User Tracking](https://langfuse.com/docs/observability/features/users)。部分框架示例待补充。
+## 多框架接入示例
+
+### Python：直接创建 Observation
+
+```python
+from langfuse import get_client, propagate_attributes
+
+langfuse = get_client()
+with langfuse.start_as_current_observation(
+    as_type="span", name="process-user-request"
+) as root_span:
+    with propagate_attributes(user_id="user_12345"):
+        with root_span.start_as_current_observation(
+            as_type="generation", name="generate-response", model="gpt-4o"
+        ) as gen:
+            pass
+```
+
+### TypeScript：`observe` 包装器
+
+```typescript
+import { observe, propagateAttributes } from "@langfuse/tracing";
+
+const processUserRequest = observe(
+  async (userQuery: string) => {
+    return await propagateAttributes({ userId: "user-123" }, async () => {
+      return await processQuery(userQuery);
+    });
+  },
+  { name: "process-user-request" }
+);
+const result = await processUserRequest("some query");
+```
+
+### Python：OpenAI 集成
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.openai import openai
+
+langfuse = get_client()
+with langfuse.start_as_current_observation(as_type="span", name="openai-call"):
+    with propagate_attributes(user_id="user_12345"):
+        completion = openai.chat.completions.create(
+            name="test-chat", model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a calculator."},
+                {"role": "user", "content": "1 + 1 = "}
+            ], temperature=0,
+        )
+```
+
+### Python：LangChain 集成
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.langchain import CallbackHandler
+
+langfuse = get_client()
+handler = CallbackHandler()
+with langfuse.start_as_current_observation(as_type="span", name="langchain-call"):
+    with propagate_attributes(user_id="user_12345"):
+        chain.invoke({"animal": "dog"}, config={"callbacks": [handler]})
+```
+
+### TypeScript：LangChain 集成
+
+```typescript
+import { startActiveObservation, propagateAttributes } from "@langfuse/tracing";
+import { CallbackHandler } from "@langfuse/langchain";
+
+const langfuseHandler = new CallbackHandler();
+await startActiveObservation("langchain-call", async () => {
+  await propagateAttributes({ userId: "user-123" }, async () => {
+    await chain.invoke(
+      { input: "<user_input>" },
+      { callbacks: [langfuseHandler] }
+    );
+  });
+});
+```
+
+属性传播限制的动态提示和 GitHub Discussions 尚未静态迁移，详见[官方用户追踪原文](https://langfuse.com/docs/observability/features/users)。
+
+原文：[User Tracking](https://langfuse.com/docs/observability/features/users)。正文及各框架 SDK 示例已补齐。
