@@ -38,8 +38,8 @@ Langfuse 是[开源 AI 工程平台](https://github.com/langfuse/langfuse)，帮
 - [评估生产流量](/official/evaluation/get-started/online)，给在线 Trace 打分。
 - 使用 LLM-as-a-Judge、代码评估器、用户反馈、人工标注或自定义 Pipeline 等[评估方式](/official/evaluation/overview)。
 - 在生产数据上评估，及早发现问题。
-- 创建和管理[Dataset](https://langfuse.com/docs/evaluation/experiments/datasets)，系统地覆盖不同情景。
-- 执行[Experiment](https://langfuse.com/docs/evaluation/core-concepts#experiments)，比较应用变更。
+- 创建和管理[Dataset](/official/evaluation/experiments/datasets)，系统地覆盖不同情景。
+- 执行[Experiment](/official/evaluation/core-concepts)，比较应用变更。
 
 [观看完整演示](https://langfuse.com/watch-demo)。官方 Evaluation GIF 概览可在[原文](https://langfuse.com/docs#evaluation)查看。
 
@@ -55,7 +55,7 @@ Langfuse 是[开源 AI 工程平台](https://github.com/langfuse/langfuse)，帮
 
 ## 快速入门
 
-1. [接入 LLM 应用 / Agent Trace](https://langfuse.com/docs/observability/get-started)
+1. [接入 LLM 应用 / Agent Trace](/official/observability/get-started)
 2. [配置提示词管理](/official/prompt-management/get-started)
 3. [建立评估](/official/evaluation/get-started/online)
 
