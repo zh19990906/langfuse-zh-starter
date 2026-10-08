@@ -4,7 +4,7 @@ description: 在 Langfuse 中为实时 Observation 配置自动评估器和规�
 ---
 # 评估生产流量
 
-本指南说明如何为 Langfuse 中的实时生产 Trace 添加评分。如果还不知道该评价什么，可以先读[选择评估目标](https://langfuse.com/academy/evaluate/choosing-what-to-evaluate)。评估器、Score、Rule 之间的关系见[核心概念](https://langfuse.com/docs/evaluation/core-concepts)。
+本指南说明如何为 Langfuse 中的实时生产 Trace 添加评分。如果还不知道该评价什么，可以先读[选择评估目标](https://langfuse.com/academy/evaluate/choosing-what-to-evaluate)。评估器、Score、Rule 之间的关系见[核心概念](/official/evaluation/core-concepts)。
 
 ## Agent 安装方式
 
@@ -56,9 +56,9 @@ ln -s /path/to/langfuse-skills/skills/langfuse /path/to/<agent-skill-root>/skill
 
 可选评估器：
 
-- **[LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)**：利用 LLM 评价相关性、语气、请求是否超出范围等需要语言理解的质量。需提前建立 [LLM Connection](https://langfuse.com/docs/administration/llm-connection)。
-- **[Decision-model evaluator](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models)**：使用 TypeSafe Jev 或 OpenAI 的类型化问题生成标签、评分档次或真假标记。该功能仍为实验性，需要 TypeSafe 或受支持的 OpenAI 连接。
-- **[Code evaluator](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators)**：执行 Python / TypeScript `evaluate` 函数，检查 JSON 格式、必需字段或关键词等确定性规则。
+- **[LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge)**：利用 LLM 评价相关性、语气、请求是否超出范围等需要语言理解的质量。需提前建立 [LLM Connection](/official/administration/llm-connection)。
+- **[Decision-model evaluator](/official/evaluation/evaluation-methods/decision-models)**：使用 TypeSafe Jev 或 OpenAI 的类型化问题生成标签、评分档次或真假标记。该功能仍为实验性，需要 TypeSafe 或受支持的 OpenAI 连接。
+- **[Code evaluator](/official/evaluation/evaluation-methods/code-evaluators)**：执行 Python / TypeScript `evaluate` 函数，检查 JSON 格式、必需字段或关键词等确定性规则。
 
 ### 2. 用样本 Observation 测试
 
@@ -68,15 +68,15 @@ ln -s /path/to/langfuse-skills/skills/langfuse /path/to/<agent-skill-root>/skill
 
 ### 3. 关联流量规则
 
-保存评估器后，可以利用测试时的筛选条件创建 [Rule](https://langfuse.com/docs/evaluation/core-concepts#evaluators-and-rules)，也可以挂到已有规则上。
+保存评估器后，可以利用测试时的筛选条件创建 [Rule](/official/evaluation/core-concepts)，也可以挂到已有规则上。
 
 Rule 定义**哪些**新 Observation 接受评价，包括筛选条件、采样率，以及一个或多个评估器。应查看过去七天匹配的数据量；使用 LLM 裁判时，还应核算估计成本，并按需降低采样率。
 
 ### 4. 查看生产环境的 Score
 
-新的匹配 Observation 到来时会被评分。打开评分后的 Observation，可查看分数和 LLM 裁判推理解释。使用 [Score Analytics](https://langfuse.com/docs/evaluation/scores/score-analytics)或[自定义 Dashboard](https://langfuse.com/docs/metrics/features/custom-dashboards)观察指标随时间的变化。
+新的匹配 Observation 到来时会被评分。打开评分后的 Observation，可查看分数和 LLM 裁判推理解释。使用 [Score Analytics](/official/evaluation/scores/score-analytics)或[自定义 Dashboard](/official/metrics/features/custom-dashboards)观察指标随时间的变化。
 
-还可以通过[批量评估](https://langfuse.com/docs/evaluation/core-concepts#batch-evaluation)将同一评估器应用到选定历史 Observation。
+还可以通过[批量评估](/official/evaluation/core-concepts)将同一评估器应用到选定历史 Observation。
 
 遇到评估器未执行问题，参阅[官方 FAQ](https://langfuse.com/faq/all/observation-eval-not-executing)。
 
@@ -88,13 +88,13 @@ Rule 定义**哪些**新 Observation 接受评价，包括筛选条件、采样�
 | --- | --- |
 | 人工检查部分 Trace | [UI 评分](/official/evaluation/evaluation-methods/scores-via-ui)、[标注队列](/official/evaluation/evaluation-methods/annotation-queues) |
 | 采集用户点赞/点踩等反馈 | [用户反馈](/official/observability/features/user-feedback) |
-| 从应用、Agent 或自有 Pipeline 推送评分 | [API/SDK 评分](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk) |
+| 从应用、Agent 或自有 Pipeline 推送评分 | [API/SDK 评分](/official/evaluation/evaluation-methods/scores-via-sdk) |
 
 ## 后续步骤
 
 - 学习 [Langfuse Academy 评估模块](https://langfuse.com/academy/evaluate)，选择可靠指标、编写可验证的评估器。
-- 在 Score 低于阈值时[建立告警](https://langfuse.com/docs/observability/features/alerts)。
-- 使用[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)分析质量指标。
+- 在 Score 低于阈值时[建立告警](/official/observability/features/alerts)。
+- 使用[自定义仪表盘](/official/metrics/features/custom-dashboards)分析质量指标。
 
 ---
 
