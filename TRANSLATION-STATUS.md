@@ -359,3 +359,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 已逐页静态核对 administration/ 的 10 篇中文版与官方同名源页的章节数及代码围栏数，重点抽查认证、RBAC、删除、保留的实际操作约束。发现删除和留存说明应更加明确数据保护边界，已在 `data-deletion.md` 补充级联删除不覆盖 Dataset/其他个人数据、删除异步与重新查询验证（`4549616`）；在 `data-retention.md` 补充保留策略不清理审计日志、数据集项和外部导出，版本化 S3 仍需生命周期规则（`74980be`）；在 `authentication-and-sso.md` 补充 OIDC-only、强制 SSO 避免锁定的上线核验提示（`7d86b4d`）。更正相关中文站内链接。
 
 10/10 篇已经进行首次**结构/风险扫描**，并非逐篇完整验收或执行测试；RBAC 的动态权限表还需字段级校验。未进行 VitePress Build，未部署。
+
+### Metrics 和 Scores 首轮技术审查（2026-10-08）
+
+对照官方原文核对 `metrics/` 3 篇和 `evaluation/scores/` 3 篇的章节与代码围栏。Metrics API v2 的 `scores-boolean` 视图提供 `booleanValue` 分组/筛选和数值化 `value` 的平均值；与 Scores API v3 读取 JSON `BOOLEAN` Score 的实际布尔 `value` 类型不同。已在 `metrics/features/metrics-api.md` 和 `evaluation/scores/overview.md` 分别加入类型契约说明，并将部分正文英文文档链接调整为本地中文路径（`9b108bb`、`cd5d7f4`）。其余四篇未在本轮修改。六篇仅完成首轮对照，仍未执行全量翻译逐句验收、API 运行测试及 VitePress 构建，未部署。
