@@ -4,12 +4,12 @@ description: 在 Langfuse 界面中为 Trace、Session 和 Observation 添加人
 ---
 # 通过 UI 手动评分
 
-在 Langfuse UI 中添加[评分（Score）](https://langfuse.com/docs/evaluation/scores/overview)是一种人工[评估方法](https://langfuse.com/docs/evaluation/core-concepts#evaluation-methods)，用于协作标注 Trace、Session 和 Observation。
+在 Langfuse UI 中添加[评分（Score）](/official/evaluation/scores/overview)是一种人工[评估方法](/official/evaluation/core-concepts)，用于协作标注 Trace、Session 和 Observation。
 
 [观看手动评分演示](https://static.langfuse.com/docs-videos/2025-12-19-manual-scoring.mp4)。
 
 ::: info
-如果需要审核大批量 Trace、Session 和 Observation，可以使用[标注队列](https://langfuse.com/docs/evaluation/evaluation-methods/annotation-queues)，提高审核效率。
+如果需要审核大批量 Trace、Session 和 Observation，可以使用[标注队列](/official/evaluation/evaluation-methods/annotation-queues)，提高审核效率。
 :::
 
 ## 为什么通过界面手动评分？
@@ -50,7 +50,7 @@ description: 在 Langfuse 界面中为 Trace、Session 和 Observation 添加人
 
 ## 给实验结果添加评分
 
-运行 [UI 实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-ui)或 [SDK 实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)后，可直接在实验比较视图中标注结果。
+运行 [UI 实验](/official/evaluation/experiments/experiments-via-ui)或 [SDK 实验](/official/evaluation/experiments/experiments-via-sdk)后，可直接在实验比较视图中标注结果。
 
 ::: info 前提条件
 - 已为要评估的维度配置 [Score Config](https://langfuse.com/faq/all/manage-score-configs)。
