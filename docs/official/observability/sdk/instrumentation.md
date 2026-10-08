@@ -43,6 +43,28 @@ ID 应符合 OpenTelemetry / W3C Trace Context 的要求；希望关联外部 Re
 
 Python 短进程结束前执行 `langfuse.flush()`；JS/TS 应适当地 `shutdown()` OpenTelemetry NodeSDK。长运行服务需在退出钩子中清理 Exporter。详细代码保留在后附的原文示例。
 
+## 校验补充：不同埋点方式的生命周期
+
+**Python Context Manager**：`with langfuse.start_as_current_observation(...)` 会自动设置活跃上下文并在离开 `with` 时结束 Observation。通过 `as_type="generation"` 等参数选择类型；内部创建的 Observation 自动继承父子关系。
+
+**JS/TS Context Manager**：`startActiveObservation(name, async (span) => {...})` 会让新 Span 在回调期间生效，处理跨异步调用的上下文，并在回调结束时自动结束。
+
+**装饰器/包装器**：Python 使用 `@observe()`，TypeScript 使用 `observe()` 包装函数，自动记录输入、输出、耗时和错误。输入输出可能很大，Python 可通过 `capture_input=False`、`capture_output=False` 或 `LANGFUSE_OBSERVE_DECORATOR_IO_CAPTURE_ENABLED` 关闭自动采集。
+
+**手动 Observation**：必须明确调用 `.end()`；单纯更新 Output 不代表已结束。
+
+## 校验补充：属性传播与跨服务上下文
+
+可传播的常用属性包括 User ID、Session ID、Metadata、Version、Tag 与 Trace Name。Python `propagate_attributes()` 还支持请求级 `environment`，会映射到 `langfuse.environment`，**不是普通 Metadata**。JS/TS 使用 `propagateAttributes()`。
+
+跨服务传播可以使用 OpenTelemetry Baggage；Python 的 `as_baggage=True` 还可以传递 Environment。在传播上下文中，Baggage 中的 `langfuse_environment` 优先于下游本地环境变量或客户端默认 Environment。必须在子调用开始前设置属性，不应期待它追溯修改已创建的 Span。
+
+## 校验补充：Flush 与 Shutdown
+
+Langfuse SDK 的追踪数据通常异步批量导出。Python `flush()` 会等待缓冲数据处理；`shutdown()` 除了刷新，还会等待摄入及媒体上传工作线程退出。SDK 通常注册 `atexit` Hook，但 Serverless、强制退出或守护进程仍建议显式处理。
+
+JS/TS 通用 Serverless 函数可持有 `LangfuseSpanProcessor`，在函数结束前执行 `await langfuseSpanProcessor.forceFlush()`；Node 进程结束时则正确 Shutdown OpenTelemetry SDK。不能认为函数返回时后台导出一定已完成。
+
 ## 官方技术示例（保留原始可执行语法）
 
 以下是源文档中的全部代码块与配置示例，代码保持原文，不自动翻译变量名，以免破坏运行行为。
