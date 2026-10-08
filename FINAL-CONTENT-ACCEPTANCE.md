@@ -59,3 +59,9 @@ GitHub Actions 已成功构建 VitePress，站内路径、导航和代码围栏�
 追加检查 `administration/{scim-and-org-api,audit-logs}`、`api-and-data-platform/features/{cli,mcp-server}`、`prompt-management/features/guaranteed-availability`、`observability/features/{queuing-batching,masking,metadata}` 共 8 篇，源 Blob SHA、实际比对范围及修复提交已列入 [`FOLLOWUP-CONTENT-QA-BATCH2-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH2-2026-10-08.md)（`bdb7bbf`）。其中审计日志 28/28 资源动作核对、SCIM 19 处路由引用已覆盖；MCP 的 15 个上游地域/客户端配置合并为中文区域表和客户端模板，不等于丢失 9 个功能示例。**发现并修复真实启动竞态**：`guaranteed-availability.md` 的 Express 预取完成前就 `listen`（`5e3cd38`），现改为预取成功才开放端口，失败拒绝启动；同时清理 CLI 迁移文案重复（`9888223`），修正 SCIM 中文 RBAC 链接（`71cd608`）。
 
 最新文档修订的 GitHub Actions [run 37771941645](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37771941645) **success**：扫描 113 篇 official / 121 篇 Markdown，静态 Errors 0、anchor warnings 0、VitePress Build 成功。此轮仅完成上述定点检查，仍没有运行受外部服务/密钥影响的 SDK、SCIM、MCP 等代码；不可将这 8 篇标为**整篇内容最终 PASS**。未部署。
+
+### 迁移指南与追踪属性传播补查（13 篇，2026-10-08）
+
+新增核销 **13 篇**：SDK Upgrade Path 5 篇、Observability Users/Feedback/Comments/Corrections/Tags/Environments/Sessions/Releases 8 篇。各页上游 Blob SHA、代码示例对照、核对范围见 [`FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md)（`1486611`）。实质修复为上游 `PropagationRestrictionsCallout` 中原先被略过的**传播值字符串限额、尽早设置及无效值被丢弃的说明**，涉及 Users `d0dd29a`、Sessions `eab0c4d`、Releases `5021b62`、Tags `a66cd81`；并在 6 篇文档中修复 15 处与本地中文页有对应目标的内部正文链接/锚点（`3ef9a1a`、`86382bc`、`5ffce50`、`f5674e3`、`8bf8ccc`、`8a8bac6`）。JS v3→v4 原文采用缩进代码围栏，不能按顶格围栏数量判断缺失；Release 的 12→11 是原文重复 `LANGFUSE_RELEASE` 示例在中文版合并。
+
+最新内容提交 `8a8bac6` 的 GitHub Actions [run 37773401731](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37773401731) **success**：113 篇 official / 121 篇 Markdown，Errors 0、anchor warnings 0，VitePress Build 成功。仍未执行实际 SDK/外部服务测试；本批定点核查不等于 13 篇全文最终 PASS；**未部署**。
