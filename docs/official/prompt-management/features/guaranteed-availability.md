@@ -5,10 +5,10 @@ description: 通过启动时预取及回退提示词，降低网络故障影响�
 # 提示词高可用保障
 
 ::: warning
-通常无需额外实现此机制，否则会增加应用复杂度。Langfuse 提示词管理本身依赖多层[缓存](https://langfuse.com/docs/prompt-management/features/caching)提供较高可用性，并持续监测[服务状态](https://status.langfuse.com)。仅当业务要求极严格的可用性时才考虑下列方案。
+通常无需额外实现此机制，否则会增加应用复杂度。Langfuse 提示词管理本身依赖多层[缓存](/official/prompt-management/features/caching)提供较高可用性，并持续监测[服务状态](https://status.langfuse.com)。仅当业务要求极严格的可用性时才考虑下列方案。
 :::
 
-Langfuse API 可用性较高，SDK 也会将提示词[缓存在本地](https://langfuse.com/docs/prompt-management/features/caching)，以缓解网络故障。
+Langfuse API 可用性较高，SDK 也会将提示词[缓存在本地](/official/prompt-management/features/caching)，以缓解网络故障。
 
 但是，以下两个条件**同时**成立时，`get_prompt()` / `getPrompt()` 仍可能抛出异常：
 
