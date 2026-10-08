@@ -11,7 +11,8 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '入门指南', link: '/guide/overview' },
-      { text: '官方英文文档 ↗', link: 'https://langfuse.com/docs' }
+      { text: '官方文档翻译', link: '/official/observability/overview' },
+      { text: '英文原文 ↗', link: 'https://langfuse.com/docs' }
     ],
     sidebar: [
       { text: '开始使用', items: [
@@ -23,6 +24,11 @@ export default defineConfig({
         { text: '提示词管理', link: '/features/prompts' },
         { text: '评估与数据集', link: '/features/evaluations' },
         { text: 'LLM Playground', link: '/features/playground' }
+      ]},
+      { text: '官方文档中文翻译', items: [
+        { text: '可观测性与追踪', link: '/official/observability/overview' },
+        { text: '提示词管理', link: '/official/prompt-management/overview' },
+        { text: 'LLM 应用评估', link: '/official/evaluation/overview' }
       ]},
       { text: '关于', items: [ { text: '翻译说明与许可', link: '/about' } ] }
     ],
