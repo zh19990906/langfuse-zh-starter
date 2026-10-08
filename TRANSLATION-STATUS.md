@@ -347,3 +347,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### Prompt Management Features 第一批（2026-10-08）
 
 盘点 Prompt Management / Features 共 15 篇，重点对照上游检查了 a-b-testing、caching、composability、github-integration、webhooks-slack-integrations、playground 六篇的章节和示例数量。发现 Webhook 官方 TS 签名验签示例若遇到错误长度的十六进制签名，Node `timingSafeEqual` 可能抛错；因此在中文版追加一段可供生产接入参考的防御式验证函数（固定 SHA-256 长度、头格式校验、时间戳窗口和常量时间比较），原官方示例仍保留。Commit: `1a432c9`。六篇只完成范围检查，其他 9 篇及逐句翻译/运行测试仍待完成，未部署。
+
+### Prompt Management Features 第二批（2026-10-08）
+
+对照官方原文检查剩余 9 篇：agentic-access、config、folders、guaranteed-availability、link-to-traces、message-placeholders、n8n-node、prompt-version-control、variables。原文和中文译稿的围栏示例数量逐篇一致（依次为 0、6、0、4、0、6、0、6、6）。修复了 6 篇页面的 **11 处**指向同主题英文 `/docs/...` 的正文链接，改用本站 `/official/...` 路由；对于可能已失效的锚点链接保守移除片段，保留原文参考链接。提交：`d192001`、`541d609`、`37e00a1`、`ea86388`、`4a7770a`、`d4db148`。
+
+至此 `prompt-management/features/` 15/15 篇都经过至少一轮章节/示例静态检查，但不能称为全量译文验收；SDK 示例运行与 VitePress 构建尚未测试，未部署。
