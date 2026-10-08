@@ -212,3 +212,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 
 ### SDK 精校批次（未部署）
 - `observability/sdk/overview.mdx` → `docs/official/observability/sdk/overview.md`：已对照官方源文补齐完整中文正文、安装配置、OTEL 关系、浏览器注意事项和代码示例，替换旧概要式工作稿。其余工作稿仍待逐篇精校。
+
+### 首轮技术精校与导航检查（2026-10-08，未部署）
+
+- 对照上游逐段复核 `observability/sdk/overview.md`，已将原概要稿替换成 SDK 版本、快速开始、OTEL、客户端初始化、前端安全以及跨语言说明的中文正文。
+- 检查 VitePress 配置中的 114 个 `/official/` 导航引用：均可对应仓库中的 `.md` 页面；这只是文件存在性检查，不代表页面锚点和外部链接全部有效。
+- 修正 `prompt-management/get-started.md` 的英文 Frontmatter 标题和包含 `MOVED TO R2` 的明显无效视频 URL（改为官方教程入口），并调整内部数据模型链接。
+- 修正 SDK 概览内部分章节锚点链接，减少无效跳转风险。
+- 未运行全量 VitePress Build、未验证所有代码示例或外部资源；其他概要式译稿仍需逐篇校对。
