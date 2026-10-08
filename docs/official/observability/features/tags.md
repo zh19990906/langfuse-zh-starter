@@ -128,10 +128,103 @@ await propagateAttributes({ tags: ["tag-1", "tag-2"] }, async () => {
 
 另外可通过 `new CallbackHandler({ tags: ["tag-1", "tag-2"] })` 设置，或在 `chain.invoke()` 的配置中传入 `tags`。
 
+
+## 补充：官方 SDK 场景示例
+
+### Python 装饰器传播
+
+```python
+from langfuse import observe, propagate_attributes
+
+@observe()
+def my_function():
+    # Apply tags to all child observations
+    with propagate_attributes(
+        tags=["tag-1", "tag-2"]
+    ):
+        # All nested observations automatically have these tags
+        result = process_data()
+        return result
+```
+
+### Python 手动 Observation 传播
+
+```python
+from langfuse import get_client, propagate_attributes
+
+langfuse = get_client()
+
+with langfuse.start_as_current_observation(as_type="span", name="my-operation") as root_span:
+    # Apply tags to all child observations
+    with propagate_attributes(tags=["tag-1", "tag-2"]):
+        # All observations created here automatically have these tags
+        with root_span.start_as_current_observation(
+            as_type="generation",
+            name="llm-call",
+            model="gpt-4o"
+        ) as gen:
+            # This generation automatically has the tags
+            pass
+```
+
+### TypeScript 上下文传播
+
+```ts
+import { startActiveObservation, propagateAttributes } from "@langfuse/tracing";
+
+await startActiveObservation("context-manager", async (span) => {
+  span.update({
+    input: { query: "What is the capital of France?" },
+  });
+
+  // Apply tags to all child observations
+  await propagateAttributes(
+    {
+      tags: ["tag-1", "tag-2"],
+    },
+    async () => {
+      // All observations created here automatically have these tags
+      // ... your logic ...
+    }
+  );
+});
+```
+
+### TypeScript observe 包装器
+
+```ts
+import { observe, propagateAttributes } from "@langfuse/tracing";
+
+const processData = observe(
+  async (data: string) => {
+    // Apply tags to all child observations
+    return await propagateAttributes(
+      { tags: ["tag-1", "tag-2"] },
+      async () => {
+        // All nested observations automatically have these tags
+        const result = await performProcessing(data);
+        return result;
+      }
+    );
+  },
+  { name: "process-data" }
+);
+
+const result = await processData("input");
+```
+
+### LangChain CallbackHandler 标签
+
+```ts
+const handler = new CallbackHandler({
+  tags: ["tag-1", "tag-2"],
+});
+```
+
 ## 相关资源
 
 - [筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)
 - [Score 与 Tag 的区别](https://langfuse.com/docs/evaluation/scores/overview#scores-vs-tags)
 - [追踪最佳实践](https://langfuse.com/docs/observability/best-practices)
 
-原文：[Tags](https://langfuse.com/docs/observability/features/tags)。正文与主要 SDK 示例已翻译。
+原文：[Tags](https://langfuse.com/docs/observability/features/tags)。已补充关键标签传播示例，仍需逐项核对所有 SDK 场景。
