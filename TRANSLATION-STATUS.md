@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：29 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：33 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -64,3 +64,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `observability/features/queuing-batching.mdx` → `docs/official/observability/features/queuing-batching.md`
 - `metrics/overview.mdx` → `docs/official/metrics/overview.md`
 - `evaluation/evaluation-methods/scores-via-ui.mdx` → `docs/official/evaluation/evaluation-methods/scores-via-ui.md`
+
+### 追加四篇（未部署）
+- `administration/billable-units.mdx` → `docs/official/administration/billable-units.md`
+- `observability/features/url.mdx` → `docs/official/observability/features/url.md`
+- `observability/features/web-callouts.mdx` → `docs/official/observability/features/web-callouts.md`
+- `prompt-management/features/a-b-testing.mdx` → `docs/official/prompt-management/features/a-b-testing.md`
