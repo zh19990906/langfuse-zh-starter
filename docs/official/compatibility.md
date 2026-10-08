@@ -62,6 +62,16 @@ description: Langfuse Cloud、自托管 Server、Python 和 JS/TS SDK 的版本�
 | Observation 级评估器 | 完整支持 | 完整支持 |
 | Trace 级评估器 | 完整支持 | 已弃用 |
 
+## 兼容矩阵的使用方式
+
+官方页面通过交互式矩阵展示不同 Server/SDK/API 组合的支持状态，并按功能提供展开解释。本站使用静态表格，**不能根据表格中的「完整支持」推断所有补丁版本或自托管实例都支持某一功能**。涉及生产升级时，建议按以下次序核对：
+
+1. 确认部署属于 Langfuse Cloud 还是自托管，以及实际 Server 主版本与补丁版本。
+2. 确认 Python / JS SDK 的主版本和具体补丁版本，并核对对应升级指南。
+3. 分别核对追踪写入（OpenTelemetry/旧 Ingestion）、Scores 写入、读取 API、Experiments、评估器和 Blob Storage Export；这些能力不一定同步迁移。
+4. 如涉及 v4 迁移，先在测试环境验证字段模型、实时性和数据导出消费者，再切换生产流量。
+5. 对静态文档不能表示的 Cloud 切换日期、最小补丁版本和动态筛选结果，以[官方实时兼容性矩阵](https://langfuse.com/docs/compatibility)为准。
+
 ## 各能力的迁移限制
 
 ### Python SDK v3
