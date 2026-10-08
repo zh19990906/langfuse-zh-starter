@@ -21,18 +21,18 @@ description: 在 Langfuse 中集中保存、版本管理和获取提示词。
 
 ### 低延迟与可用性
 
-Langfuse SDK 会在客户端缓存提示词，所以从缓存中读取的速度与内存读取相当。详细说明见[缓存文档](https://langfuse.com/docs/prompt-management/features/caching)。
+Langfuse SDK 会在客户端缓存提示词，所以从缓存中读取的速度与内存读取相当。详细说明见[缓存文档](/official/prompt-management/features/caching)。
 
 ## 开始使用
 
-从[创建第一条提示词](https://langfuse.com/docs/prompt-management/get-started)开始，然后接入应用。你可以在 UI 中直接创建提示词，也可以导入应用已有的提示词。
+从[创建第一条提示词](/official/prompt-management/get-started)开始，然后接入应用。你可以在 UI 中直接创建提示词，也可以导入应用已有的提示词。
 
-建议了解以下[核心概念](https://langfuse.com/docs/prompt-management/data-model)：提示词类型、版本管理、标签和配置。
+建议了解以下[核心概念](/official/prompt-management/data-model)：提示词类型、版本管理、标签和配置。
 
 接入后，还可以：
 
-- [将提示词关联到追踪记录](https://langfuse.com/docs/prompt-management/features/link-to-traces)，按版本分析效果。
-- [使用版本管理和标签](https://langfuse.com/docs/prompt-management/features/prompt-version-control)，管理不同部署环境。
+- [将提示词关联到追踪记录](/official/prompt-management/features/link-to-traces)，按版本分析效果。
+- [使用版本管理和标签](/official/prompt-management/features/prompt-version-control)，管理不同部署环境。
 
 更多功能见官方 *Features* 导航。
 
