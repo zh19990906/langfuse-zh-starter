@@ -6,7 +6,7 @@ description: Langfuse 邮箱密码、第三方登录和 Enterprise OIDC SSO 的�
 
 Langfuse 默认支持邮箱/密码、Google、GitHub、Microsoft 第三方登录，以及 ClickHouse Cloud 登录。需要更严格安全管理时，还可通过 OIDC 配置 Enterprise SSO，例如 Okta、Authentik、GitHub Enterprise、OneLogin、Azure AD、Keycloak、JumpCloud 等。
 
-授权机制见 [RBAC](https://langfuse.com/docs/administration/rbac)；自托管配置参阅[自托管认证与 SSO](https://langfuse.com/self-hosting/security/authentication-and-sso)。
+授权机制见 [RBAC](/official/administration/rbac)；自托管配置参阅[自托管认证与 SSO](https://langfuse.com/self-hosting/security/authentication-and-sso)。
 
 ## 邮箱和密码
 
@@ -34,6 +34,10 @@ Enterprise SSO 仅支持 **OIDC**，不支持 SAML。可用性：Hobby、Core �
 - **登录**：输入邮箱并点击 Continue，然后跳转到对应的 Enterprise SSO 提供商认证。
 
 ![SSO 登录流程](https://langfuse.com/images/security/sso-signin.png)
+
+::: warning 强制 SSO 上线检查
+Enterprise SSO **仅支持 OIDC，不支持 SAML**。上线前请先验证域名、IdP Issuer、Callback URL、邮箱 Claim 和用户授权；保留现有已登录会话，在独立浏览器完成登录验证后再启用强制策略。目前无法为已强制 SSO 的邮箱域名保留使用密码登录的 Break-Glass 账号。
+:::
 
 ## 在 Langfuse Cloud 配置 Enterprise SSO
 
