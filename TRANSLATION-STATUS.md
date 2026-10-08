@@ -15,7 +15,7 @@
 - `observability/features/environments.mdx` → `docs/official/observability/features/environments.md`
 - `observability/features/metadata.mdx` → `docs/official/observability/features/metadata.md`
 
-**当前已建立中文版页面：60 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前已建立中文版页面：62 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -110,17 +110,23 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（主要 SDK 集成示例已补齐，发布前待验收）
 - `observability/features/observation-types.mdx` → `docs/official/observability/features/observation-types.md`（部分翻译/组件或示例待补）
 
-**60 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
+**62 / 113 是中文映射页数量，不是完整翻译验收数量。** 本轮部分长篇 SDK 文档采用精简翻译，必须在后续补齐全部示例，才能标为完成。
 
 ### 翻译补齐批次（未部署）
 
 - 已将 `prompt-management/data-model` 从概要扩展为对应上游完整正文：Text/Chat、动态渲染、缓存、版本、标签、发布与回滚。
 - 已为 `observability/features/tags` 补充 Python / TypeScript 的 OpenAI、LangChain 与手动 Observation 使用示例。
-- 中文映射总数仍为 **60 / 113**；这次是补齐已有页面，而非新增篇数。
+- 中文映射总数仍为 **62 / 113**；这次是补齐已有页面，而非新增篇数。
 
 ### 本轮继续补齐（未部署）
 
 - `observability/features/sessions.md` 补入 Python、TypeScript、OpenAI、LangChain 等完整上下文传播示例。
 - `observability/features/users.md` 补入手动 Observation、TypeScript 包装器、OpenAI 与 LangChain 接入示例。
 - `prompt-management/get-started.md` 从官方 `components-mdx/prompt-create.mdx` 与 `components-mdx/prompt-use.mdx` 迁入创建提示词和运行时使用示例，包含 Python、TypeScript、HTTP API、OpenAI、LangChain 和 Vercel AI SDK；动态 FAQ 仍须链接官方。
-- **中文映射页面数仍为 60 / 113。** 此轮是补齐，不新增映射。
+- **中文映射页面数仍为 62 / 113。** 此轮是补齐，不新增映射。
+
+### 新增官方译文（未部署）
+- `observability/sdk/upgrade-path/js-v3-to-v4.mdx` → `docs/official/observability/sdk/upgrade-path/js-v3-to-v4.md`（正文及代码迁移示例已翻译）
+- `v4.mdx` → `docs/official/v4.md`（正文已翻译；交互时间线和图示未复刻）
+
+**中文映射页面总计 62 / 113；这不代表 62 篇全部完成技术验收。**
