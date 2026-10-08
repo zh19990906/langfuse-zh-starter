@@ -6,7 +6,7 @@ description: 通过基线对比、逐项审查和 CI 门禁判断模型与提示
 
 比较实验运行结果，判断提示词、模型、检索流程或代码变更是否可以上线。先检查整体评分，再查看质量下降的案例，并打开相应 Trace 调查原因。
 
-实验可以使用 Langfuse 数据集或本地数据。参阅[评估现有应用](https://langfuse.com/resources/engineering/evaluate-existing-application)，在 Python 或 TypeScript 中生成可比的两次运行，也可以使用[示例项目](https://langfuse.com/docs/demo)。
+实验可以使用 Langfuse 数据集或本地数据。参阅[评估现有应用](https://langfuse.com/resources/engineering/evaluate-existing-application)，在 Python 或 TypeScript 中生成可比的两次运行，也可以使用[示例项目](/official/demo)。
 
 ## 选择可比较的运行
 
@@ -18,7 +18,7 @@ description: 通过基线对比、逐项审查和 CI 门禁判断模型与提示
 
 不同来源的实验也能比较，但必须先确认测试项代表相同输入与预期输出。**缺失的测试项不能当作通过。** 本地测试数据应保留案例 ID，以便 CI 精确匹配。
 
-在分析结果前先确定[发布规则](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd#release-policy)：是否要求所有必需案例通过？还是不允许已批准通过的案例回退？已知失败需要明确接受，新运行不能自动成为批准基线。
+在分析结果前先确定[发布规则](/official/evaluation/experiments/experiments-ci-cd)：是否要求所有必需案例通过？还是不允许已批准通过的案例回退？已知失败需要明确接受，新运行不能自动成为批准基线。
 
 ## 检查评分与输出
 
@@ -47,17 +47,17 @@ description: 通过基线对比、逐项审查和 CI 门禁判断模型与提示
 
 ## 与审核者分享结果
 
-通过[组织邀请和角色权限](https://langfuse.com/docs/administration/rbac)给审核者开通项目访问。**Viewer** 可以查看结果；**Member** 可以添加评分与评论。仅发送链接不会自动授予权限。
+通过[组织邀请和角色权限](/official/administration/rbac)给审核者开通项目访问。**Viewer** 可以查看结果；**Member** 可以添加评分与评论。仅发送链接不会自动授予权限。
 
 分享时提供基线和候选运行名称、版本标识、需要审核的案例及发布规则，并注明筛选条件，让审核者能复现比较。
 
-如果由 QA 团队审核答案，可以把相应实验项的 Observation 添加到[标注队列](https://langfuse.com/docs/evaluation/evaluation-methods/annotation-queues#review-experiment-answers)，并提供必要的来源材料与参考答案。审核者无需执行代码即可评分、解释失败原因并给出纠正建议。
+如果由 QA 团队审核答案，可以把相应实验项的 Observation 添加到[标注队列](/official/evaluation/evaluation-methods/annotation-queues)，并提供必要的来源材料与参考答案。审核者无需执行代码即可评分、解释失败原因并给出纠正建议。
 
 ## 将决策转化为 CI 规则
 
 显式批准基线并记录其 ID、数据集与评估器版本。不要把每个成功的候选运行自动替换为新基线。有效的 CI 策略通常同时检查最低整体评分、关键案例是否新出现失败、结果是否完整。
 
-参阅[实验 CI/CD](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd#approved-baseline)的示例。基线批准与门禁规则属于你的代码仓库；在 UI 中选择基线并不会自动配置 CI 门禁。
+参阅[实验 CI/CD](/official/evaluation/experiments/experiments-ci-cd)的示例。基线批准与门禁规则属于你的代码仓库；在 UI 中选择基线并不会自动配置 CI 门禁。
 
 ---
 
