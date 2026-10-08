@@ -9,11 +9,11 @@ description: 理解 Score、评估器、规则、在线评估、批量评估及�
 从这些任务开始：
 
 - [为生产 Trace 配置在线评估](/official/evaluation/get-started/online)
-- [创建 Dataset](https://langfuse.com/docs/evaluation/experiments/datasets)，持续衡量应用表现
+- [创建 Dataset](/official/evaluation/experiments/datasets)，持续衡量应用表现
 - [运行实验](#experiments)，了解应用整体性能
-- [配置 LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)
-- [使用 Decision Model](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models)得到类型化判断
-- [创建代码评估器](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators)执行确定性检查
+- [配置 LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge)
+- [使用 Decision Model](/official/evaluation/evaluation-methods/decision-models)得到类型化判断
+- [创建代码评估器](/official/evaluation/evaluation-methods/code-evaluators)执行确定性检查
 
 ## 评估循环
 
@@ -47,12 +47,12 @@ Score 可关联 Trace、Observation、Session 或 Dataset Run，包含**名称�
 
 | 方式 | 用途 | 适合场景 |
 | --- | --- | --- |
-| [LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge) | 使用 LLM 按自定义标准判断输出 | 大规模主观质量评估，如语气、准确性、帮助程度 |
-| [Decision Model](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models) | TypeSafe Jev 或 OpenAI 回答类型化问题 | 分类、评分等级、是/否判断 |
-| [代码评估器](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators) | 自定义 Python/TypeScript 程序 | 确定性规则、结构化输出验证、业务检查 |
+| [LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge) | 使用 LLM 按自定义标准判断输出 | 大规模主观质量评估，如语气、准确性、帮助程度 |
+| [Decision Model](/official/evaluation/evaluation-methods/decision-models) | TypeSafe Jev 或 OpenAI 回答类型化问题 | 分类、评分等级、是/否判断 |
+| [代码评估器](/official/evaluation/evaluation-methods/code-evaluators) | 自定义 Python/TypeScript 程序 | 确定性规则、结构化输出验证、业务检查 |
 | [UI 评分](/official/evaluation/evaluation-methods/scores-via-ui) | 手动对 Trace 增加 Score | 快速抽查、审阅单条 Trace |
 | [标注队列](/official/evaluation/evaluation-methods/annotation-queues) | 结构化人工审核 | 构建 Ground Truth、系统标注、团队协作 |
-| [API/SDK 评分](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk) | 应用通过代码写入 Score | 自定义 Pipeline、自动化流程 |
+| [API/SDK 评分](/official/evaluation/evaluation-methods/scores-via-sdk) | 应用通过代码写入 Score | 自定义 Pipeline、自动化流程 |
 
 引入新评估器后，可通过 [Score Analytics](/official/evaluation/scores/score-analytics)判断评分分布和可信度。
 
@@ -142,7 +142,7 @@ Experiment 对 Dataset 执行应用任务并评估输出，适合在发布前测
 
 | Dataset 来源 | Langfuse 平台执行 | 本地/CI 执行 |
 | --- | --- | --- |
-| Langfuse Dataset | [通过 UI 运行](/official/evaluation/experiments/experiments-via-ui) | [通过 SDK](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)或 [OTEL](/official/evaluation/experiments/experiments-via-opentelemetry) |
+| Langfuse Dataset | [通过 UI 运行](/official/evaluation/experiments/experiments-via-ui) | [通过 SDK](/official/evaluation/experiments/experiments-via-sdk)或 [OTEL](/official/evaluation/experiments/experiments-via-opentelemetry) |
 | Local Dataset | 不支持 | 通过 SDK 或 OTEL |
 
 虽然可以使用本地 Dataset，但通常建议在 Langfuse 托管测试集，因为这支持同一数据集的多次实验在 UI 中并排比较，也便于根据生产/测试 Trace 持续完善案例集。
