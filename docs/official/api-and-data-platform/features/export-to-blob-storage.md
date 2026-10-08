@@ -170,65 +170,65 @@ Scores 始终导出，不能配置其字段组。
 
 ### 文件类别
 
-| File               | When it is exported      | Schema                                          |
+| 文件类别               | 导出时机      | Schema                                          |
 | ------------------ | ------------------------ | ----------------------------------------------- |
-| `observations_v2/` | Current enriched export  | [Enriched observations](#enriched-observations) |
-| `scores/`          | Every export             | [Scores](#scores)                               |
-| `traces/`          | Deprecated legacy export | [Legacy exports](#legacy-export-paths)          |
-| `observations/`    | Deprecated legacy export | [Legacy exports](#legacy-export-paths)          |
+| `observations_v2/` | 当前 Enriched 导出  | [Enriched observations](#enriched-observations) |
+| `scores/`          | 每次导出             | [Scores](#scores)                               |
+| `traces/`          | 已弃用的旧版导出 | [Legacy exports](#legacy-export-paths)          |
+| `observations/`    | 已弃用的旧版导出 | [Legacy exports](#legacy-export-paths)          |
 
 
 ### Enriched Observations：`observations_v2/`
 
 一行表示一个 Observation，同时附带 Trace 上下文，受上方字段组控制，`core` 必选。
 
-| Field                     | Type                       | Description                                                                                                                       |
+| 字段                     | 类型                       | 说明                                                                                                                       |
 | ------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                      | string                     | Unique observation identifier.                                                                                                    |
-| `trace_id`                | string                     | Trace identifier shared by related observations and scores.                                                                       |
-| `project_id`              | string                     | Langfuse project identifier.                                                                                                      |
-| `environment`             | string                     | Environment label.                                                                                                                |
-| `type`                    | string                     | Observation type: `SPAN`, `GENERATION`, `EVENT`, `AGENT`, `TOOL`, `CHAIN`, `RETRIEVER`, `EVALUATOR`, `EMBEDDING`, or `GUARDRAIL`. |
-| `parent_observation_id`   | string                     | Parent observation identifier; empty for a root observation.                                                                      |
-| `is_root_observation`     | boolean                    | Whether the observation is a logical root.                                                                                        |
-| `start_time`              | string (timestamp)         | When the observation started.                                                                                                     |
-| `end_time`                | string (timestamp) or null | When the observation ended.                                                                                                       |
-| `name`                    | string                     | User-defined observation name.                                                                                                    |
-| `metadata`                | object                     | User-supplied observation metadata.                                                                                               |
-| `level`                   | string                     | `DEBUG`, `DEFAULT`, `WARNING`, or `ERROR`.                                                                                        |
-| `status_message`          | string                     | Status or error message.                                                                                                          |
-| `version`                 | string                     | User-defined version.                                                                                                             |
-| `input`                   | string                     | Observation input; may contain plain text or JSON.                                                                                |
-| `output`                  | string                     | Observation output; may contain plain text or JSON.                                                                               |
-| `provided_model_name`     | string                     | Model name supplied by the SDK or user.                                                                                           |
-| `model_parameters`        | string                     | Model parameters encoded as JSON.                                                                                                 |
-| `usage_details`           | object (string → integer)  | Token usage by category, such as `input`, `output`, and `total`.                                                                  |
-| `cost_details`            | object (string → number)   | Cost in USD by category.                                                                                                          |
-| `completion_start_time`   | string (timestamp) or null | When the first streamed token was generated.                                                                                      |
-| `prompt_name`             | string                     | Langfuse prompt name.                                                                                                             |
-| `prompt_version`          | integer or null            | Langfuse prompt version.                                                                                                          |
-| `total_cost`              | number                     | Total observation cost in USD; `0` when no cost was recorded.                                                                     |
-| `latency`                 | number or null             | Duration in seconds.                                                                                                              |
-| `time_to_first_token`     | number or null             | Time to first token in seconds.                                                                                                   |
-| `model_id`                | string                     | Matched Langfuse model definition identifier.                                                                                     |
-| `created_at`              | string (timestamp)         | Row creation time.                                                                                                                |
-| `updated_at`              | string (timestamp)         | Last row update time.                                                                                                             |
-| `prompt_id`               | string                     | Langfuse prompt identifier.                                                                                                       |
-| `tool_calls`              | array of strings           | Tool calls encoded as JSON strings.                                                                                               |
-| `tool_call_names`         | array of strings           | Names of called tools.                                                                                                            |
-| `tool_definitions`        | object                     | Tool or function schemas supplied to the model.                                                                                   |
-| `usage_pricing_tier_id`   | string or null             | Pricing tier identifier used for cost calculation.                                                                                |
-| `usage_pricing_tier_name` | string or null             | Pricing tier name used for cost calculation.                                                                                      |
-| `input_price`             | string or null             | Matched per-unit input price; omitted from Parquet.                                                                               |
-| `output_price`            | string or null             | Matched per-unit output price; omitted from Parquet.                                                                              |
-| `total_price`             | string or null             | Matched flat per-call price; omitted from Parquet.                                                                                |
-| `user_id`                 | string                     | End-user identifier from the trace.                                                                                               |
-| `session_id`              | string                     | Session identifier from the trace.                                                                                                |
-| `trace_name`              | string                     | Trace name.                                                                                                                       |
-| `tags`                    | array of strings           | Trace tags.                                                                                                                       |
-| `release`                 | string                     | Trace release.                                                                                                                    |
-| `bookmarked`              | boolean                    | Whether the trace is bookmarked.                                                                                                  |
-| `public`                  | boolean                    | Whether the trace is public.                                                                                                      |
+| `id`                      | string                     | Observation 的唯一标识符。                                                                                                    |
+| `trace_id`                | string                     | 关联 Observation 和 Score 共用的 Trace ID。                                                                       |
+| `project_id`              | string                     | Langfuse 项目 ID。                                                                                                      |
+| `environment`             | string                     | 环境标签。                                                                                                                |
+| `type`                    | string                     | Observation 类型：`SPAN`、`GENERATION`、`EVENT`、`AGENT`、`TOOL`、`CHAIN`、`RETRIEVER`、`EVALUATOR`、`EMBEDDING` 或 `GUARDRAIL`。 |
+| `parent_observation_id`   | string                     | 父 Observation ID；根 Observation 为空字符串。                                                                      |
+| `is_root_observation`     | boolean                    | 是否为逻辑根 Observation。                                                                                        |
+| `start_time`              | string (timestamp)         | Observation 开始时间。                                                                                                     |
+| `end_time`                | string (timestamp) or null | Observation 结束时间。                                                                                                       |
+| `name`                    | string                     | 用户自定义的 Observation 名称。                                                                                                    |
+| `metadata`                | object                     | 用户提供的 Observation 元数据。                                                                                               |
+| `level`                   | string                     | 日志级别：`DEBUG`、`DEFAULT`、`WARNING` 或 `ERROR`。                                                                                        |
+| `status_message`          | string                     | 状态或错误消息。                                                                                                          |
+| `version`                 | string                     | 用户自定义版本。                                                                                                             |
+| `input`                   | string                     | Observation 输入，可包含纯文本或 JSON。                                                                                |
+| `output`                  | string                     | Observation 输出，可包含纯文本或 JSON。                                                                               |
+| `provided_model_name`     | string                     | SDK 或用户提供的模型名称。                                                                                           |
+| `model_parameters`        | string                     | JSON 编码的模型参数。                                                                                                 |
+| `usage_details`           | object (string → integer)  | 按类别统计的 Token 用量，例如 `input`、`output`、`total`。                                                                  |
+| `cost_details`            | object (string → number)   | 按类别统计的美元成本。                                                                                                          |
+| `completion_start_time`   | string (timestamp) or null | 流式响应中首个 Token 的生成时间。                                                                                      |
+| `prompt_name`             | string                     | Langfuse 提示词名称。                                                                                                             |
+| `prompt_version`          | integer or null            | Langfuse 提示词版本号。                                                                                                          |
+| `total_cost`              | number                     | Observation 总成本（美元）；未记录成本时也可能为 `0`，不一定表示真实零成本。                                                                     |
+| `latency`                 | number or null             | 持续时长（秒）。                                                                                                              |
+| `time_to_first_token`     | number or null             | 首 Token 时间（秒）。                                                                                                   |
+| `model_id`                | string                     | 匹配到的 Langfuse 模型定义 ID。                                                                                     |
+| `created_at`              | string (timestamp)         | 记录创建时间。                                                                                                                |
+| `updated_at`              | string (timestamp)         | 记录最后更新时间。                                                                                                             |
+| `prompt_id`               | string                     | Langfuse 提示词 ID。                                                                                                       |
+| `tool_calls`              | array of strings           | 以 JSON 字符串编码的工具调用。                                                                                               |
+| `tool_call_names`         | array of strings           | 调用过的工具名称。                                                                                                            |
+| `tool_definitions`        | object                     | 提供给模型的工具或函数 Schema。                                                                                   |
+| `usage_pricing_tier_id`   | string or null             | 用于费用计算的价格档位 ID。                                                                                |
+| `usage_pricing_tier_name` | string or null             | 用于费用计算的价格档位名称。                                                                                      |
+| `input_price`             | string or null             | 匹配的单位输入价格；Parquet 格式不导出此列。                                                                               |
+| `output_price`            | string or null             | 匹配的单位输出价格；Parquet 格式不导出此列。                                                                              |
+| `total_price`             | string or null             | 匹配的每次调用固定价格；Parquet 格式不导出此列。                                                                                |
+| `user_id`                 | string                     | 取自 Trace 的最终用户 ID。                                                                                               |
+| `session_id`              | string                     | 取自 Trace 的 Session ID。                                                                                                |
+| `trace_name`              | string                     | Trace 名称。                                                                                                                       |
+| `tags`                    | array of strings           | Trace 标签。                                                                                                                       |
+| `release`                 | string                     | Trace 对应的应用 Release。                                                                                                                    |
+| `bookmarked`              | boolean                    | Trace 是否已被收藏。                                                                                                  |
+| `public`                  | boolean                    | Trace 是否公开。                                                                                                      |
 
 
 **重要单位差异：**2026-04-01 起创建的集成，其 `latency` 和 `time_to_first_token` 单位为**秒**；更早创建的集成为兼容旧使用方式，单位为**毫秒**。不能直接混算。
@@ -237,24 +237,24 @@ Scores 始终导出，不能配置其字段组。
 
 包含 `NUMERIC`、`BOOLEAN`、`CATEGORICAL`、`TEXT` 评分，**不包含** `CORRECTION` 数据类型；`TEXT` 的数值 `value` 为 0，真实文字见 `string_value`。
 
-| Field            | Type               | Description                                            |
+| 字段            | 类型               | 说明                                            |
 | ---------------- | ------------------ | ------------------------------------------------------ |
-| `id`             | string             | Unique score identifier.                               |
-| `timestamp`      | string (timestamp) | Score creation time.                                   |
-| `project_id`     | string             | Langfuse project identifier.                           |
-| `environment`    | string             | Environment label.                                     |
-| `trace_id`       | string or null     | Associated trace identifier.                           |
-| `observation_id` | string or null     | Associated observation identifier.                     |
-| `session_id`     | string or null     | Associated session identifier.                         |
-| `dataset_run_id` | string or null     | Associated dataset run identifier.                     |
-| `name`           | string             | Score name.                                            |
-| `value`          | number             | Numeric value; `TEXT` scores use `0`.                  |
-| `source`         | string             | `API`, `ANNOTATION`, or `EVAL`.                        |
-| `comment`        | string or null     | Optional comment or evaluator reasoning.               |
-| `data_type`      | string             | `NUMERIC`, `BOOLEAN`, `CATEGORICAL`, or `TEXT`.        |
-| `string_value`   | string or null     | Category label or text value; null for numeric scores. |
-| `created_at`     | string (timestamp) | Row creation time.                                     |
-| `updated_at`     | string (timestamp) | Last row update time.                                  |
+| `id`             | string             | Score 唯一 ID。                               |
+| `timestamp`      | string (timestamp) | Score 创建时间。                                   |
+| `project_id`     | string             | Langfuse 项目 ID。                           |
+| `environment`    | string             | 环境标签。                                     |
+| `trace_id`       | string or null     | 关联的 Trace ID。                           |
+| `observation_id` | string or null     | 关联的 Observation ID。                     |
+| `session_id`     | string or null     | 关联的 Session ID。                         |
+| `dataset_run_id` | string or null     | 关联的数据集运行 ID。                     |
+| `name`           | string             | 评分名称。                                            |
+| `value`          | number             | 数值字段；`TEXT` 类型的评分在此字段使用 `0`。                  |
+| `source`         | string             | 评分来源：`API`、`ANNOTATION` 或 `EVAL`。                        |
+| `comment`        | string or null     | 可选评论或评估器推理说明。               |
+| `data_type`      | string             | 评分类型：`NUMERIC`、`BOOLEAN`、`CATEGORICAL` 或 `TEXT`。        |
+| `string_value`   | string or null     | 类别标签或文本值；数值评分时为 null。 |
+| `created_at`     | string (timestamp) | 记录创建时间。                                     |
+| `updated_at`     | string (timestamp) | 记录最后更新时间。                                  |
 
 
 ### Legacy Traces：`traces/`
@@ -263,23 +263,23 @@ Scores 始终导出，不能配置其字段组。
 
 | Field         | Type               | Description                      |
 | ------------- | ------------------ | -------------------------------- |
-| `id`          | string             | Unique trace identifier.         |
-| `timestamp`   | string (timestamp) | Trace creation time.             |
-| `name`        | string             | User-defined trace name.         |
-| `environment` | string             | Environment label.               |
-| `project_id`  | string             | Langfuse project identifier.     |
-| `metadata`    | object             | Trace metadata.                  |
-| `user_id`     | string or null     | End-user identifier.             |
-| `session_id`  | string or null     | Session identifier.              |
-| `release`     | string or null     | Application release.             |
-| `version`     | string or null     | User-defined version.            |
-| `public`      | boolean            | Whether the trace is public.     |
-| `bookmarked`  | boolean            | Whether the trace is bookmarked. |
-| `tags`        | array of strings   | Trace tags.                      |
-| `input`       | string or null     | Trace input.                     |
-| `output`      | string or null     | Trace output.                    |
-| `created_at`  | string (timestamp) | Row creation time.               |
-| `updated_at`  | string (timestamp) | Last row update time.            |
+| `id`          | string             | Trace 唯一 ID。         |
+| `timestamp`   | string (timestamp) | Trace 创建时间。             |
+| `name`        | string             | 用户自定义 Trace 名称。         |
+| `environment` | string             | 环境标签。               |
+| `project_id`  | string             | Langfuse 项目 ID。     |
+| `metadata`    | object             | Trace 元数据。                  |
+| `user_id`     | string or null     | 最终用户 ID。             |
+| `session_id`  | string or null     | Session ID。              |
+| `release`     | string or null     | 应用发布版本。             |
+| `version`     | string or null     | 用户自定义版本。            |
+| `public`      | boolean            | Trace 是否公开。     |
+| `bookmarked`  | boolean            | Trace 是否已被收藏。 |
+| `tags`        | array of strings   | Trace 标签。                      |
+| `input`       | string or null     | Trace 输入。                     |
+| `output`      | string or null     | Trace 输出。                    |
+| `created_at`  | string (timestamp) | 记录创建时间。               |
+| `updated_at`  | string (timestamp) | 记录最后更新时间。            |
 
 
 ### Legacy Observations：`observations/`
@@ -288,42 +288,42 @@ Scores 始终导出，不能配置其字段组。
 
 | Field                     | Type                       | Description                                                                                                                       |
 | ------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                      | string                     | Unique observation identifier.                                                                                                    |
-| `trace_id`                | string                     | Trace identifier shared by related observations and scores.                                                                       |
-| `project_id`              | string                     | Langfuse project identifier.                                                                                                      |
-| `environment`             | string                     | Environment label.                                                                                                                |
-| `type`                    | string                     | Observation type: `SPAN`, `GENERATION`, `EVENT`, `AGENT`, `TOOL`, `CHAIN`, `RETRIEVER`, `EVALUATOR`, `EMBEDDING`, or `GUARDRAIL`. |
-| `parent_observation_id`   | string or null             | Parent observation identifier; null for a root observation.                                                                       |
-| `start_time`              | string (timestamp)         | When the observation started.                                                                                                     |
-| `end_time`                | string (timestamp) or null | When the observation ended.                                                                                                       |
-| `name`                    | string                     | User-defined observation name.                                                                                                    |
-| `metadata`                | object                     | User-supplied observation metadata.                                                                                               |
-| `level`                   | string                     | `DEBUG`, `DEFAULT`, `WARNING`, or `ERROR`.                                                                                        |
-| `status_message`          | string or null             | Status or error message.                                                                                                          |
-| `version`                 | string or null             | User-defined version.                                                                                                             |
-| `input`                   | string or null             | Observation input; may contain plain text or JSON.                                                                                |
-| `output`                  | string or null             | Observation output; may contain plain text or JSON.                                                                               |
-| `provided_model_name`     | string or null             | Model name supplied by the SDK or user.                                                                                           |
-| `model_parameters`        | string or null             | Model parameters encoded as JSON.                                                                                                 |
-| `usage_details`           | object (string → integer)  | Token usage by category, such as `input`, `output`, and `total`.                                                                  |
-| `cost_details`            | object (string → number)   | Cost in USD by category.                                                                                                          |
-| `completion_start_time`   | string (timestamp) or null | When the first streamed token was generated.                                                                                      |
-| `prompt_name`             | string or null             | Langfuse prompt name.                                                                                                             |
-| `prompt_version`          | integer or null            | Langfuse prompt version.                                                                                                          |
-| `total_cost`              | number or null             | Total observation cost in USD.                                                                                                    |
-| `latency`                 | number or null             | Duration in seconds.                                                                                                              |
-| `time_to_first_token`     | number or null             | Time to first token in seconds.                                                                                                   |
-| `model_id`                | string or null             | Matched Langfuse model definition identifier.                                                                                     |
-| `created_at`              | string (timestamp)         | Row creation time.                                                                                                                |
-| `updated_at`              | string (timestamp)         | Last row update time.                                                                                                             |
-| `prompt_id`               | string or null             | Langfuse prompt identifier.                                                                                                       |
-| `tool_calls`              | array of strings           | Tool calls encoded as JSON strings.                                                                                               |
-| `tool_call_names`         | array of strings           | Names of called tools.                                                                                                            |
-| `tool_definitions`        | object                     | Tool or function schemas supplied to the model.                                                                                   |
-| `usage_pricing_tier_name` | string or null             | Pricing tier name used for cost calculation.                                                                                      |
-| `input_price`             | string or null             | Matched per-unit input price; omitted from Parquet.                                                                               |
-| `output_price`            | string or null             | Matched per-unit output price; omitted from Parquet.                                                                              |
-| `total_price`             | string or null             | Matched flat per-call price; omitted from Parquet.                                                                                |
+| `id`                      | string                     | Observation 的唯一标识符。                                                                                                    |
+| `trace_id`                | string                     | 关联 Observation 和 Score 共用的 Trace ID。                                                                       |
+| `project_id`              | string                     | Langfuse 项目 ID。                                                                                                      |
+| `environment`             | string                     | 环境标签。                                                                                                                |
+| `type`                    | string                     | Observation 类型：`SPAN`、`GENERATION`、`EVENT`、`AGENT`、`TOOL`、`CHAIN`、`RETRIEVER`、`EVALUATOR`、`EMBEDDING` 或 `GUARDRAIL`。 |
+| `parent_observation_id`   | string or null             | 父 Observation ID；根 Observation 为 null。                                                                       |
+| `start_time`              | string (timestamp)         | Observation 开始时间。                                                                                                     |
+| `end_time`                | string (timestamp) or null | Observation 结束时间。                                                                                                       |
+| `name`                    | string                     | 用户自定义的 Observation 名称。                                                                                                    |
+| `metadata`                | object                     | 用户提供的 Observation 元数据。                                                                                               |
+| `level`                   | string                     | 日志级别：`DEBUG`、`DEFAULT`、`WARNING` 或 `ERROR`。                                                                                        |
+| `status_message`          | string or null             | 状态或错误消息。                                                                                                          |
+| `version`                 | string or null             | 用户自定义版本。                                                                                                             |
+| `input`                   | string or null             | Observation 输入，可包含纯文本或 JSON。                                                                                |
+| `output`                  | string or null             | Observation 输出，可包含纯文本或 JSON。                                                                               |
+| `provided_model_name`     | string or null             | SDK 或用户提供的模型名称。                                                                                           |
+| `model_parameters`        | string or null             | JSON 编码的模型参数。                                                                                                 |
+| `usage_details`           | object (string → integer)  | 按类别统计的 Token 用量，例如 `input`、`output`、`total`。                                                                  |
+| `cost_details`            | object (string → number)   | 按类别统计的美元成本。                                                                                                          |
+| `completion_start_time`   | string (timestamp) or null | 流式响应中首个 Token 的生成时间。                                                                                      |
+| `prompt_name`             | string or null             | Langfuse 提示词名称。                                                                                                             |
+| `prompt_version`          | integer or null            | Langfuse 提示词版本号。                                                                                                          |
+| `total_cost`              | number or null             | Observation 总成本（美元）。                                                                                                    |
+| `latency`                 | number or null             | 持续时长（秒）。                                                                                                              |
+| `time_to_first_token`     | number or null             | 首 Token 时间（秒）。                                                                                                   |
+| `model_id`                | string or null             | 匹配到的 Langfuse 模型定义 ID。                                                                                     |
+| `created_at`              | string (timestamp)         | 记录创建时间。                                                                                                                |
+| `updated_at`              | string (timestamp)         | 记录最后更新时间。                                                                                                             |
+| `prompt_id`               | string or null             | Langfuse 提示词 ID。                                                                                                       |
+| `tool_calls`              | array of strings           | 以 JSON 字符串编码的工具调用。                                                                                               |
+| `tool_call_names`         | array of strings           | 调用过的工具名称。                                                                                                            |
+| `tool_definitions`        | object                     | 提供给模型的工具或函数 Schema。                                                                                   |
+| `usage_pricing_tier_name` | string or null             | 用于费用计算的价格档位名称。                                                                                      |
+| `input_price`             | string or null             | 匹配的单位输入价格；Parquet 格式不导出此列。                                                                               |
+| `output_price`            | string or null             | 匹配的单位输出价格；Parquet 格式不导出此列。                                                                              |
+| `total_price`             | string or null             | 匹配的每次调用固定价格；Parquet 格式不导出此列。                                                                                |
 
 
 ### 旧版 null 在新版中的表示
