@@ -221,6 +221,12 @@ const handler = new CallbackHandler({
 });
 ```
 
+## Tag 属性的传播约束
+
+官方 `PropagationRestrictionsCallout` 说明：每个 Tag 必须是**最长 200 个字符的字符串**，无效值会被丢弃并发出警告。应在 Trace 流程**尽早**通过 `propagate_attributes(tags=[...])` 或 `propagateAttributes({ tags: [...] }, callback)` 设置 Tag；传播不会回填在该上下文之前已创建的 Observation，过晚设置会影响按 Tag 分组的指标。
+
+Langfuse 会自动聚合一个 Trace 内各 Observation 的 Tag，形成 Trace 级的 Tag 列表；注意这不代表可以事后通过 UI 修改已经写入的 Observation Tag。参阅[SDK 添加属性](/official/observability/sdk/instrumentation#添加属性)。
+
 ## 相关资源
 
 - [筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)
