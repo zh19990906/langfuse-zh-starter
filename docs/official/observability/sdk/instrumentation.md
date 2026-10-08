@@ -419,7 +419,7 @@ await startActiveObservation("api-request", async () => {
 ```
 
 
-分布式服务需要在 HTTP、消息或 RPC 调用时传播 OpenTelemetry Trace Context。跨服务同一 Trace 的 Span 才能正确聚合。
+分布式服务需要在 HTTP、消息或 RPC 调用时传播 OpenTelemetry Trace Context。跨服务同一 Trace 的 Span 才能正确聚合。使用 Python `propagate_attributes(..., as_baggage=True)` 还会通过 OTel Baggage 传播属性，其中 `environment` 使用 **`langfuse_environment`** Baggage 键；在下游继承的 Context 内，该值优先于下游进程本地的 `LANGFUSE_TRACING_ENVIRONMENT` 或 Client 环境配置。Python SDK 的 `environment` 是映射到 `langfuse.environment` 的独立属性，不是普通 Trace Metadata。
 
 ## Trace 的输入输出
 
