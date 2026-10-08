@@ -7,6 +7,7 @@ Preserve all MDX content and the shared app layout/components.
 from pathlib import Path
 import shutil
 import sys
+import os
 
 root = Path(sys.argv[1]).resolve()
 app = root / "app"
@@ -17,3 +18,18 @@ for route in app.iterdir():
         shutil.rmtree(route)
         print("Excluded non-doc route:", route.name)
 print("Preserved app/docs and shared app layouts for static export")
+
+# In a project GitHub Pages site all URLs are served below /<repository>.
+# Apply basePath during build without modifying the upstream repository.
+base = os.environ.get("GITHUB_PAGES_BASE_PATH", "").rstrip("/")
+if base:
+    if not base.startswith("/") or base == "/":
+        raise SystemExit("Invalid GITHUB_PAGES_BASE_PATH")
+    config = root / "next.config.mjs"
+    original = config.read_text(encoding="utf-8")
+    marker = "const nextConfig = {"
+    if original.count(marker) != 1:
+        raise SystemExit("Could not patch upstream Next.js config safely")
+    original = original.replace(marker, marker + '\n  basePath: process.env.GITHUB_PAGES_BASE_PATH,\n  assetPrefix: process.env.GITHUB_PAGES_BASE_PATH,', 1)
+    config.write_text(original, encoding="utf-8")
+    print("Configured Pages base path:", base)
