@@ -1,11 +1,11 @@
 ---
-title: get started
+title: 提示词管理快速开始
 description: Langfuse 官方文档的中文翻译与适配。
 ---
 
 # 提示词管理快速开始
 
-本指南介绍如何创建、读取和使用 Langfuse 提示词。如需了解原理，先阅读[提示词管理概览](/official/prompt-management/overview)与[数据模型](https://langfuse.com/docs/prompt-management/data-model)。
+本指南介绍如何创建、读取和使用 Langfuse 提示词。如需了解原理，先阅读[提示词管理概览](/official/prompt-management/overview)与[数据模型](/official/prompt-management/data-model)。
 
 ## 使用编码 Agent 安装
 
@@ -50,7 +50,7 @@ Langfuse SDK 会在客户端缓存提示词，首次获取后通常从内存返�
 
 ## 创建提示词：官方共享示例
 
-在 UI 中创建或更新提示词时，需要选择 **Text** 或 **Chat** 类型。创建后不能更改类型。[查看 UI 操作视频](https://static.langfuse.com/docs-videos/create-update-prompts.mp4%20MOVED%20TO%20R2.mp4)（官方原始视频链接）。
+在 UI 中创建或更新提示词时，需要选择 **Text** 或 **Chat** 类型。创建后不能更改类型。[查看 UI 操作视频](https://langfuse.com/docs/prompt-management/get-started)（官方原始视频链接）。
 
 ### Python SDK
 
