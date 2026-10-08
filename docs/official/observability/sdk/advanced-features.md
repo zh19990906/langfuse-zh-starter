@@ -497,4 +497,11 @@ ThreadingInstrumentor().instrument()
 本页已完成主要章节的中文整理，并保存官方代码块；源文档的复杂表格、FAQ 和部分细节尚需逐段精校，因此当前标记为**待完善译稿**，不应视为完整质量验收。
 :::
 
+
+## 精校索引：代码示例与原文章节
+
+此页目前保留 **31 组官方代码块**，但“示例 1～31”尚未逐一映射到对应的中文操作步骤。**因此本页目前是工作译稿，不应作为已经完整校验的 SDK 操作指南。**
+
+在完成逐节重排前，请配合[官方原文](https://langfuse.com/docs/observability/sdk/advanced-features)确认每段示例的前提条件、适用 SDK 版本及执行顺序。特别注意初始化 OpenTelemetry、Context 传播、Span 结束和短进程 Flush。
+
 原文：[SDK 高级功能](https://langfuse.com/docs/observability/sdk/advanced-features)。
