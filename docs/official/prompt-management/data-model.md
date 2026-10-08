@@ -8,7 +8,7 @@ description: Langfuse 提示词的文本与聊天类型、动态内容、缓存�
 
 ## Prompt 对象
 
-Langfuse 的提示词对象包含给 LLM 的指令（一个字符串或消息数组），以及可选的[附加配置](https://langfuse.com/docs/prompt-management/features/config)，用于影响模型行为。对象还包含用于管理版本、变体与部署的属性。完整字段和方法见[SDK 参考](https://langfuse-js-git-main-langfuse.vercel.app/interfaces/_langfuse_core.Prompt.Chat.html)。
+Langfuse 的提示词对象包含给 LLM 的指令（一个字符串或消息数组），以及可选的[附加配置](/official/prompt-management/features/config)，用于影响模型行为。对象还包含用于管理版本、变体与部署的属性。完整字段和方法见[SDK 参考](https://langfuse-js-git-main-langfuse.vercel.app/interfaces/_langfuse_core.Prompt.Chat.html)。
 
 ### Text 与 Chat 提示词
 
@@ -62,7 +62,7 @@ Langfuse Prompt Management 使用缓存主要是为了：
 
 缓存意味着提示词更新后，最先产生的几条 Trace 可能仍在使用旧版本。如果业务需要立即生效，可缩短缓存 TTL（存活时间），或者禁用缓存。
 
-详见[缓存说明](https://langfuse.com/docs/prompt-management/features/caching)。
+详见[缓存说明](/official/prompt-management/features/caching)。
 
 ## 版本与标签
 
@@ -78,7 +78,7 @@ Langfuse Prompt Management 使用缓存主要是为了：
 - `latest`：总是指向最新版本；
 - 自定义标签：用于预发布、测试、租户划分或 A/B 测试。
 
-更多说明见[版本控制与标签](https://langfuse.com/docs/prompt-management/features/prompt-version-control)。
+更多说明见[版本控制与标签](/official/prompt-management/features/prompt-version-control)。
 
 ```mermaid
 flowchart LR
