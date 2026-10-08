@@ -48,6 +48,20 @@ Score 的更新通常需要已知 ID 和对应 API 路径。请区分“创建�
 - [用户反馈](/official/observability/features/user-feedback)
 - [评分分析](/official/evaluation/scores/score-analytics)
 
+## 精校补充：评分创建与读取的区别
+
+创建评分应使用 SDK Score Helper 或 `POST /api/public/scores`；读取评分可使用 `GET /api/public/v3/scores`。**Scores API v3 的读取 `value` 是类型化数据**：数值为 number、布尔为 boolean、类别与文本为 string；不要把新版读取的布尔型值直接当作 0/1。
+
+在 Python v4.8.1+ 中，v3 读取位于 `langfuse.api.scores_v3`；JS/TS v5.5.0+ 中位于 `langfuse.api.scoresV3`。旧的 `api.scores` v2 读取已经弃用。
+
+### 幂等写入与关联
+
+同一评分写入流程可为 Score 指定稳定 ID，在重试场景避免重复记录。但 **Score Name 并非唯一 ID**，也不能单凭同名确定要更新的记录。Trace、Observation、Session 和 DatasetRun 属于不同关联层级，创建时应明确指定正确对象。
+
+### 浏览器中写入用户反馈
+
+前端应使用官方 [`@langfuse/browser`](https://www.npmjs.com/package/@langfuse/browser) 的受支持方式，只配置 Public Key；**不能把 Langfuse Secret Key 暴露给网页**。浏览器包只能发送客户端评分，不负责创建 Trace 和 Observation。完整签名、限制与示例需以原文的 Browser Score Ingestion 章节为准。
+
 ## 官方代码与请求示例
 
 以下示例保留原文代码内容和请求字段，尚未逐一运行验证。
