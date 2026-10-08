@@ -21,9 +21,7 @@ npx @langfuse/cli api <resource> <action>
 please install @langfuse/cli
 ```
 
-旧包 `langfuse-cli` 在下一次主版本发布前继续维护，但推荐新项目使用 `@langfuse/cli`。
-
-原包名 `langfuse-cli` 仍暂时维护，但官方推荐使用 `@langfuse/cli`：
+旧包 `langfuse-cli` 将继续维护至下一次主版本发布；官方推荐迁移到 `@langfuse/cli`：
 
 ```bash
 npm uninstall --global langfuse-cli
