@@ -1,0 +1,37 @@
+name: Experimental V0.2 GitHub Pages static export
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: langfuse/langfuse-docs
+          path: upstream
+      - name: Apply Chinese docs
+        run: python3 scripts/apply-langfuse-zh.py upstream
+      - name: Remove API-only routes
+        run: python3 scripts/prepare-static-export.py upstream
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.8.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: upstream/pnpm-lock.yaml
+      - name: Build static docs
+        working-directory: upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build:static
+      - uses: actions/upload-artifact@v4
+        with:
+          name: langfuse-zh-static-experiment
+          path: upstream/out/
