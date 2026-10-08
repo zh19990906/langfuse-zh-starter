@@ -15,58 +15,12 @@ Python 与 TypeScript SDK 支持通过明确的 Trace ID / Observation ID 创建
 - **当前 Observation**：直接在活动 Context 中评分，适合执行期的业务逻辑。
 - **当前上下文**：利用上下文传播来定位目标，无须重复传递 ID。
 
-## 浏览器评分
 
-收集用户点赞、点踩时，应让浏览器向自己可信的后端发送评分，后端再使用项目密钥写入 Langfuse。不要在浏览器内暴露 Langfuse Secret Key。
+### Trace / Observation 评分的完整代码
 
-## Session 级 Score
+以下按 Python、TypeScript 和 REST API 分组展示官方的低层创建方法、当前 Observation 评分及当前 Context 评分。注意各语言 SDK 的方法名称和异步 Flush 方式不同。
 
-跨多轮对话的质量结果，可以关联 Session ID。例如评价整个客服对话是否解决问题，而不是只评价一条消息。
-
-## 高级功能
-
-### 防止重复评分
-
-可以为 Score 指定稳定 ID 以便幂等创建或更新。注意同一 Score 名称不一定意味着同一条评分记录。
-
-### ScoreConfig
-
-ScoreConfig 约束 Name、Type、范围与允许类别，统一不同来源的评分契约。如果团队已经创建了配置，API/SDK 可通过 Config ID 关联。
-
-### Score 字段推断
-
-SDK 可能根据传入 Value 或 Config 自动决定 Score DataType；生产系统推荐明确约定类型，避免随请求内容改变。
-
-## 更新已有 Score
-
-Score 的更新通常需要已知 ID 和对应 API 路径。请区分“创建新评分”“幂等写入”与“修改既有评分”，并确认相应 SDK 版本与服务器接口。
-
-## 相关内容
-
-- [Score 概览](/official/evaluation/scores/overview)
-- [Score 数据模型](/official/evaluation/scores/data-model)
-- [用户反馈](/official/observability/features/user-feedback)
-- [评分分析](/official/evaluation/scores/score-analytics)
-
-## 精校补充：评分创建与读取的区别
-
-创建评分应使用 SDK Score Helper 或 `POST /api/public/scores`；读取评分可使用 `GET /api/public/v3/scores`。**Scores API v3 的读取 `value` 是类型化数据**：数值为 number、布尔为 boolean、类别与文本为 string；不要把新版读取的布尔型值直接当作 0/1。
-
-在 Python v4.8.1+ 中，v3 读取位于 `langfuse.api.scores_v3`；JS/TS v5.5.0+ 中位于 `langfuse.api.scoresV3`。旧的 `api.scores` v2 读取已经弃用。
-
-### 幂等写入与关联
-
-同一评分写入流程可为 Score 指定稳定 ID，在重试场景避免重复记录。但 **Score Name 并非唯一 ID**，也不能单凭同名确定要更新的记录。Trace、Observation、Session 和 DatasetRun 属于不同关联层级，创建时应明确指定正确对象。
-
-### 浏览器中写入用户反馈
-
-前端应使用官方 [`@langfuse/browser`](https://www.npmjs.com/package/@langfuse/browser) 的受支持方式，只配置 Public Key；**不能把 Langfuse Secret Key 暴露给网页**。浏览器包只能发送客户端评分，不负责创建 Trace 和 Observation。完整签名、限制与示例需以原文的 Browser Score Ingestion 章节为准。
-
-## 官方代码与请求示例
-
-以下示例保留原文代码内容和请求字段，尚未逐一运行验证。
-
-### 官方示例 1
+**Python SDK · 示例 1**
 
 ```python
 from langfuse import get_client
@@ -118,7 +72,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation"):
     )
 ```
 
-### 官方示例 2
+**Python SDK · 示例 2**
 
 ```python
 from langfuse import get_client
@@ -169,7 +123,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation"):
     )
 ```
 
-### 官方示例 3
+**Python SDK · 示例 3**
 
 ```python
 from langfuse import get_client
@@ -219,7 +173,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation"):
     )
 ```
 
-### 官方示例 4
+**Python SDK · 示例 4**
 
 ```python
 from langfuse import get_client
@@ -270,7 +224,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation"):
     )
 ```
 
-### 官方示例 5
+**TypeScript SDK · 示例 5**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -291,7 +245,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 6
+**TypeScript SDK · 示例 6**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -312,7 +266,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 7
+**TypeScript SDK · 示例 7**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -333,7 +287,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 8
+**TypeScript SDK · 示例 8**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -354,7 +308,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 9
+**REST API · 示例 9**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -370,7 +324,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 10
+**REST API · 示例 10**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -386,7 +340,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 11
+**REST API · 示例 11**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -402,7 +356,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 12
+**REST API · 示例 12**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -418,13 +372,22 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 13
+## 浏览器评分
+
+收集用户点赞、点踩时，应让浏览器向自己可信的后端发送评分，后端再使用项目密钥写入 Langfuse。不要在浏览器内暴露 Langfuse Secret Key。
+
+
+### 前端用户评分的完整代码
+
+浏览器集成只应使用公开凭据，不能嵌入 Secret Key；下面依次是官方安装命令及客户端代码。
+
+**REST API · 示例 13**
 
 ```bash
 npm install @langfuse/browser
 ```
 
-### 官方示例 14
+**TypeScript SDK · 示例 14**
 
 ```ts
 import { LangfuseBrowserClient } from "@langfuse/browser";
@@ -445,7 +408,16 @@ await langfuse.score({
 });
 ```
 
-### 官方示例 15
+## Session 级 Score
+
+跨多轮对话的质量结果，可以关联 Session ID。例如评价整个客服对话是否解决问题，而不是只评价一条消息。
+
+
+### Session 评分的完整代码
+
+以下分别是 Python、TypeScript 与 REST API 的官方示例。Session Score 评价整个会话，而不是单条模型调用。
+
+**Python SDK · 示例 15**
 
 ```python
 from langfuse import get_client
@@ -460,7 +432,7 @@ langfuse.create_score(
 )
 ```
 
-### 官方示例 16
+**TypeScript SDK · 示例 16**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -478,7 +450,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 17
+**REST API · 示例 17**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -493,7 +465,18 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 18
+## 高级功能
+
+### 防止重复评分
+
+可以为 Score 指定稳定 ID 以便幂等创建或更新。注意同一 Score 名称不一定意味着同一条评分记录。
+
+
+### 带 ScoreConfig 的类型化评分示例
+
+以下提供 Numeric、Categorical、Boolean 和 Text 类型，按照 Python、TypeScript 和 REST API 分组。示例保留原文的创建方式；ScoreConfig 可以用来校验评分的类型和允许值。
+
+**Python SDK · 示例 18**
 
 ```python
 from langfuse import get_client
@@ -523,7 +506,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation") 
     )
 ```
 
-### 官方示例 19
+**Python SDK · 示例 19**
 
 ```python
 from langfuse import get_client
@@ -552,7 +535,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation") 
     )
 ```
 
-### 官方示例 20
+**Python SDK · 示例 20**
 
 ```python
 from langfuse import get_client
@@ -581,7 +564,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation") 
     )
 ```
 
-### 官方示例 21
+**Python SDK · 示例 21**
 
 ```python
 from langfuse import get_client
@@ -610,7 +593,7 @@ with langfuse.start_as_current_observation(as_type="span", name="my-operation") 
     )
 ```
 
-### 官方示例 22
+**TypeScript SDK · 示例 22**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -632,7 +615,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 23
+**TypeScript SDK · 示例 23**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -654,7 +637,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 24
+**TypeScript SDK · 示例 24**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -676,7 +659,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 25
+**TypeScript SDK · 示例 25**
 
 ```ts
 import { LangfuseClient } from "@langfuse/client";
@@ -698,7 +681,7 @@ langfuse.score.create({
 await langfuse.flush();
 ```
 
-### 官方示例 26
+**REST API · 示例 26**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -716,7 +699,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 27
+**REST API · 示例 27**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -734,7 +717,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 28
+**REST API · 示例 28**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -752,7 +735,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-### 官方示例 29
+**REST API · 示例 29**
 
 ```bash
 curl -X POST https://cloud.langfuse.com/api/public/scores \
@@ -770,8 +753,42 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
   }'
 ```
 
-::: info 翻译状态
-已提供主要章节的中文说明并保留官方代码块。原文完整字段参考、复杂示例说明和部分表格仍需要逐段精校，此页暂不计入“完整验收”。
+### ScoreConfig
+
+ScoreConfig 约束 Name、Type、范围与允许类别，统一不同来源的评分契约。如果团队已经创建了配置，API/SDK 可通过 Config ID 关联。
+
+### Score 字段推断
+
+SDK 可能根据传入 Value 或 Config 自动决定 Score DataType；生产系统推荐明确约定类型，避免随请求内容改变。
+
+## 更新已有 Score
+
+Score 的更新通常需要已知 ID 和对应 API 路径。请区分“创建新评分”“幂等写入”与“修改既有评分”，并确认相应 SDK 版本与服务器接口。
+
+## 相关内容
+
+- [Score 概览](/official/evaluation/scores/overview)
+- [Score 数据模型](/official/evaluation/scores/data-model)
+- [用户反馈](/official/observability/features/user-feedback)
+- [评分分析](/official/evaluation/scores/score-analytics)
+
+## 精校补充：评分创建与读取的区别
+
+创建评分应使用 SDK Score Helper 或 `POST /api/public/scores`；读取评分可使用 `GET /api/public/v3/scores`。**Scores API v3 的读取 `value` 是类型化数据**：数值为 number、布尔为 boolean、类别与文本为 string；不要把新版读取的布尔型值直接当作 0/1。
+
+在 Python v4.8.1+ 中，v3 读取位于 `langfuse.api.scores_v3`；JS/TS v5.5.0+ 中位于 `langfuse.api.scoresV3`。旧的 `api.scores` v2 读取已经弃用。
+
+### 幂等写入与关联
+
+同一评分写入流程可为 Score 指定稳定 ID，在重试场景避免重复记录。但 **Score Name 并非唯一 ID**，也不能单凭同名确定要更新的记录。Trace、Observation、Session 和 DatasetRun 属于不同关联层级，创建时应明确指定正确对象。
+
+### 浏览器中写入用户反馈
+
+前端应使用官方 [`@langfuse/browser`](https://www.npmjs.com/package/@langfuse/browser) 的受支持方式，只配置 Public Key；**不能把 Langfuse Secret Key 暴露给网页**。浏览器包只能发送客户端评分，不负责创建 Trace 和 Observation。完整签名、限制与示例需以原文的 Browser Score Ingestion 章节为准。
+
+
+::: info 代码验收说明
+以上 29 组示例与上游代码块数量一致，已按用途重新归位；未在当前环境实际执行 SDK/HTTP 请求，不能据此视为运行测试通过。
 :::
 
-原文：[通过 API/SDK 写入评分](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk)。
+原文：[Scores via SDK](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk)。
