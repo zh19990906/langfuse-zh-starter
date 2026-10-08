@@ -20,6 +20,10 @@ level:ERROR type:TOOL environment:production latency:>2 name:*checkout*
 
 筛选完成后，可以直接[绘制图表](/official/observability/features/events-table-charts)，上方的 [Pulse](/official/observability/features/pulse) 也会使用相同筛选条件展示时间异常。
 
+::: info 查询语法校验
+筛选搜索栏是结构化字段查询与全文搜索的组合。使用通配符、否定条件或空值判断时，应注意字段类型、运算符及多个条件的组合语义；具体语法示例需与正在使用的 Langfuse UI 版本一致。
+:::
+
 ## 查询语法
 
 查询由若干 `field:value` 条件组成，条件之间默认使用 **AND**。
