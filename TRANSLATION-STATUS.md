@@ -394,3 +394,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 按用户指定顺序，已完成**第一优先级 12 篇 + 第二优先级 8 篇**的源文/中文稿定点对照，源 Blob SHA、逐篇核对结果及修复 Commit 见 [`PRIORITY-CONTENT-QA-2026-10-08.md`](PRIORITY-CONTENT-QA-2026-10-08.md)（commit `6829abc`）。累计重点修复包括 Public API Observation v2 filter 优先级、Compatibility 最低 Server 版本、RBAC 项目角色方案限制（组织/项目十组 Scope 列表一致）、SDK OTel/过滤/环境属性传播、Experiment Action 完整输入输出表、Dataset 版本语义、UI Webhook 签名和异步返回条件、评分类型限制、Blob 导出 114 处字段说明汉化，以及第二优先级 Webhook TS 正则错误、LLM Judge Rule 示例、Token/Cost 优先级与外部 S3 预览限制。
 
 最新文档修订提交 `b3b4187` 的 GitHub Actions [run 37769093730](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37769093730) **success**：扫描官方译文 113 篇，总 Markdown 121 篇，Errors 0、anchor warnings 0，VitePress Build 成功。**20/20 只代表这轮定点项目已有检查证据，不能宣称整篇最终内容 PASS**：深层全文翻译、真实 SDK/API/存储服务运行和其他动态内容仍需独立验收。保留 BLOCKED 发布门槛，未部署。
+
+### 其他页面内容证据补查：18 篇（2026-10-08）
+
+沿用 Issue #2 已有批次校验，不重做先前 12+8 篇。新检查的 18 篇及各自上游 Blob SHA、代码示例数量和逐项核对范围，见 [`FOLLOWUP-CONTENT-QA-2026-10-08.md`](FOLLOWUP-CONTENT-QA-2026-10-08.md)，提交 `42af2e2`。其中 `query-via-sdk` 15/15 源示例均存在、备注/排版有改动；`log-levels`、`sampling`、`trace-ids-and-distributed-tracing` 源示例完整保留；Prompt Data Model 的 Mermaid 和 Chat JSON 做过语义等效的本地化。修复四篇正文共 **28 处**跨到英文文档的链接和已知英文锚点（`ef25b18`、`1f3b2fc`、`884ca44`、`271a67d`）。Github Actions [#37770543384](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37770543384)：静态 Errors 0、anchor warnings 0、VitePress Build 成功。此批为**证据补查/定点审查**，不称 18 篇完整翻译 PASS，也未执行 SDK 示例或部署。
