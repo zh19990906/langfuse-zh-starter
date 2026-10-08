@@ -307,7 +307,9 @@ s3://media-bucket/path/image.png
 ```
 
 
-外部 S3 对象必须配置合理的 CORS、对象权限、来源及过期策略。不要把私有 Bucket 无限制公开，只为所需客户端和源授权。
+**外部媒体功能是预览能力**：组织管理员需要先在 **Organization Settings → Feature Previews** 启用 **External Media Storage**。每个 Project 可配置一个外部媒体集成，在 **Project Settings → Integrations → External Media Storage** 填写 Amazon S3 或 S3 Compatible Storage 的 Bucket、Region 和只读凭据；兼容存储还可能需要指定 Endpoint 和 Path-style URL。建议设置媒体 Prefix 限制访问路径，并使用界面的 **Test** 配合 `s3://bucket/key` URI 验证对象访问及浏览器 CORS。
+
+外部 S3 对象必须配置合理的 CORS、对象权限、来源及过期策略：CORS 要允许来自 Langfuse 域名的 `GET`、`HEAD` 和 `Range` 请求头。不要把私有 Bucket 无限制公开，只为所需客户端和源授权。
 
 
 
