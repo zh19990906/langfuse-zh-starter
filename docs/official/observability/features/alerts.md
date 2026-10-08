@@ -59,6 +59,12 @@ Langfuse Cloud 的 Hobby、Core、Pro、Enterprise 均支持告警；自托管�
 
 设置最多 **200 字符**的名称和可选 Tag，然后点击 **Save**；也可留空标题，由配置自动生成。告警保存后立即变为 **ACTIVE**，并计划首次计算。
 
+### 无数据处理与通知边界
+
+查询没有数据时，可按配置选择无数据状态或持续无数据后通知。**`NO_DATA` 不等于告警阈值被触发**；仅配置 **Notify after sustained NO_DATA** 的情况会将相关无数据状态变化纳入通知。实际告警还可能处于 `OK`、`WARNING`、`ALERT`、`UNKNOWN` 等状态，应在自动化中区分处理。
+
+Webhook 动作通过 HTTP POST 发送带 HMAC 签名的 JSON；签名校验规则请参考[官方 Webhook 安全示例](https://langfuse.com/docs/prompt-management/features/webhooks-slack-integrations)。不要仅凭接收到请求就认定来自 Langfuse。
+
 ## 告警状态
 
 | Severity | 含义 |
