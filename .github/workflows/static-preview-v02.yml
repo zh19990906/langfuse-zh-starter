@@ -1,13 +1,6 @@
 name: Deploy Langfuse Docs Chinese V0.2
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/prepare-static-export.py'
-      - 'overrides/**'
-      - 'scripts/apply-langfuse-zh.py'
-      - '.github/workflows/static-preview-v02.yml'
 permissions:
   contents: read
   pages: write
@@ -52,6 +45,7 @@ jobs:
         with:
           path: upstream/out/
   deploy:
+    if: ${{ false }}
     needs: static-build
     runs-on: ubuntu-latest
     environment:
