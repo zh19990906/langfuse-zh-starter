@@ -333,3 +333,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - Blob Storage 导出：将官方对象存储路径示例与 API 端点放入正文对应小节（commit `c7923be`）；**该页仍是高度压缩的中文概要，原文约 40 KB，有大量字段定义未译**，已在正文警示，不可标记 PASS。
 - 首批只验证代码位置与结构，尚未完整核对 API 字段、导出表结构、所有链接及全量构建，状态 PARTIAL。不部署。
 
+
+### API Features 第二批范围检查（2026-10-08）
+
+已对 `agent-skill`、`cli`、`export-from-ui`、`mcp-server` 和 `query-via-sdk` 五篇进行章节及代码结构对照。CLI 补充 Agent 安装命令、bunx 使用方式及新旧包说明（`72fdcd9`）。MCP 原文包含嵌套代码围栏与动态 Tabs，因此不能仅凭简单代码块计数判定有示例缺失。七篇 API Features 页面现均已完成首轮结构扫描，但字段、Schema、客户端配置及构建仍未完成最终验收；未部署。
