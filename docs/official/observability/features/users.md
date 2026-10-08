@@ -56,7 +56,7 @@ OpenAI、LangChain 的追踪包装器也可在相同上下文中继承用户 ID�
 https://<hostname>/project/{projectId}/users/{userId}
 ```
 
-还可以通过[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)和 [Metrics API](/official/metrics/features/metrics-api)查询每用户成本、Token 数与 Trace 数。
+还可以通过[自定义仪表盘](/official/metrics/features/custom-dashboards)和 [Metrics API](/official/metrics/features/metrics-api)查询每用户成本、Token 数与 Trace 数。
 
 ## 多框架接入示例
 
@@ -149,6 +149,6 @@ await startActiveObservation("langchain-call", async () => {
 - 不合法的传播值会被丢弃并产生警告。排查用户指标缺失时，先确认值的类型、长度及调用位置。
 - 详细用法参阅[SDK 属性传播](/official/observability/sdk/instrumentation#添加属性)。
 
-官方动态 GitHub Discussions 未嵌入，参阅[用户追踪原文](https://langfuse.com/docs/observability/features/users)。
+官方动态 GitHub Discussions 未嵌入，参阅[用户追踪原文](/official/observability/features/users)。
 
 原文：[User Tracking](https://langfuse.com/docs/observability/features/users)。正文及各框架 SDK 示例已补齐。
