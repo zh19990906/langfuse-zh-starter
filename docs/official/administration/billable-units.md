@@ -4,7 +4,7 @@ description: 了解 Langfuse 计费单位的定义与计算方式。
 ---
 # 计费单位
 
-Langfuse 的[定价](https://langfuse.com/pricing)依据每个计费周期内摄入的单位数量。单位包括 [Trace](/official/observability/data-model)、Observation 和 [Score](https://langfuse.com/docs/evaluation/scores/data-model#scores)。
+Langfuse 的[定价](https://langfuse.com/pricing)依据每个计费周期内摄入的单位数量。单位包括 [Trace](/official/observability/data-model)、Observation 和 [Score](/official/evaluation/scores/data-model)。
 
 **单位总数 = Trace 数量 + Observation 数量 + Score 数量。**
 
@@ -18,7 +18,7 @@ MIT 许可下的自托管开源版 Langfuse 免费，不按使用量计费。对
 
 即使不需要计费，上述单位定义仍有助于量化数据规模，例如估算迁移到 Cloud 的费用或规划自托管资源容量。
 
-可以在 Langfuse 内置的 **Langfuse Usage Management** 仪表盘中直接查看单位数量。该看板属于 Langfuse 提供的预置仪表盘，详情见[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)。
+可以在 Langfuse 内置的 **Langfuse Usage Management** 仪表盘中直接查看单位数量。该看板属于 Langfuse 提供的预置仪表盘，详情见[自定义仪表盘](/official/metrics/features/custom-dashboards)。
 
 ## 查看使用量
 
