@@ -4,7 +4,7 @@ description: Dataset、DatasetItem、DatasetRun、DatasetRunItem 与实验任务
 ---
 # 实验数据模型
 
-本页介绍 Langfuse 实验相关对象。对象之间的概念关系见[核心概念](https://langfuse.com/docs/evaluation/core-concepts)；Score 和 ScoreConfig 见[评分数据模型](/official/evaluation/scores/data-model)。
+本页介绍 Langfuse 实验相关对象。对象之间的概念关系见[核心概念](/official/evaluation/core-concepts)；Score 和 ScoreConfig 见[评分数据模型](/official/evaluation/scores/data-model)。
 
 详细类型参阅 [Python SDK](https://python.reference.langfuse.com)、[JS/TS SDK](https://js.reference.langfuse.com)与[公共 API](https://api.reference.langfuse.com)。
 
