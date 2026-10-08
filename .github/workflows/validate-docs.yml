@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/validate-docs.yml'
       - 'docs/**'
+      - 'scripts/qa-docs.mjs'
       - 'package.json'
       - 'package-lock.json'
 permissions:
@@ -20,6 +21,8 @@ jobs:
           node-version: '22'
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Audit Markdown links and fences (no deployment)
+        run: npm run qa:docs
       - name: Build VitePress (no deployment)
         env:
           DOCS_BASE: /langfuse-zh-starter/
