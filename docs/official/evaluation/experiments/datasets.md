@@ -111,6 +111,8 @@ Dataset 名称可以通过路径组织，例如按团队、功能或评估任务
 
 ## 版本控制
 
+Dataset Item 每次**新增、更新、删除或归档**都会形成新的 Dataset 版本，版本以时间戳标识；默认查询返回当前最新版本，指定 `version` 时间戳则读取该时点存在的 Item。**版本化只适用于 Dataset Item，不适用于 Dataset Schema**：修改 Schema 不会产生新的 Dataset 版本。若希望实验可复现，需固定所用数据集版本，而不能仅记录数据集名称。
+
 **读取版本化 Dataset：官方代码示例**
 
 ```python
