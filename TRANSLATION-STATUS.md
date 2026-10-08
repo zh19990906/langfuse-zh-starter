@@ -313,3 +313,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 已在 `tags.md` 补入 5 组官方 SDK 标签传播用法（commit `6512b87`），覆盖 Python Decorator / 手动 Observation、TypeScript Context / observe 包装器、LangChain CallbackHandler。提醒：这仍可能与原先译写示例重复，需最终编辑整合。
 
 **至此 27/27 篇 features 页面已至少完成一轮结构/代码量扫描，但 0 篇被本任务据此正式标记 PASS。** 目录仍未执行逐句完整验收、示例运行和 VitePress Build；继续标记 PARTIAL，不部署。
+
+### ## observability/sdk/ 第一批精校（2026-10-08）
+
+范围总计 9 篇（SDK 基础页与 Upgrade Path）。优先修复两个高风险的大型工作稿：`advanced-features.md` 的 31 个官方代码块、`instrumentation.md` 的 33 个官方代码块从文末集中编号附录重排回对应中文主题章节，保留原始代码文本和语言标识。提交分别为 `3bb11dd47e12d6f2b949ce530bfaa9a093326932` 和 `d6fdae667a3efa95f578a95c91d28175fc37db39`。静态检查两篇示例数量分别为 31 和 33，代码围栏均成对。本次不视为逐段完整翻译或 SDK 运行测试通过，目录状态 PARTIAL；无构建、无部署。
