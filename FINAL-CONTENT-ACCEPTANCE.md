@@ -43,3 +43,9 @@ GitHub Actions 已成功构建 VitePress，站内路径、导航和代码围栏�
 5. 在最终内容修订后重新运行 `npm run qa:docs` 和 `npm run build`。
 
 **当前结论：内容验收 BLOCKED；仓库构建通过不等于可正式发布。未部署。**
+
+### 指定清单 12+8 篇定点复查（2026-10-08）
+
+按用户指定顺序，已完成**第一优先级 12 篇 + 第二优先级 8 篇**的源文/中文稿定点对照，源 Blob SHA、逐篇核对结果及修复 Commit 见 [`PRIORITY-CONTENT-QA-2026-10-08.md`](PRIORITY-CONTENT-QA-2026-10-08.md)（commit `6829abc`）。累计重点修复包括 Public API Observation v2 filter 优先级、Compatibility 最低 Server 版本、RBAC 项目角色方案限制（组织/项目十组 Scope 列表一致）、SDK OTel/过滤/环境属性传播、Experiment Action 完整输入输出表、Dataset 版本语义、UI Webhook 签名和异步返回条件、评分类型限制、Blob 导出 114 处字段说明汉化，以及第二优先级 Webhook TS 正则错误、LLM Judge Rule 示例、Token/Cost 优先级与外部 S3 预览限制。
+
+最新文档修订提交 `b3b4187` 的 GitHub Actions [run 37769093730](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37769093730) **success**：扫描官方译文 113 篇，总 Markdown 121 篇，Errors 0、anchor warnings 0，VitePress Build 成功。**20/20 只代表这轮定点项目已有检查证据，不能宣称整篇最终内容 PASS**：深层全文翻译、真实 SDK/API/存储服务运行和其他动态内容仍需独立验收。保留 BLOCKED 发布门槛，未部署。
