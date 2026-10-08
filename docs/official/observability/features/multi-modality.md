@@ -23,43 +23,11 @@ SDK 可以识别受支持的媒体内容，并将媒体实体从结构化 JSON �
 
 ### 外部 URL
 
-也可保留外部可访问的媒体 URL。媒体是否能在 UI 中预览取决于跨域、认证和 URL 的有效期。
-
-### LLM-as-a-Judge
-
-多模态评估器可读取合适的媒体引用，比较图文、音频等输入与输出，前提是评估模型和变量映射支持该格式。
-
-### 自定义附件
-
-Python 的 `LangfuseMedia` 可以把文件或二进制内容包装成追踪属性。相关使用方法在下方代码示例中保留。
-
-## API 上传与媒体引用
-
-自建集成可使用媒体上传 API，再在 Trace/Observation 的 JSON 内容中保存媒体引用；不要把长期有效的私有对象存储 Key 直接放在 Trace 字段中。
-
-## 媒体处理流程
-
-SDK 会识别媒体、读取内容、执行安全与上传处理，最终在 Trace 内容中保存一个可解析的媒体引用。前端通过受控或签名 URL 获取媒体，需注意 URL 过期和对象存储权限。
-
-## 引用解析
-
-API 或 SDK 读取内容后，可将媒体引用转换成 Base64 Data URI 用于下游模型和数据集实验。转换可能涉及网络读取，大规模数据应控制并发与大小。
-
-## 外部 S3 媒体
-
-外部 S3 对象必须配置合理的 CORS、对象权限、来源及过期策略。不要把私有 Bucket 无限制公开，只为所需客户端和源授权。
-
-## 官方技术示例（保留原始可执行语法）
-
-以下是源文档中的全部代码块与配置示例，代码保持原文，不自动翻译变量名，以免破坏运行行为。
-
-### 示例 1
+**外部媒体 URL：官方示例**
 
 ```md
 ![Alt text](https://example.com/image.jpg)
 ```
-
-### 示例 2
 
 ```json
 {
@@ -87,7 +55,16 @@ API 或 SDK 读取内容后，可将媒体引用转换成 Base64 Data URI 用于
 }
 ```
 
-### 示例 3
+
+也可保留外部可访问的媒体 URL。媒体是否能在 UI 中预览取决于跨域、认证和 URL 的有效期。
+
+### LLM-as-a-Judge
+
+多模态评估器可读取合适的媒体引用，比较图文、音频等输入与输出，前提是评估模型和变量映射支持该格式。
+
+### 自定义附件
+
+**自定义媒体对象：官方示例**
 
 ```python
 from langfuse import get_client, observe, propagate_attributes
@@ -139,8 +116,6 @@ with langfuse.start_as_current_observation(as_type="span", name="analyze-documen
 
 ```
 
-### 示例 4
-
 ```typescript
 import fs from "fs";
 import { LangfuseMedia } from "@langfuse/core";
@@ -168,13 +143,24 @@ generation3.end();
 span3.end();
 ```
 
-### 示例 5
 
-```text
+Python 的 `LangfuseMedia` 可以把文件或二进制内容包装成追踪属性。相关使用方法在下方代码示例中保留。
+
+## API 上传与媒体引用
+
+自建集成可使用媒体上传 API，再在 Trace/Observation 的 JSON 内容中保存媒体引用；不要把长期有效的私有对象存储 Key 直接放在 Trace 字段中。
+
+## 媒体处理流程
+
+SDK 会识别媒体、读取内容、执行安全与上传处理，最终在 Trace 内容中保存一个可解析的媒体引用。前端通过受控或签名 URL 获取媒体，需注意 URL 过期和对象存储权限。
+
+## 引用解析
+
+**媒体引用格式与解析：官方示例**
+
+```
 @@@langfuseMedia:type={MIME_TYPE}|id={LANGFUSE_MEDIA_ID}|source={SOURCE_TYPE}@@@
 ```
-
-### 示例 6
 
 ```python
 from langfuse import get_client
@@ -205,8 +191,6 @@ resolved_obj = langfuse.resolve_media_references(
 # }
 ```
 
-### 示例 7
-
 ```python
 from langfuse import Langfuse
 
@@ -236,8 +220,6 @@ resolved_trace = langfuse.resolve_media_references(
 # }
 ```
 
-### 示例 8
-
 ```typescript
 import { LangfuseClient } from "@langfuse/client";
 
@@ -266,7 +248,12 @@ const resolvedTrace = await langfuse.resolveMediaReferences({
 // }
 ```
 
-### 示例 9
+
+API 或 SDK 读取内容后，可将媒体引用转换成 Base64 Data URI 用于下游模型和数据集实验。转换可能涉及网络读取，大规模数据应控制并发与大小。
+
+## 外部 S3 媒体
+
+**S3 CORS 与媒体 URL：官方示例**
 
 ```json
 [
@@ -285,8 +272,6 @@ const resolvedTrace = await langfuse.resolveMediaReferences({
 ]
 ```
 
-### 示例 10
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
@@ -304,19 +289,13 @@ const resolvedTrace = await langfuse.resolveMediaReferences({
 </CORSConfiguration>
 ```
 
-### 示例 11
-
 ```text
 s3://media-bucket/path/image.png
 ```
 
-### 示例 12
-
 ```md
 ![Product image](s3://media-bucket/path/image.png)
 ```
-
-### 示例 13
 
 ```json
 {
@@ -328,8 +307,12 @@ s3://media-bucket/path/image.png
 ```
 
 
-::: info 翻译状态
-本页已完成主要章节的中文整理，并保存官方代码块；源文档的复杂表格、FAQ 和部分细节尚需逐段精校，因此当前标记为**待完善译稿**，不应视为完整质量验收。
+外部 S3 对象必须配置合理的 CORS、对象权限、来源及过期策略。不要把私有 Bucket 无限制公开，只为所需客户端和源授权。
+
+
+
+::: info 校验状态
+已根据原文将 13 组代码示例归位到对应章节，尚未完成所有动态组件、复杂表格、SDK 运行测试及全量构建的最终验收。
 :::
 
-原文：[多模态与附件](https://langfuse.com/docs/observability/features/multi-modality)。
+原文：[官方文档](https://langfuse.com/docs/observability/features/multi-modality)。
