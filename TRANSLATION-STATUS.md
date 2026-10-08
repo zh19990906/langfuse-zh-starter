@@ -410,3 +410,12 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 新增核销 **13 篇**：SDK Upgrade Path 5 篇、Observability Users/Feedback/Comments/Corrections/Tags/Environments/Sessions/Releases 8 篇。各页上游 Blob SHA、代码示例对照、核对范围见 [`FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md)（`1486611`）。实质修复为上游 `PropagationRestrictionsCallout` 中原先被略过的**传播值字符串限额、尽早设置及无效值被丢弃的说明**，涉及 Users `d0dd29a`、Sessions `eab0c4d`、Releases `5021b62`、Tags `a66cd81`；并在 6 篇文档中修复 15 处与本地中文页有对应目标的内部正文链接/锚点（`3ef9a1a`、`86382bc`、`5ffce50`、`f5674e3`、`8bf8ccc`、`8a8bac6`）。JS v3→v4 原文采用缩进代码围栏，不能按顶格围栏数量判断缺失；Release 的 12→11 是原文重复 `LANGFUSE_RELEASE` 示例在中文版合并。
 
 最新内容提交 `8a8bac6` 的 GitHub Actions [run 37773401731](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37773401731) **success**：113 篇 official / 121 篇 Markdown，Errors 0、anchor warnings 0，VitePress Build 成功。仍未执行实际 SDK/外部服务测试；本批定点核查不等于 13 篇全文最终 PASS；**未部署**。
+
+### 内容证据补查（四）：16 篇 Prompt / Evaluation / Observability / Administration（2026-10-08）
+
+本批**没有重查已经列入前述近期批次的 12+8、18、8、13 篇**，转而对照官方 MDX 检查另外 16 篇。逐页来源 SHA 前缀、代码块/章节对照、未完成项及修复提交列在 [`FOLLOWUP-CONTENT-QA-BATCH4-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH4-2026-10-08.md)（`2a24787`，后续补充 `352f4cb`）。本轮发现并修复：
+- **安全**：`prompt-management/features/github-integration.md` 中上游 GitHub Actions 的不可信事件字段被直接拼进 Shell，已改为步骤级 `env` + 引号保护的变量；同时补充 FastAPI 样例未 HMAC 验签、未记录事件去重、可能遇到 GitHub SHA 竞态及覆盖的限制（`2988b12`、`f7b8c4b`），并明确原 YAML 已经安全改写，不是纯原样复制。
+- **内容**：`evaluation/overview.md` 原先漏掉的 OpenTelemetry Experiments 入口已恢复，修复 16 条直接对应中文页的链接（`5678487`）；Observation Types 已有源文 8 段代码，纠正“更多 TS 示例待迁移”的过时结论（`ae4a0c5`）。
+- **引用**：Prompt Management Overview、Experiments Data Model、Billable Units、Annotation Queues 补改已存在的中文站内链接及错误的“原文”回链。
+
+正文修订 `ae4a0c5` 的 GitHub Actions [#37779116285](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779116285) 已成功：113 篇官方文档、121 篇 Markdown，Errors 0、Anchor Warnings 0、VitePress Build 通过。之后另有 GitHub Webhook 安全说明补充 `f7b8c4b`；其 CI 结果应单独核实。本批仅为**16 篇定点证据复查**，不等于全文 PASS；未部署。
