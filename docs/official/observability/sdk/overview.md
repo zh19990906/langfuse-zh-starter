@@ -29,7 +29,7 @@ Langfuse SDK 是创建[自定义 Trace 与 Observation](/official/observability/
 
 ### Python SDK
 
-安装并配置凭据后，可通过 Context Manager 或 `@observe()` 记录调用。完整的官方 Python 入门示例已迁入[Tracing 快速开始](/official/observability/get-started#python-原生-sdk)。
+安装并配置凭据后，可通过 Context Manager 或 `@observe()` 记录调用。完整的官方 Python 入门示例已迁入[Tracing 快速开始](/official/observability/get-started)。
 
 ### JavaScript / TypeScript SDK
 
@@ -241,7 +241,7 @@ OpenTelemetry 自动在被追踪函数、第三方 Instrumentation 或手动创�
 
 追踪 SDK 需要 Secret Key，因此**只适用于服务端环境**，绝不能把 Secret Key 打包到浏览器或移动应用中。应在调用 LLM Provider 的后端执行追踪，并将 Trace ID 返回前端以便关联反馈。
 
-前端可使用 [`@langfuse/browser`](/official/evaluation/evaluation-methods/scores-via-sdk#浏览器评分)添加用户反馈和客户端评分：它只使用 Public Key，并直接向摄入 API 发送 Score，**不会创建 Trace 或 Observation**。
+前端可使用 [`@langfuse/browser`](/official/evaluation/evaluation-methods/scores-via-sdk#browser-score-ingestion)添加用户反馈和客户端评分：它只使用 Public Key，并直接向摄入 API 发送 Score，**不会创建 Trace 或 Observation**。
 
 如果浏览器需要调用 LLM，应该通过受控后端或代理调用，并在服务端追踪。
 
