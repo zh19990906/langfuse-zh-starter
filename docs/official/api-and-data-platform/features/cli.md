@@ -1,11 +1,11 @@
 ---
-title: cli
+title: Langfuse CLI
 description: Langfuse 官方文档的中文翻译与适配。
 ---
 
 # Langfuse CLI
 
-Langfuse CLI 将[公开 API](https://langfuse.com/docs/api-and-data-platform/features/public-api)包装为命令行工具，适合 AI 编程 Agent 和习惯终端的开发者。如果不能执行命令或安装软件，可以改用 [MCP Server](https://langfuse.com/docs/api-and-data-platform/features/mcp-server)。
+Langfuse CLI 将[公开 API](/official/api-and-data-platform/features/public-api)包装为命令行工具，适合 AI 编程 Agent 和习惯终端的开发者。如果不能执行命令或安装软件，可以改用 [MCP Server](/official/api-and-data-platform/features/mcp-server)。
 
 ![CLI 示例](https://langfuse.com/images/changelog/2026-02-17-langfuse-cli.jpg)
 
@@ -14,6 +14,14 @@ Langfuse CLI 将[公开 API](https://langfuse.com/docs/api-and-data-platform/fea
 ```bash
 npx @langfuse/cli api <resource> <action>
 ```
+
+也可以让编码 Agent 执行：
+
+```text
+please install @langfuse/cli
+```
+
+旧包 `langfuse-cli` 在下一次主版本发布前继续维护，但推荐新项目使用 `@langfuse/cli`。
 
 原包名 `langfuse-cli` 仍暂时维护，但官方推荐使用 `@langfuse/cli`：
 
@@ -26,6 +34,8 @@ bun add --global @langfuse/cli
 ```
 
 迁移后继续使用相同的 `langfuse` 命令。
+
+运行时也可使用 `bunx @langfuse/cli api <resource> <action>`。
 
 ## 认证
 
@@ -40,6 +50,10 @@ export LANGFUSE_BASE_URL="https://cloud.langfuse.com"
 欧盟默认地址为 `https://cloud.langfuse.com`，美国为 `https://us.cloud.langfuse.com`，日本为 `https://jp.cloud.langfuse.com`，HIPAA 区为 `https://hipaa.cloud.langfuse.com`；自托管使用自己的服务地址。
 
 CLI 自动读取密钥，不需要单独登录；不同项目需使用不同的密钥对。
+
+## 为什么使用及 Agent Skill 集成
+
+使用 CLI 可以让 Cursor、Claude Code 等编码 Agent 在编辑器内维护 Dataset、查看 Trace、更新 Prompt；也适合将批量导出、评分、跨环境同步等工作自动化到脚本或 CI/CD。CLI 的命令来自完整 OpenAPI 定义，需要了解参数时请对照[官方 API Reference](https://api.reference.langfuse.com)。
 
 ## 支持的操作
 
