@@ -27,6 +27,11 @@ export default defineConfig({
       ]},
       { text: '官方文档中文翻译', items: [
         { text: '可观测性与追踪', link: '/official/observability/overview' },
+        { text: 'Observation 类型', link: '/official/observability/features/observation-types' },
+        { text: '日志级别', link: '/official/observability/features/log-levels' },
+        { text: 'Session 会话', link: '/official/observability/features/sessions' },
+        { text: '用户追踪', link: '/official/observability/features/users' },
+        { text: '标签', link: '/official/observability/features/tags' },
         { text: '追踪核心概念', link: '/official/observability/data-model' },
         { text: '环境配置', link: '/official/observability/features/environments' },
         { text: '元数据', link: '/official/observability/features/metadata' },
@@ -75,6 +80,11 @@ export default defineConfig({
         { text: '文档 MCP 服务器', link: '/official/docs-mcp' },
         { text: 'Ask AI', link: '/official/ask-ai' },
         { text: '提示词管理', link: '/official/prompt-management/overview' },
+        { text: '提示词快速开始（部分）', link: '/official/prompt-management/get-started' },
+        { text: '提示词数据模型（部分）', link: '/official/prompt-management/data-model' },
+        { text: 'API 与数据平台', link: '/official/api-and-data-platform/overview' },
+        { text: 'Langfuse CLI', link: '/official/api-and-data-platform/features/cli' },
+        { text: 'Agent Skill', link: '/official/api-and-data-platform/features/agent-skill' },
         { text: 'LLM 应用评估', link: '/official/evaluation/overview' }
       ]},
       { text: '关于', items: [ { text: '翻译说明与许可', link: '/about' } ] }
