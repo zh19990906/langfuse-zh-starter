@@ -130,7 +130,7 @@ const compiledMessages = await langchainChatPrompt.formatMessages({
 });
 ```
 
-相关功能：[提示词组合](/official/prompt-management/features/composability)、[消息占位符](/official/prompt-management/features/message-placeholders)。原文的动态 FAQ 请通过[官方页面](https://langfuse.com/docs/prompt-management/features/variables)访问。
+相关功能：[提示词组合](/official/prompt-management/features/composability)、[消息占位符](/official/prompt-management/features/message-placeholders)。原文的动态 FAQ 请通过[官方页面](/official/prompt-management/features/variables)访问。
 
 ---
 
