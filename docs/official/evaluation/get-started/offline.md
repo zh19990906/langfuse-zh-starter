@@ -7,7 +7,7 @@ description: 创建 Langfuse Dataset，使用 Python 或 TypeScript 执行实验
 本指南介绍如何配置 Dataset、运行实验及评估输出，适合在部署到生产之前检查改动。如果还不知道如何挑选指标，可阅读 [选择评估目标](https://langfuse.com/academy/evaluate/choosing-what-to-evaluate)；概念背景见 [Dataset](https://langfuse.com/academy/datasets)和 [Experiment](https://langfuse.com/academy/experiments)。
 
 ::: info
-本指南演示[通过 SDK 运行实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)：从 Langfuse 获取 Dataset，在外部运行应用/Agent，然后将结果上报平台。还可以[通过 UI 运行 Prompt Experiment](/official/evaluation/experiments/experiments-via-ui)、[UI 手工评分](/official/evaluation/evaluation-methods/scores-via-ui)或[标注队列](/official/evaluation/evaluation-methods/annotation-queues)。
+本指南演示[通过 SDK 运行实验](/official/evaluation/experiments/experiments-via-sdk)：从 Langfuse 获取 Dataset，在外部运行应用/Agent，然后将结果上报平台。还可以[通过 UI 运行 Prompt Experiment](/official/evaluation/experiments/experiments-via-ui)、[UI 手工评分](/official/evaluation/evaluation-methods/scores-via-ui)或[标注队列](/official/evaluation/evaluation-methods/annotation-queues)。
 :::
 
 ## Agent 安装方式
@@ -262,7 +262,7 @@ npx tsx seed-dataset.ts
 
 ![新建数据集](https://langfuse.com/images/docs/create_dataset.png)
 
-可以逐条添加 Item、上传 CSV，或从已有 Trace 中添加。每条 `input` 是问题、`expected output` 是景点名称。更多说明见[数据集与版本](https://langfuse.com/docs/evaluation/experiments/datasets)。
+可以逐条添加 Item、上传 CSV，或从已有 Trace 中添加。每条 `input` 是问题、`expected output` 是景点名称。更多说明见[数据集与版本](/official/evaluation/experiments/datasets)。
 
 - [添加单条 Item 演示](https://static.langfuse.com/docs-videos/dataset-item-create.mp4)
 - [CSV 导入演示](https://static.langfuse.com/docs-videos/dataset-item-upload.mp4)
@@ -274,7 +274,7 @@ npx tsx seed-dataset.ts
 
 SDK 会对每个 DatasetItem 执行应用。应用仍在自己的运行环境中运行，因此可以正常使用已有工具、检索逻辑与依赖库。Task 函数负责将测试项转换成应用输入，并返回待评价的输出。
 
-如果只是比较 Prompt 和 Model，也可以直接通过 [UI 实验](/official/evaluation/experiments/experiments-via-ui)完成；甚至可以通过[Webhook](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk#configure-webhook)从 UI 触发外部 SDK 实验。
+如果只是比较 Prompt 和 Model，也可以直接通过 [UI 实验](/official/evaluation/experiments/experiments-via-ui)完成；甚至可以通过[Webhook](/official/evaluation/experiments/experiments-via-sdk)从 UI 触发外部 SDK 实验。
 
 以下使用简单的 `answer_question` / `answerQuestion` 函数，实际项目应改为调用**与生产环境相同的应用路径**。Evaluator 采用严格匹配：输出与 Expected Output 完全相同时返回 `1`，否则返回 `0`。
 
@@ -447,16 +447,16 @@ Answer the question about a site in San Francisco. Return only the site's offici
 
 ### 为什么一些 Exact Match Score 为零？
 
-打开对应 Item 对比模型输出和 Expected Output。大小写、额外单词、标点差异都使严格匹配失败。对于确定性输出契约很有用；语义正确性需使用 [LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)。
+打开对应 Item 对比模型输出和 Expected Output。大小写、额外单词、标点差异都使严格匹配失败。对于确定性输出契约很有用；语义正确性需使用 [LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge)。
 
 ## 下一步
 
-- 使用[数据集和数据集版本](https://langfuse.com/docs/evaluation/experiments/datasets)实现可复现测试。
+- 使用[数据集和数据集版本](/official/evaluation/experiments/datasets)实现可复现测试。
 - 直接在 [UI 实验](/official/evaluation/experiments/experiments-via-ui)中对比 Prompt 和模型。
-- 深入了解[Experiment Runner SDK](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)，包括异步 Evaluator、并发与 Run 级指标。
-- 将[实验加入 CI/CD](https://langfuse.com/docs/evaluation/experiments/experiments-ci-cd)，部署前捕获回退。
+- 深入了解[Experiment Runner SDK](/official/evaluation/experiments/experiments-via-sdk)，包括异步 Evaluator、并发与 Run 级指标。
+- 将[实验加入 CI/CD](/official/evaluation/experiments/experiments-ci-cd)，部署前捕获回退。
 - 学习[可靠评估器编写](https://langfuse.com/academy/evaluate/writing-evaluators)。
-- 为应用选择[代码评估器](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators)、LLM-as-a-Judge 或人工审阅。
+- 为应用选择[代码评估器](/official/evaluation/evaluation-methods/code-evaluators)、LLM-as-a-Judge 或人工审阅。
 
 ---
 
