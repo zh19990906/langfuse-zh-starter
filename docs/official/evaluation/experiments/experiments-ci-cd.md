@@ -112,7 +112,30 @@ Task 调用真实 Agent，并对每个 DatasetItem 运行。Evaluator 返回 Sco
 
 ### Action 的 Input 与 Output
 
-可通过 Action Input 指定实验配置、数据集、基线和阈值；从 Output 读取实验 ID、质量指标及对比结果，形成 CI 报告。
+以下与官方 `langfuse/experiment-action` 的参数表对应，避免工作流使用不存在的输入键：
+
+| Input | 必填 | 用途 / 默认值 |
+| --- | --- | --- |
+| `langfuse_public_key`、`langfuse_secret_key` | 是 | 项目 API 密钥，存入 GitHub Secrets |
+| `experiment_path` | 是 | 实验脚本、目录或 Glob；支持 Python、JS、TS |
+| `langfuse_base_url` | 否 | Langfuse 地域或自托管地址；默认 `https://cloud.langfuse.com` |
+| `dataset_name` | 否 | 通过 `RunnerContext` 提供托管 Dataset；不传则脚本自行准备数据 |
+| `dataset_version` | 否 | 数据集版本时间戳；不传使用最新版本 |
+| `experiment_metadata` | 否 | 额外 `key=value` 元数据 |
+| `should_fail_on_regression` | 否 | 遇到 `RegressionError` 是否令 CI 失败，默认 `true` |
+| `should_fail_on_script_error` | 否 | 脚本错误是否令 CI 失败，默认 `true` |
+| `should_comment_on_pr` | 否 | 在 PR 留下/更新实验报告，默认 `true` |
+| `python_sdk_version` | 否 | Python Langfuse SDK，默认 `latest`，至少 v4.6.0 |
+| `js_sdk_version` | 否 | `@langfuse/client`，默认 `latest`，至少 v5.3.0 |
+| `should_skip_sdk_installation` | 否 | 已自行安装 SDK 时可跳过，默认 `false`；TS 需自行准备 `@langfuse/client`、`@langfuse/tracing`、`@langfuse/otel`、`@opentelemetry/sdk-node` 和 `tsx` |
+| `github_token` | 否 | PR 评论及获取 Job URL；不设置则跳过两项 |
+
+| Output | 含义 |
+| --- | --- |
+| `result_json` | 供后续 CI 步骤解析的规范化 JSON |
+| `failed` | 有任一实验脚本出错或出现 Regression 时为 `true`，否则为 `false` |
+
+生产使用时核对 [experiment-action 最新 Input 说明](https://github.com/langfuse/experiment-action/blob/main/README.md#inputs)，不要依赖中文表格中的版本信息永远不变。
 
 ### 失败策略
 
