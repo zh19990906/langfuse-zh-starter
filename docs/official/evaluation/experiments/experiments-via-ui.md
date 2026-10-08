@@ -6,7 +6,7 @@ description: 使用数据集测试提示词版本与模型，并通过自动评�
 
 在 Langfuse UI 中直接运行提示词实验，测试来自[提示词管理](/official/prompt-management/overview)的不同提示词版本或语言模型，并排比较结果。
 
-可以选择附加 [LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge) 或[代码评估器](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators)，根据预期输出自动评分，并从聚合层面分析效果。
+可以选择附加 [LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge) 或[代码评估器](/official/evaluation/evaluation-methods/code-evaluators)，根据预期输出自动评分，并从聚合层面分析效果。
 
 [观看提示词实验演示](https://static.langfuse.com/docs-videos/prompt-experiments.mp4)。
 
@@ -18,7 +18,7 @@ description: 使用数据集测试提示词版本与模型，并通过自动评�
 - 使用 LLM 裁判或代码评估器与预期结果比较。
 - 提示词变更后运行测试，避免质量回退。
 
-配置实验时可以选择 **Dataset Version**，将运行固定在历史数据集状态。不选则使用最新版。详见[版本化数据集](https://langfuse.com/docs/evaluation/experiments/datasets#run-experiments-on-versioned-datasets)。
+配置实验时可以选择 **Dataset Version**，将运行固定在历史数据集状态。不选则使用最新版。详见[版本化数据集](/official/evaluation/experiments/datasets)。
 
 ## 前提条件
 
@@ -76,7 +76,7 @@ Chat Prompt 中的占位符命名为 `message_history`。对应数据集项：
 
 ### 2. 创建可用于实验的数据集
 
-[创建数据集](https://langfuse.com/docs/evaluation/experiments/datasets)，包含想要测试的输入及预期输出。
+[创建数据集](/official/evaluation/experiments/datasets)，包含想要测试的输入及预期输出。
 
 ::: info
 可用的数据集要求：数据集项的 `input` 是 JSON 对象，且键名与提示词的变量或占位符名称匹配。例如上面的 `documentation` 与 `question`。
@@ -84,11 +84,11 @@ Chat Prompt 中的占位符命名为 `message_history`。对应数据集项：
 
 ### 3. 配置 LLM Connection
 
-每个数据集项都会触发一次提示词执行，因此需要在项目设置中配置 [LLM Connection](https://langfuse.com/docs/administration/llm-connection)。
+每个数据集项都会触发一次提示词执行，因此需要在项目设置中配置 [LLM Connection](/official/administration/llm-connection)。
 
 ### 4. 可选：配置评估器
 
-可以创建 [LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge) 评估语义质量，也可以创建[代码评估器](https://langfuse.com/docs/evaluation/evaluation-methods/code-evaluators)执行确定性检查。记得将目标设置为 Experiments，并筛选要使用的数据集。
+可以创建 [LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge) 评估语义质量，也可以创建[代码评估器](/official/evaluation/evaluation-methods/code-evaluators)执行确定性检查。记得将目标设置为 Experiments，并筛选要使用的数据集。
 
 ## 从 UI 触发实验
 
@@ -141,7 +141,7 @@ Chat Prompt 中的占位符命名为 `message_history`。对应数据集项：
 
 ## 相关资料
 
-- 如果要评估完整应用或 Agent 逻辑（包括自定义运行时配置），应使用[通过 SDK 运行实验](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)。也可以通过 [Webhook](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk#configure-webhook) 在 UI 触发基于 SDK 的评估运行。
+- 如果要评估完整应用或 Agent 逻辑（包括自定义运行时配置），应使用[通过 SDK 运行实验](/official/evaluation/experiments/experiments-via-sdk)。也可以通过 [Webhook](/official/evaluation/experiments/experiments-via-sdk) 在 UI 触发基于 SDK 的评估运行。
 - 如果自定义 Pipeline 或其他语言通过 OpenTelemetry 上报 Trace，使用[通过 OpenTelemetry 运行实验](/official/evaluation/experiments/experiments-via-opentelemetry)。
 
 官方 GitHub Discussions 是动态内容，未嵌入本站。
