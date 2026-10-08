@@ -2,7 +2,7 @@ name: Deploy Langfuse Docs Chinese V0.2
 on:
   workflow_dispatch:
   push:
-    branches: [v0.2]
+    branches: [master]
     paths:
       - 'scripts/prepare-static-export.py'
       - 'overrides/**'
