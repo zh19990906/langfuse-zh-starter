@@ -6,7 +6,7 @@ description: 使用组织级 API Key、SCIM 和 Okta 自动管理项目、成员
 
 该功能适用于 **Enterprise** 和自托管 **Enterprise Edition**；Hobby、Core、Pro 不提供。
 
-组织级 API Key 可以管理项目、用户、项目及组织成员关系，详见[角色权限文档](https://langfuse.com/docs/administration/rbac)。可以使用这些接口将 Langfuse 组织的管理工作自动化。本页包含组织管理接口、符合 SCIM 的用户预配，以及 Okta 配置指南。
+组织级 API Key 可以管理项目、用户、项目及组织成员关系，详见[角色权限文档](/official/administration/rbac)。可以使用这些接口将 Langfuse 组织的管理工作自动化。本页包含组织管理接口、符合 SCIM 的用户预配，以及 Okta 配置指南。
 
 ::: info
 自托管部署还可以使用 [Instance Management API](https://langfuse.com/self-hosting/administration/instance-management-api)管理单个实例中的多个组织。
