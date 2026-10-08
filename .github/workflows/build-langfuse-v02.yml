@@ -32,6 +32,8 @@ jobs:
           cache-dependency-path: upstream/pnpm-lock.yaml
       - name: Install and build static output
         working-directory: upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm install --frozen-lockfile
           pnpm build
