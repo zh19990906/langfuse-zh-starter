@@ -43,6 +43,45 @@ Exact Match 将 Output 与 Expected Output 比较，完全相同时为 1，否�
 
 代码在受控环境执行，通常有时间、内存、依赖和网络限制。不要假设拥有任意文件系统、密钥或无限执行时间；详细限制以最新官方说明为准。
 
+## 精校补充：评估对象与函数契约
+
+代码评估器可运行在**生产 Observation**或**离线 Experiment**上。使用 **Is Root Observation** 筛选逻辑根时，根节点可能仍有物理父节点；需要某个具体调用类型时，应额外按 Name 或 Type 筛选。
+
+创建流程：进入 **Evaluators → New evaluator → Code evaluator**，选择 Python 或 TypeScript；定义 `evaluate` 函数，使用样本测试后保存。**代码评估器不需要额外的变量映射步骤**，通过 `ctx` 直接读取数据。保存后可添加 Rule，也可用于 Batch Evaluation 或 Prompt Experiment。
+
+### EvaluationContext 字段
+
+| 字段 | 含义 |
+| --- | --- |
+| `ctx.observation.input` / `output` / `metadata` | 被评价 Observation 保存的字段 |
+| Python `ctx.observation.tool_calls` / TS `ctx.observation.toolCalls` | 有序工具调用；包含 `id`、`name`、`arguments`、`type`、`index`；合法 JSON 参数会解析 |
+| `ctx.experiment` | 只在实验场景存在 |
+| Python `ctx.experiment.item_expected_output` / TS `itemExpectedOutput` | 实验样本期望输出 |
+| Python `ctx.experiment.item_metadata` / TS `itemMetadata` | 实验样本元数据 |
+
+### EvaluationResult 中的 Score 字段
+
+`evaluate(ctx)` 必须返回至少一条 Score。`name`、`value`、`data_type`（Python）或 `dataType`（TS）为必填。类型可以是 `NUMERIC`、`CATEGORICAL`、`BOOLEAN`、`TEXT`。可选字段包括 `comment`、`config_id` / `configId`、`metadata`；指定 ScoreConfig 后必须遵守该配置的限制。
+
+### 运行时硬性限制
+
+| 项目 | 官方限制 |
+| --- | --- |
+| 语言 | Python 或 TypeScript |
+| 自托管 Python 执行器 | 必须使用 `aws-lambda` Dispatcher；`insecure-local` 仅支持 TypeScript/JavaScript |
+| TypeScript 语法 | 必须使用可擦除语法；类型注解与 Interface 可用，避免 Enum、Namespace、Decorator 和参数属性 |
+| 依赖 | 仅能使用相应语言标准库，**不支持第三方包** |
+| 网络 | **禁止访问外部网络** |
+| 执行超时 | **2 秒** |
+| 返回结果 | 至少 1 个 Score |
+| 源码大小 | 小于 **256 KB** |
+| 输入 Payload | 源码和选择的变量合计小于 **5.5 MB** |
+| 结果大小 | 小于 **256 KB** |
+
+如果遇到超时，先从小样本复现，移除网络访问、减少循环与解析工作量，以及缩小 Input/Output/Metadata 的体积。每次执行会生成调试 Trace，可在 Tracing 中按 Environment `langfuse-code-eval` 筛选。
+
+![代码评估器执行记录](https://langfuse.com/images/docs/code-evaluators/debugging.png)
+
 ## 原文中的技术示例
 
 以下保留源文档所有代码与配置块，以避免翻译程序标识符造成错误。
