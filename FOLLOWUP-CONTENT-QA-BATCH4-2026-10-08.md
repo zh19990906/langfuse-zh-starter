@@ -16,7 +16,7 @@
 | `prompt-management/features/prompt-version-control.md` | `3b34c90` | 6/6 | 404/400 标签解析规则、版本回退、受保护标签核对；代码缩进/注释有差异 | `无需改` |
 | `prompt-management/features/message-placeholders.md` | `9072487` | 6/6 | SDK 版本下限、Compile 与 LangChain 入口核对；未实测 | `无需改` |
 | `evaluation/experiments/data-model.md` | `d308a8f` | 3/3 | 21 项表格对象字段、三个源代码块对照；本地链接修正 | `e7d145d` |
-| `prompt-management/features/github-integration.md` | `4dc01ca` | 9/9 | 两个 YAML 工作流样例安全改写：事件字段经 env 注入而非直接 Shell 拼接 | `2988b12` |
+| `prompt-management/features/github-integration.md` | `4dc01ca` | 9/9 | 两个 YAML 工作流样例安全改写：事件字段经 env 注入而非直接 Shell 拼接；补充官方 FastAPI 示例的重试不幂等及 GitHub SHA 竞态警告 | `2988b12` |
 | `evaluation/evaluation-methods/annotation-queues.md` | `cdc16a1` | 0/0 | Score Config、批量/单条审核和快捷键表核对，原文链接修正 | `70d3de8` |
 | `observability/best-practices.md` | `1e2c720` | 0/0 | Trace 范围、Thinking、树结构、命名和属性使用说明核对 | `无需改` |
 | `administration/billable-units.md` | `3a04f03` | 0/1 | 计费单位求和、用量 Dashboard 和算例对照，本地引用修正 | `e76d42f` |
@@ -31,3 +31,5 @@
 ## 结构和构建验证
 
 最后正文改动提交 `ae4a0c5` 对应 [GitHub Actions #37779116285](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779116285)，成功扫描 113 篇官方页面和 121 篇 Markdown，Errors 0、Anchor Warnings 0，VitePress Build 成功。该 CI 没有执行第三方 SDK 示例、真实 GitHub Actions Dispatch 或动态组件。后续仍需对未核销的页面和代码环境做内容验收，**不得声称本批整篇 PASS，也不部署**。
+
+补充修复：`prompt-management/features/github-integration.md` 于 `f7b8c4b` 明确说明，官方 FastAPI 示例不记录 event.id，不能自动保证重复事件幂等；同时更新同一文件可能遇到 GitHub 409 和单文件覆盖问题，并修正末尾“代码完全原样”的不准确表述。此为文档安全告知，非已实现的生产 Webhook 服务器。
