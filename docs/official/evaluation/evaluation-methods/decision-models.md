@@ -95,8 +95,8 @@ description: 使用 OpenAI 或 TypeSafe Jev 对 Observation 提出类型化问�
 
 保存后可以：
 
-- 使用测试时的筛选条件创建 [Rule](/official/evaluation/core-concepts)，或关联已有 Rule，自动评估新到达的 Observation；
-- 不配置 Rule，继续用于[历史批量评估](/official/evaluation/core-concepts)或[提示词实验](/official/evaluation/experiments/experiments-via-ui)。
+- 使用测试时的筛选条件创建 [Rule](/official/evaluation/core-concepts#evaluator-和-rule)，或关联已有 Rule，自动评估新到达的 Observation；
+- 不配置 Rule，继续用于[历史批量评估](/official/evaluation/core-concepts#批量评估)或[提示词实验](/official/evaluation/experiments/experiments-via-ui)。
 
 每道问题的 Score 都可像其他评分一样参与筛选、图表和告警。
 
@@ -132,7 +132,7 @@ TypeSafe 连接仅适用于决策模型评估器，因为 Jev 不能生成自由
 | --- | --- |
 | `name` | 题目配置的 Score Name |
 | `value` / `dataType` | Choice：选中项的 `CATEGORICAL`；Score：期望等级的 `NUMERIC`；Yes / no：`P(true)` 的 `NUMERIC` |
-| `comment` | 答案的简短可读摘要，例如 `ready (p=0.91); confidence 0.82` 或 `P(true)=0.97` |
+| `comment` | 答案的简短可读摘要，例如 Choice 的 `ready (p=0.91); confidence 0.82; runner-up needs_revision (0.09)`、Score 的 `1.26 ≈ level 1 "Frustrated but civil"; confidence 0.61`，或 Yes / no 的 `P(true)=0.97` |
 | `metadata.openai` / `metadata.typesafe` | `questionId`、类型、实际模型和（如可用）概率、置信度、评分等级说明 |
 
 决策模型返回的是结构化结论，不是书面推理。因此 Comment 概括概率分布；分数明显有误时，应检查输入映射、判定条件并收紧题目或新增兜底选项。
@@ -181,8 +181,10 @@ TypeSafe 连接仅适用于决策模型评估器，因为 Jev 不能生成自由
 - [如何编写可靠的评估器](https://langfuse.com/academy/evaluate/writing-evaluators)
 - [TypeSafe 文档](https://docs.typesafe.ai/introduction)
 
-官方 GitHub Discussions 属于运行时内容，请通过[原文](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models)查看。
+## GitHub Discussions
+
+上游此处嵌入按 `feat-evals` 标签动态筛选的 GitHub Discussions 预览。VitePress 静态页面无法直接呈现该互动组件；讨论列表、回复与实时状态请通过[原文](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models)查看。
 
 ---
 
-原文：[Decision model evaluators](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models) · 本页已根据官方静态正文逐节补译。
+原文：[Decision model evaluators](https://langfuse.com/docs/evaluation/evaluation-methods/decision-models) · 静态章节、两张技术配置表、Score 字段表、限制表与四则 FAQ 已逐节翻译；互动讨论预览保留原站入口。
