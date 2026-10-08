@@ -1,0 +1,43 @@
+---
+title: 概览
+seoTitle: Langfuse 开源 AI 工程平台中文指南
+description: Langfuse 是开源的 AI 工程平台，提供可观测性、提示词管理与评估功能。
+---
+
+# Langfuse 概览
+
+Langfuse 是一个开源 AI 工程平台，帮助团队协作调试、分析并持续改进 AI Agent 应用。它将追踪、提示词管理和评估等能力整合在同一个平台中，支持自托管，也可以使用云服务。
+
+> **非官方中文翻译**：本站基于 [Langfuse 官方文档](https://langfuse.com/docs) 构建；英文内容仍以原站为准。部分页面尚未翻译。
+
+import { FeatureOverview } from "@/components/FeatureOverview";
+
+<FeatureOverview />
+
+## 可观测性
+
+[可观测性](/docs/observability/overview) 用于理解和调试 AI Agent 的运行过程。与传统软件不同，LLM 应用可能包含复杂且非确定性的交互。Langfuse 通过追踪（Tracing）帮助开发者了解每一次执行。
+
+- 追踪 LLM 调用、检索、嵌入、API 请求等步骤。
+- 将多轮对话组织为会话，并关联用户。
+- 使用 Python、JavaScript SDK 或框架集成采集数据。
+
+[开始接入追踪 →](/docs/observability/get-started)
+
+## 提示词管理
+
+[提示词管理](/docs/prompt-management/overview) 支持集中维护提示词、管理版本，并将提示词与实际运行记录关联。
+
+[开始使用提示词管理 →](/docs/prompt-management/get-started)
+
+## 评估
+
+[评估](/docs/evaluation/overview) 帮助你衡量 AI 应用的输出质量，逐步改进提示词、模型及应用流程。
+
+[开始配置评估 →](/docs/evaluation/get-started/online)
+
+## 下一步
+
+按顺序体验 [追踪](/docs/observability/get-started)、[提示词管理](/docs/prompt-management/get-started) 和 [评估](/docs/evaluation/get-started/online)。
+
+本页面属于首批中文覆盖层；其他未覆盖页面会保留官方原文。

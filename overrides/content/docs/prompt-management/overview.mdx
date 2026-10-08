@@ -1,0 +1,49 @@
+---
+title: 提示词管理概览
+seoTitle: 开源提示词管理
+description: 在开源 Langfuse 中管理提示词及其版本。Langfuse SDK 可在客户端缓存获取到的提示词，以降低延迟。
+---
+
+# 提示词管理
+
+提示词管理是指以系统化方式存储、版本管理和获取 LLM 应用的提示词。与其把提示词硬编码在应用程序中，不如通过 Langfuse 进行集中管理。
+
+<Frame fullWidth>
+  <Image
+    src="/images/docs/prompt-management.png"
+    alt="Langfuse 提示词管理界面，展示版本控制、Playground 和部署标签"
+    loading="lazy"
+    quality={85}
+  />
+</Frame>
+
+<Callout type="info" emoji="🎥">
+
+[**观看演示视频**](/watch-demo)，了解 Langfuse 提示词管理及其应用接入方式。
+
+</Callout>
+
+### 将提示词更新与代码部署解耦
+
+在大多数 LLM 应用中，**提示词迭代和代码部署**往往由**不同的人**负责。产品经理和领域专家持续改进提示词，而工程师负责应用部署。
+
+如果提示词写在代码中，即使只是修改几个字，也需要工程人员参与、代码审查和完整的部署流程。原本两分钟能完成的修改，可能因此要等待数小时甚至数天。
+
+将提示词托管在 Langfuse 中后，非技术团队成员可以直接通过界面更新提示词，应用也可以自动获取最新版本。这种**职责分离**让提示词更新无需工程师介入或重新触发应用部署，就能快速生效。
+
+### 不增加延迟，也不引入额外的可用性风险
+
+**Langfuse 的提示词管理不会增加应用请求的额外延迟**：SDK 会在客户端缓存提示词，因此后续获取可以像从内存中读取一样快。详情参阅[缓存说明](/docs/prompt-management/features/caching)。
+
+## 开始使用
+
+先在 Langfuse 中[添加第一条提示词](/docs/prompt-management/get-started)，再将其接入应用。你可以在界面中从零创建提示词，也可以导入应用已有的提示词。
+
+建议先理解几个[核心概念：提示词类型、版本、标签和配置](/docs/prompt-management/data-model)。
+
+当提示词已经存储在 Langfuse 中，并且应用开始使用它们后，还可以进一步：
+
+- [将提示词关联到追踪记录](/docs/prompt-management/features/link-to-traces)，按提示词版本分析实际表现。
+- [使用版本控制和标签](/docs/prompt-management/features/prompt-version-control)，管理不同环境中的发布。
+
+如果你在寻找特定操作，可以在左侧导航的 *Features（功能）* 部分查阅相关指南。

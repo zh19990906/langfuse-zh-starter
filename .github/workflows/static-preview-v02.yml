@@ -1,0 +1,62 @@
+name: Deploy Langfuse Docs Chinese V0.2
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/prepare-static-export.py'
+      - 'overrides/**'
+      - 'scripts/apply-langfuse-zh.py'
+      - '.github/workflows/static-preview-v02.yml'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  static-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: langfuse/langfuse-docs
+          path: upstream
+      - name: Apply Chinese docs
+        run: python3 scripts/apply-langfuse-zh.py upstream
+      - name: Remove API-only routes and configure project path
+        env:
+          GITHUB_PAGES_BASE_PATH: /langfuse-zh-starter
+        run: python3 scripts/prepare-static-export.py upstream
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.8.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: upstream/pnpm-lock.yaml
+      - name: Build static docs
+        working-directory: upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAGES_BASE_PATH: /langfuse-zh-starter
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build:static
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Add nojekyll marker
+        run: touch upstream/out/.nojekyll
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: upstream/out/
+  deploy:
+    needs: static-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

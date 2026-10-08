@@ -1,0 +1,45 @@
+name: Build Langfuse Chinese Docs V0.2
+on:
+  workflow_dispatch:
+  push:
+    branches: [v0.2]
+    paths:
+      - 'overrides/**'
+      - 'scripts/apply-langfuse-zh.py'
+      - '.github/workflows/build-langfuse-v02.yml'
+      - 'V0.2-README.md'
+      - 'scripts/build-preview.sh'
+      - 'scripts/start-preview.sh'
+      - 'render.yaml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout official Langfuse docs
+        uses: actions/checkout@v4
+        with:
+          repository: langfuse/langfuse-docs
+          path: upstream
+      - name: Apply Chinese translations
+        run: python3 scripts/apply-langfuse-zh.py upstream
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.8.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: upstream/pnpm-lock.yaml
+      - name: Validate preview scripts
+        run: bash -n scripts/build-preview.sh scripts/start-preview.sh
+      - name: Install and build Next.js application
+        working-directory: upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build
+      # Server build validation only. Static export is blocked by upstream dynamic API routes.

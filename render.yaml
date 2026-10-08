@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: langfuse-docs-zh-preview
+    runtime: node
+    plan: starter
+    branch: v0.2
+    buildCommand: bash scripts/build-preview.sh
+    startCommand: bash scripts/start-preview.sh
+    healthCheckPath: /docs
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.1
+      - key: GITHUB_TOKEN
+        sync: false
