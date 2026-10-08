@@ -5,7 +5,7 @@ description: Langfuse JavaScript/TypeScript SDK 的破坏性变更与迁移步�
 # JS/TS SDK v3 → v4
 
 ::: info
-官方建议仍使用 JS/TS SDK v3 的项目直接升级到 **v5**。需要先完成下文的 v3 → v4 迁移步骤，再参照 [v4 → v5 升级指南](https://langfuse.com/docs/observability/sdk/upgrade-path/js-v4-to-v5)继续迁移。
+官方建议仍使用 JS/TS SDK v3 的项目直接升级到 **v5**。需要先完成下文的 v3 → v4 迁移步骤，再参照 [v4 → v5 升级指南](/official/observability/sdk/upgrade-path/js-v4-to-v5)继续迁移。
 :::
 
 请逐项检查以下变化。如果升级时遇到问题，可以在 [GitHub Issues](https://github.com/langfuse/langfuse/issues)反馈。
@@ -22,7 +22,7 @@ v4 基于 OpenTelemetry 重写追踪实现，引入多项破坏性变更：
 2. **全新的追踪函数**：以前的 `langfuse.trace()`、`langfuse.span()` 与 `langfuse.generation()`，改为从 `@langfuse/tracing` 使用 [`startObservation`](https://langfuse-js-git-main-langfuse.vercel.app/functions/_langfuse_tracing.startObservation.html)、[`startActiveObservation`](https://langfuse-js-git-main-langfuse.vercel.app/functions/_langfuse_tracing.startActiveObservation.html) 等函数。
 3. **职责分离**：`@langfuse/tracing` 和 `@langfuse/otel` 负责追踪；`@langfuse/client` 与 `LangfuseClient` 只处理评分、提示词管理、数据集等非追踪功能。
 
-更多信息见[官方 SDK 说明](https://langfuse.com/docs/observability/sdk/overview)。
+更多信息见[官方 SDK 说明](/official/observability/sdk/overview)。
 
 ## 提示词管理
 
