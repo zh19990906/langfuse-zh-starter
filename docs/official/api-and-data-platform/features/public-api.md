@@ -79,6 +79,61 @@ Python 与 TypeScript 的 `langfuse.api` 提供类型化生成客户端，可访
 
 核对 API Base URL 是否对应项目 Region，检查认证、版本兼容性、分页和数据摄入延迟。遇到不支持的读取字段，请升级 SDK 或使用匹配服务端的 Legacy API。
 
+## 精校补充：具体 API 契约与版本约束
+
+### 公共 API 认证验证
+
+```bash
+curl -u public-key:secret-key https://cloud.langfuse.com/api/public/projects
+```
+
+请求成功时返回项目列表，通常包含 `data` 数组，每个项目有 `id`、`name` 和 `organization` 等字段。
+
+### SDK 命名空间与服务端版本
+
+| 资源 | Python SDK | JS/TS SDK | 服务端要求 |
+| --- | --- | --- | --- |
+| Observations API v2 | `langfuse.api.observations`，Python v4 | `langfuse.api.observations`，JS/TS v5 | Cloud 或自托管 v4 |
+| Metrics API v2 | `langfuse.api.metrics`，Python v4 | `langfuse.api.metrics`，JS/TS v5 | Cloud 或自托管 v4 |
+| Scores API v3 | `langfuse.api.scores_v3`，Python **4.8.1+** | `langfuse.api.scoresV3`，JS/TS **5.5.0+** | Cloud 或自托管 **v3.179+** |
+
+旧 `api.scores` v2 **读取接口已弃用**；旧 v1 资源迁至 `api.legacy.*`。自托管 v3 应使用兼容的 Legacy Observation/Metrics API。具体迁移见[官方弃用 API 指南](https://langfuse.com/faq/all/deprecated-api-migration)。
+
+### Observation v2 的 Cursor 分页
+
+`GET /api/public/v2/observations` 支持 `limit`（默认 **50**、最大 **1000**），按 `startTime` **降序**返回。下一页 Cursor 位于 `meta.cursor`。持续将该值传入后续请求的 `cursor` 参数，直到不存在或为 `null`。Cloud 调用受组织级 API Rate Limit 约束；自托管不强制执行该平台限流。
+
+```bash
+curl -u public-key:secret-key \
+  "https://cloud.langfuse.com/api/public/v2/observations?traceId=your-trace-id&fields=core,basic,usage&limit=100"
+```
+
+### Scores API v3 的类型和值
+
+`GET /api/public/v3/scores` 用于**读取**评分，创建评分则使用 `POST /api/public/scores` 或 SDK Score Helper。
+
+| `dataType` | 返回 `value` 类型 |
+| --- | --- |
+| `NUMERIC` | number |
+| `BOOLEAN` | boolean |
+| `CATEGORICAL` | string |
+| `TEXT` | string |
+| `CORRECTION` | string；无修正时为空字符串 |
+
+**不要将 Scores API v3 的 `BOOLEAN` 读返回值当成 0/1 数字。** API v3 的 `value` 是依类型区分的字段。
+
+可通过 `fields=details,subject,annotation` 获取额外内容；基本字段始终返回，未知字段组返回 HTTP **400**。
+
+| 字段组 | 额外字段 |
+| --- | --- |
+| `details` | `comment`、`configId`、`metadata` |
+| `subject` | `subject`（评分关联对象） |
+| `annotation` | `authorUserId`、`queueId` |
+
+### Trace 摄入端点
+
+**新接入应使用 OpenTelemetry OTLP/HTTP Endpoint**：`POST /api/public/otel/v1/traces`。旧 `POST /api/public/ingestion` 的 Trace/Observation 事件已弃用；Cloud 切换时间应核对[官方迁移指南](https://langfuse.com/integrations/native/opentelemetry/migration-to-v4)。当前 Score Helper 仍通过旧端点发送 `score-create`，该事件在切换后继续受支持。不能把旧 Ingestion API 作为新项目推荐方案。
+
 ## 官方代码与请求示例
 
 以下示例保留原文代码内容和请求字段，尚未逐一运行验证。
