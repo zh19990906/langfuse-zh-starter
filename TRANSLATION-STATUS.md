@@ -243,3 +243,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 本轮 12 篇抽查代码围栏数量均为偶数；**这不是语法编译或示例运行通过**。
 - 尚未完成全部 113 篇的逐句比对、所有站内锚点与外链验证、SDK 示例运行及 VitePress 全量构建。本项目 **禁止因 113/113 页面映射而宣称全量验收成功**。
 - 由于当前执行环境无法直接连接 GitHub 克隆仓库，且可用 GitHub 接口无法触发构建验证工作流，因此本阶段无法在本机完成真实构建；部署维持关闭。
+
+### 本轮补齐：兼容性与决策模型（2026-10-08，未部署）
+
+- `docs/official/compatibility.md`：原先只有摘要，现已补齐 GA 主版本、生命周期、Cloud v3/v4 功能矩阵、旧 SDK/接口的迁移边界及 FAQ；动态切换日期继续引用官方实时页面。
+- `docs/official/evaluation/evaluation-methods/decision-models.md`：原先为概要稿，现已逐节补齐 Choice、Score、Yes/no 类型及边界、OpenAI 与 TypeSafe 区别、输入映射、调试、Score 字段、限制和 FAQ。特别澄清 Yes/no 为数值概率而非 Boolean Score。
+- 本轮两页仍未运行 VitePress 全量构建或示例运行；剩余长篇工作稿继续保留待验收标记，**不因本轮补齐两篇而宣称全库完整**。
