@@ -1,6 +1,6 @@
 ---
-title: users
-description: Langfuse 官方文档的中文翻译与适配。
+title: 用户追踪
+description: 按用户汇总 Langfuse Trace、Token 用量、成本与反馈，了解 userId 传播限制。
 ---
 
 # 用户追踪
@@ -140,6 +140,15 @@ await startActiveObservation("langchain-call", async () => {
 });
 ```
 
-属性传播限制的动态提示和 GitHub Discussions 尚未静态迁移，详见[官方用户追踪原文](https://langfuse.com/docs/observability/features/users)。
+## 用户 ID 属性传播限制
+
+官方页面的 `PropagationRestrictionsCallout` 组件规定了 `userId` 的以下约束；中文版在此展开关键内容，而不再将其隐藏在动态组件中：
+
+- `userId` **必须是字符串，最长 200 个字符**。
+- 应在 Trace 执行流程**尽早**调用 `propagate_attributes(user_id=...)` 或 `propagateAttributes({ userId: ... }, callback)`；它影响当前上下文内的 Observation，不会自动回填之前已创建的 Observation。过晚传播可能使按用户聚合的指标不完整。
+- 不合法的传播值会被丢弃并产生警告。排查用户指标缺失时，先确认值的类型、长度及调用位置。
+- 详细用法参阅[SDK 属性传播](/official/observability/sdk/instrumentation#添加属性)。
+
+官方动态 GitHub Discussions 未嵌入，参阅[用户追踪原文](https://langfuse.com/docs/observability/features/users)。
 
 原文：[User Tracking](https://langfuse.com/docs/observability/features/users)。正文及各框架 SDK 示例已补齐。
