@@ -10,7 +10,7 @@ Langfuse 是[开源](https://langfuse.com/open-source)的，使用 Langfuse 收�
 
 - 查询 Observation 明细，用于评估 Pipeline、Few-shot 示例或微调数据集；
 - 查询成本、用量、延迟、调用量和评分聚合指标，构建仪表盘或计费流程；
-- 通过程序创建[数据集](https://langfuse.com/docs/evaluation/experiments/datasets)。
+- 通过程序创建[数据集](/official/evaluation/experiments/datasets)。
 
 新用户建议先了解[Langfuse 数据模型](/official/observability/data-model)。
 
@@ -130,7 +130,7 @@ observations = await langfuse.async_api.observations.get_many(
 metrics = await langfuse.async_api.metrics.metrics(query=query)
 ```
 
-Observation 字段筛选与游标分页，参阅 [Observations API v2](https://langfuse.com/docs/api-and-data-platform/features/public-api#v2)。
+Observation 字段筛选与游标分页，参阅 [Observations API v2](/official/api-and-data-platform/features/public-api#observations-api-v2)。
 
 ## JavaScript / TypeScript SDK
 
@@ -219,10 +219,10 @@ const scores = await langfuse.api.scores.getMany();
 
 ## 相关资源
 
-- [Observations API v2](https://langfuse.com/docs/api-and-data-platform/features/public-api#v2)：从旧版 Trace/Observation 读取接口迁移。
+- [Observations API v2](/official/api-and-data-platform/features/public-api#observations-api-v2)：从旧版 Trace/Observation 读取接口迁移。
 - [Scores API 迁移](https://langfuse.com/faq/all/deprecated-api-migration#scores)：将旧读取迁移至 v3。
 - [Metrics API v2](/official/metrics/features/metrics-api)：迁移指标查询。
-- [Blob Storage Export](https://langfuse.com/docs/api-and-data-platform/features/export-to-blob-storage)：需要大量数据用于微调、分析时，定期自动导出至 S3、GCS 或 Azure，比逐页 API 查询更合适。
+- [Blob Storage Export](/official/api-and-data-platform/features/export-to-blob-storage)：需要大量数据用于微调、分析时，定期自动导出至 S3、GCS 或 Azure，比逐页 API 查询更合适。
 - [UI 导出](/official/api-and-data-platform/features/export-from-ui)：手工导出筛选数据。
 
 ---
