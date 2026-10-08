@@ -1,0 +1,31 @@
+# Langfuse 中文文档翻译计划
+
+本项目是非官方中文文档镜像。站点采用 **VitePress**；翻译内容来自 [Langfuse 官方文档仓库](https://github.com/langfuse/langfuse-docs) 的 `content/docs` 目录。
+
+## 翻译进度
+
+2026-10-08 核对上游：113 个 Markdown/MDX 正文文件、18 个 meta.json 导航文件。并非所有路由或嵌入组件都在这些文件中。
+
+目前已按官方源页面翻译并整理：
+- `observability/overview.mdx` → `docs/official/observability/overview.md`
+- `prompt-management/overview.mdx` → `docs/official/prompt-management/overview.md`
+- `evaluation/overview.mdx` → `docs/official/evaluation/overview.md`
+
+**正文翻译进度：3 / 113**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+
+## 翻译约定
+
+- 中文文件映射原始文档的相对路径，保留原文 URL。
+- Markdown 链接可在对应中文版发布后从官方英文链接切换为中文站内链接。
+- 将 MDX 特有的 JSX 和交互组件转换成适配 VitePress 的 Markdown 或 Vue 组件；代码样例不可随意改写。
+- 对每一批翻译运行 `npm run build` 检查链接与 Markdown 编译。
+- 完整翻译完成之前，不标注为“全站已汉化”。
+- 后续维护上游源提交 SHA、变更检测、译文状态清单。
+
+## 发布
+
+在 `master` 分支推送 `docs/**` 后由 `.github/workflows/deploy.yml` 免费部署 GitHub Pages。历史 Next.js 静态发布流程已停止自动部署，以免冲突。
+
+## 许可
+
+Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该许可证和版权声明；对品牌与第三方资源需另行核查。
