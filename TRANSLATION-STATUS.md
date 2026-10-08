@@ -343,3 +343,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `export-to-blob-storage.md`：从约 2 KB 的概要扩充为约 30 KB，补入官方 11 组 Observation 字段、Score 固定列、Enriched/Legacy Trace 与 Observation 的完整字段名和数据类型、Manifest 完成与幂等消费规则、旧新版切换、Parquet 限制，以及 2026-04-01 前后 Latency 单位差异。为确保 API Schema 精确性，部分字段含义列保留上游英文原文，仍需最终语言润色与真实导出验证（commit `e8899bc`）。
 - `mcp-server.md`：按官方配置复核 Claude Code、Codex、Cursor、Pi Agent 及其他客户端的传输方式、认证头、配置结构与验证命令，新增权限安全与配置检查表；地域 URL 合并而不重复五倍 JSON 配置（commit `52f78b5`）。
 - 回读 GitHub 文件静态检查：Blob Storage 代码围栏 4 行成对，MCP 代码围栏 12 行成对；关键字段及客户端配置标记均存在。尚未执行真实数据导出、MCP 连接或 VitePress Build。依然未部署。
+
+### Prompt Management Features 第一批（2026-10-08）
+
+盘点 Prompt Management / Features 共 15 篇，重点对照上游检查了 a-b-testing、caching、composability、github-integration、webhooks-slack-integrations、playground 六篇的章节和示例数量。发现 Webhook 官方 TS 签名验签示例若遇到错误长度的十六进制签名，Node `timingSafeEqual` 可能抛错；因此在中文版追加一段可供生产接入参考的防御式验证函数（固定 SHA-256 长度、头格式校验、时间戳窗口和常量时间比较），原官方示例仍保留。Commit: `1a432c9`。六篇只完成范围检查，其他 9 篇及逐句翻译/运行测试仍待完成，未部署。
