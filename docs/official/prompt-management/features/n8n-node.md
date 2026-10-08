@@ -4,7 +4,7 @@ description: 将 Langfuse 提示词管理接入 n8n 自动化工作流。
 ---
 # Langfuse 提示词管理的 n8n 节点
 
-Langfuse n8n 节点可以把[提示词管理](https://langfuse.com/docs/prompt-management/get-started)无缝集成到 n8n 工作流。这是由社区维护的节点，可以在 n8n 中直接读取并使用 Langfuse 项目里的提示词。
+Langfuse n8n 节点可以把[提示词管理](/official/prompt-management/get-started)无缝集成到 n8n 工作流。这是由社区维护的节点，可以在 n8n 中直接读取并使用 Langfuse 项目里的提示词。
 
 > **什么是 n8n？** [n8n](https://github.com/n8n-io/n8n) 是开源、基于节点的工作流自动化平台，可以通过可视化方式连接 API、应用和数据，不必从头编写完整代码。
 
