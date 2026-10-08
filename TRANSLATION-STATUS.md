@@ -287,3 +287,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 检查了剩余的 `compare-experiments.md`、`data-model.md`、`experiments-via-opentelemetry.md` 和 `experiments-via-ui.md` 与官方页面结构。原文包含的代码块：Compare 0、Data Model 3、OTEL 0、UI 5（其中 UI 两组为相同 Prompt/Dataset JSON 的重复展示；中文合并后保留 3 个不重复的示例）。检查中修复了 4 篇文档的中文站内交叉链接，避免继续指向相同内容的英文文档和可能失效的章节锚点。提交：`d73aff6`、`eac300a`、`00eca44`、`97d222a`。
 
 说明：此轮检查的是章节/示例数量和链接位置，不代表四篇逐句完全一致；整个 experiments 目录暂继续标记 PARTIAL，构建与真实 SDK 执行仍待测试，不部署。
+
+### ## observability/features/ 目录专项（2026-10-08）
+
+本目录共 27 篇。优先检查了两篇大体量、原有“编号示例尾部附录”的工作稿：`multi-modality.md`（13 组官方代码示例）与 `token-and-cost-tracking.md`（10 组）。已把各组代码按外部媒体、附件、引用解析、S3；以及成本流程、模型定义、手动成本上报、OpenAI Usage 兼容的章节重新归位，静态确认围栏数量一致。提交：`163f263`、`4a736b4`。
+
+这只是目录的**第一批结构校验**，其余 25 篇及两篇所有段落、动态组件与运行验证仍需逐篇复核。未执行 VitePress 构建、未部署，目录状态 PARTIAL。
