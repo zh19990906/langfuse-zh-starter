@@ -52,7 +52,7 @@ const spanProcessor = new LangfuseSpanProcessor({
 });
 ```
 
-**树形结构可能断裂：**中间或父 Span 被筛掉而子 Span 保留时，Trace 树会断开。设置 `LANGFUSE_DEBUG="true"` 或 `LANGFUSE_LOG_LEVEL="DEBUG"` 查看丢弃记录，再把所需 Instrumentation Scope 加入允许列表。参阅[SDK 高级功能](https://langfuse.com/docs/observability/sdk/advanced-features)及[OTEL 排障](https://langfuse.com/faq/all/existing-otel-setup#unwanted-spans-in-langfuse)。
+**树形结构可能断裂：**中间或父 Span 被筛掉而子 Span 保留时，Trace 树会断开。设置 `LANGFUSE_DEBUG="true"` 或 `LANGFUSE_LOG_LEVEL="DEBUG"` 查看丢弃记录，再把所需 Instrumentation Scope 加入允许列表。参阅[SDK 高级功能](/official/observability/sdk/advanced-features)及[OTEL 排障](https://langfuse.com/faq/all/existing-otel-setup#unwanted-spans-in-langfuse)。
 
 ### `updateActiveTrace()` 拆成三个函数
 
@@ -120,7 +120,7 @@ await propagateAttributes(
 | `environment` | `updateActiveTrace({environment: ...})` | 移除，使用 `LANGFUSE_TRACING_ENVIRONMENT` |
 
 ::: warning
-`setActiveTraceIO()` 仅为兼容依赖 Trace 级输入输出的旧版 [LLM-as-a-Judge](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge) 保留，已弃用。**新代码应直接为根 Observation 设置输入输出。**
+`setActiveTraceIO()` 仅为兼容依赖 Trace 级输入输出的旧版 [LLM-as-a-Judge](/official/evaluation/evaluation-methods/llm-as-a-judge) 保留，已弃用。**新代码应直接为根 Observation 设置输入输出。**
 :::
 
 ### `.updateTrace()` 替换为 `.setTraceIO()` 和 `.setTraceAsPublic()`
