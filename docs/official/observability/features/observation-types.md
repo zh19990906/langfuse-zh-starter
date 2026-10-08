@@ -1,5 +1,5 @@
 ---
-title: observation types
+title: Observation 类型
 description: Langfuse 官方文档的中文翻译与适配。
 ---
 
@@ -61,7 +61,7 @@ await startActiveObservation(
 
 `observe()` 包装器及手动 Observation 同样支持 `asType`。可使用 `generation`、`retriever` 等准确表示 LLM 生成和检索操作。
 
-原文：[Observation Types](https://langfuse.com/docs/observability/features/observation-types)。动态类型列表和更多 TS 示例待迁移。
+原文：[Observation Types](https://langfuse.com/docs/observability/features/observation-types)。官方 8 组代码示例已在下文保留并补充中文使用说明；动态 Observation 类型列表未在静态站实现，请以官方实时页面为准。
 
 
 ## 官方各类型示例（按 SDK 与 API 风格）
