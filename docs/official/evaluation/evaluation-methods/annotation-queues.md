@@ -79,4 +79,4 @@ description: 使用 Langfuse 标注队列为 Trace、Observation、Session 组�
 
 ---
 
-原文：[Annotation Queues](/official/evaluation/evaluation-methods/annotation-queues) · 非官方中文翻译。
+原文：[Annotation Queues](https://langfuse.com/docs/evaluation/evaluation-methods/annotation-queues) · 非官方中文翻译。
