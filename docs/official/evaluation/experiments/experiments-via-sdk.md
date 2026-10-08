@@ -16,7 +16,9 @@ Langfuse Experiment Runner 可以在 Python 或 TypeScript 代码中运行自己
 Task 函数接收 DatasetItem 或本地样本，返回模型执行结果。Evaluator 使用 Output、Expected Output、Input 和 Metadata 计算 Score。SDK 负责追踪、关联、并发与结果汇总。
 
 
-**官方示例（本地数据实验，分别使用 Python 和 TypeScript Runner。）**
+### 基础使用
+
+**本地实验：官方代码示例**
 
 ```python
 from langfuse import get_client
@@ -109,12 +111,13 @@ console.log(await result.format());
 await otelSdk.shutdown();
 ```
 
-### 基础使用
 
 可先使用本地样本列表运行实验。定义 Task 和 Evaluator 后，调用 Experiment Runner，使用结果格式化函数输出总结。
 
 
-**官方示例（从 Langfuse 读取 Dataset，再执行 Experiment。）**
+### 使用托管 Dataset
+
+**托管 Dataset 实验：官方代码示例**
 
 ```python
 from langfuse import get_client
@@ -164,14 +167,15 @@ console.log(await result.format());
 await otelSdk.shutdown();
 ```
 
-### 使用托管 Dataset
 
 先从 Langfuse 获取 Dataset，再运行 `dataset.run_experiment()`（Python）或 `dataset.runExperiment()`（JS/TS），产生可在 UI 比较的实验记录。
 
 ## 高级功能
 
 
-**官方示例（多个逐项 Evaluator 的 Python 与 TypeScript 用法。）**
+### Evaluator
+
+**逐项评估器：官方代码示例**
 
 ```python
 from langfuse import Evaluation
@@ -236,12 +240,13 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
-### Evaluator
 
 可配置多种逐项 Evaluator，包括确定性匹配、业务规则和 LLM 裁判。Evaluator 应返回明确定义的 Score。
 
 
-**官方示例（汇总整个 Run 的指标；与单项 Evaluator 不同。）**
+### Run-level Evaluator
+
+**Run 级评估器：官方代码示例**
 
 ```python
 from langfuse import Evaluation
@@ -304,12 +309,13 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
-### Run-level Evaluator
 
 Run Evaluator 处理整次实验的输出，计算平均质量、成功率或自定义汇总指标，Score 关联整个 DatasetRun。
 
 
-**官方示例（处理媒体/图像 DatasetItem。）**
+### 多模态实验
+
+**多模态实验：官方代码示例**
 
 ```python
 from langfuse import get_client
@@ -365,12 +371,13 @@ const result = await dataset.runExperiment({
 });
 ```
 
-### 多模态实验
 
 任务可以处理图像或其他媒体，使用媒体引用和支持该类型的模型。
 
 
-**官方示例（异步 Task/Evaluator 的用法。）**
+### Async Task 与 Evaluator
+
+**异步执行：官方代码示例**
 
 ```python
 import asyncio
@@ -422,12 +429,13 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
-### Async Task 与 Evaluator
 
 异步任务可并发执行，要控制 Provider 限流、费用和共享状态。
 
 
-**官方示例（运行器的并发及其他配置选项。）**
+### 配置参数
+
+**运行器选项：官方代码示例**
 
 ```python
 result = langfuse.run_experiment(
@@ -470,16 +478,12 @@ const result = await langfuse.experiment.run({
 console.log(await result.format());
 ```
 
-### 配置参数
 
 Runner 通常支持任务函数、Evaluator、实验名、描述、元数据以及并发等参数，确切字段参阅 SDK Reference。
 
 ## Autoevals 集成
 
-可以结合 Autoevals 等外部评分库，把结果写入 Langfuse Score。
-
-
-**官方示例（Autoevals 第三方评估器集成示例。）**
+**Autoevals 集成：官方代码示例**
 
 ```python
 from langfuse.experiment import create_evaluator_from_autoevals
@@ -524,6 +528,10 @@ const result = await langfuse.experiment.run({
 
 console.log(await result.format());
 ```
+
+
+可以结合 Autoevals 等外部评分库，把结果写入 Langfuse Score。
+
 
 ## 可选：从 UI 触发 SDK 实验
 
