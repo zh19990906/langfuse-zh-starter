@@ -51,3 +51,111 @@ Langfuse 尊重 OpenTelemetry 的采样决定。可以在 OTEL SDK 中配置 Sam
 ---
 
 原文：[Sampling](https://langfuse.com/docs/observability/features/sampling) · 中文主体翻译；上游部分 JS/TS 框架初始化示例仍需逐项移植。
+
+
+## 分场景采样的官方实现
+
+采样在客户端完成，取值 **0–1**，默认 `1`（100%）；`0.2` 约表示收集 20% 的 Trace。采样以 Trace 为单位，关联的 Observation 和 Score 随 Trace 一起保留或丢弃。Python 可设置 `LANGFUSE_SAMPLE_RATE` 或 `Langfuse(sample_rate=...)`；JS/TS 应结合 OpenTelemetry Sampler 配置，不能机械照搬 Python 构造参数。
+
+### Python SDK 环境变量、初始化与 @observe
+
+```python
+from langfuse import Langfuse, get_client
+import os
+
+# Method 1: Set environment variable
+os.environ["LANGFUSE_SAMPLE_RATE"] = "0.5"  # As string in env var
+langfuse = get_client()
+
+# Method 2: Initialize with constructor parameter then get client
+Langfuse(sample_rate=0.5)  # 50% of traces will be sampled
+langfuse = get_client()
+```
+
+```python
+from langfuse import observe, Langfuse, get_client
+
+# Initialize the client with sampling
+Langfuse(sample_rate=0.3)  # 30% of traces will be sampled
+
+@observe()
+def process_data():
+    # Only ~30% of calls to this function will generate traces
+    # The decision is made at the trace level (first observation)
+    pass
+```
+
+### JS/TS OpenTelemetry Trace Sampler
+
+```ts
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { LangfuseSpanProcessor } from "@langfuse/otel";
+import { TraceIdRatioBasedSampler } from "@opentelemetry/sdk-trace-base";
+
+const sdk = new NodeSDK({
+  // Sample 20% of all traces
+  sampler: new TraceIdRatioBasedSampler(0.2),
+  spanProcessors: [new LangfuseSpanProcessor()],
+});
+```
+
+```ts
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { LangfuseSpanProcessor } from "@langfuse/otel";
+import { TraceIdRatioBasedSampler } from "@opentelemetry/sdk-trace-base";
+
+const sdk = new NodeSDK({
+  // Sample 20% of all traces
+  sampler: new TraceIdRatioBasedSampler(0.2),
+  spanProcessors: [new LangfuseSpanProcessor()],
+});
+```
+
+### OpenAI JS/TS 集成
+
+```ts
+import OpenAI from "openai";
+import { observeOpenAI } from "@langfuse/openai";
+
+const openai = observeOpenAI(new OpenAI());
+```
+
+```ts
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { LangfuseSpanProcessor } from "@langfuse/otel";
+import { TraceIdRatioBasedSampler } from "@opentelemetry/sdk-trace-base";
+
+const sdk = new NodeSDK({
+  // Sample 20% of all traces
+  sampler: new TraceIdRatioBasedSampler(0.2),
+  spanProcessors: [new LangfuseSpanProcessor()],
+});
+```
+
+### LangChain JS/TS 集成
+
+```ts
+import { CallbackHandler } from "@langfuse/langchain";
+
+const handler = new CallbackHandler();
+```
+
+### Vercel AI SDK / Next.js
+
+```ts
+import { registerOTel } from "@vercel/otel";
+import { LangfuseSpanProcessor } from "@langfuse/otel";
+import { TraceIdRatioBasedSampler } from "@opentelemetry/sdk-trace-base";
+
+export function register() {
+  registerOTel({
+    serviceName: "langfuse-vercel-ai-nextjs-example",
+    traceSampler: new TraceIdRatioBasedSampler(0.5),
+    spanProcessors: [new LangfuseSpanProcessor()],
+  });
+}
+```
+
+::: info 校验说明
+此处补齐上游示例；具体依赖和运行环境仍需验证。原文：[sampling](https://langfuse.com/docs/observability/features/sampling)。
+:::
