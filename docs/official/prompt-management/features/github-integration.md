@@ -43,8 +43,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
+        env:
+          LF_PROMPT_NAME: ${{ github.event.client_payload.prompt.name }}
+          LF_PROMPT_VERSION: ${{ github.event.client_payload.prompt.version }}
         run: |
-          echo "Testing prompt: ${{ github.event.client_payload.prompt.name }} v${{ github.event.client_payload.prompt.version }}"
+          printf 'Testing prompt: %s v%s\n' "$LF_PROMPT_NAME" "$LF_PROMPT_VERSION"
           # Add your test commands
           # npm test
           # python -m pytest
@@ -56,19 +59,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to production
+        env:
+          LF_PROMPT_NAME: ${{ github.event.client_payload.prompt.name }}
+          LF_PROMPT_VERSION: ${{ github.event.client_payload.prompt.version }}
         run: |
-          echo "Deploying ${{ github.event.client_payload.prompt.name }} v${{ github.event.client_payload.prompt.version }}"
+          printf 'Deploying %s v%s\n' "$LF_PROMPT_NAME" "$LF_PROMPT_VERSION"
           # Your deployment commands
 ```
+::: warning 中文版安全加固
+官方示例把 `client_payload` 字段直接插入 Shell 的 `run:` 文本。此处改为先通过步骤级 `env` 注入，再由 Shell 对环境变量进行引号保护，避免提示词名称等外部内容被当作 Shell 代码执行。下方工作流仅为演示，`deploy` 任务只有 `echo`，并不执行真实部署。
+:::
+
 使用 `github.event.client_payload.*` 获取事件信息：
 ```yaml
 # Example: Access webhook data in your workflow
 - name: Process prompt data
+  env:
+    LF_ACTION: ${{ github.event.client_payload.action }}
+    LF_PROMPT_NAME: ${{ github.event.client_payload.prompt.name }}
+    LF_PROMPT_VERSION: ${{ github.event.client_payload.prompt.version }}
+    LF_LABELS_JSON: ${{ toJSON(github.event.client_payload.prompt.labels) }}
   run: |
-    echo "Action: ${{ github.event.client_payload.action }}"
-    echo "Prompt: ${{ github.event.client_payload.prompt.name }}"
-    echo "Version: ${{ github.event.client_payload.prompt.version }}"
-    echo "Labels: ${{ github.event.client_payload.prompt.labels }}"
+    printf 'Action: %s\nPrompt: %s\nVersion: %s\nLabels: %s\n' \
+      "$LF_ACTION" "$LF_PROMPT_NAME" "$LF_PROMPT_VERSION" "$LF_LABELS_JSON"
 
 - name: Deploy only production prompts
   if: contains(github.event.client_payload.prompt.labels, 'production')
