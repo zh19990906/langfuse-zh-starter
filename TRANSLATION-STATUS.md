@@ -281,3 +281,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### ## evaluation/experiments/ 目录阶段校验（2026-10-08）
 
 已将 `datasets.md` 的 14 个、`experiments-via-sdk.md` 的 16 个、`experiments-ci-cd.md` 的 13 个上游代码块，重新按对应功能章节归位；复核过代码围栏数分别为 28、32、26 条。最终修正提交：`b1f07e8`、`0487859`、`3fab1d6`。本轮**仅完成示例结构和数量的静态核对**，尚需逐段技术内容对照、真实 SDK 测试和构建。因此该文件夹继续标记 PARTIAL，禁止部署。
+
+### ## evaluation/experiments/ 目录第二轮（2026-10-08）
+
+检查了剩余的 `compare-experiments.md`、`data-model.md`、`experiments-via-opentelemetry.md` 和 `experiments-via-ui.md` 与官方页面结构。原文包含的代码块：Compare 0、Data Model 3、OTEL 0、UI 5（其中 UI 两组为相同 Prompt/Dataset JSON 的重复展示；中文合并后保留 3 个不重复的示例）。检查中修复了 4 篇文档的中文站内交叉链接，避免继续指向相同内容的英文文档和可能失效的章节锚点。提交：`d73aff6`、`eac300a`、`00eca44`、`97d222a`。
+
+说明：此轮检查的是章节/示例数量和链接位置，不代表四篇逐句完全一致；整个 experiments 目录暂继续标记 PARTIAL，构建与真实 SDK 执行仍待测试，不部署。
