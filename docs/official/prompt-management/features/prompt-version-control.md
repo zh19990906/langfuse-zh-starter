@@ -125,7 +125,7 @@ SDK 调用的接口为 `GET /api/public/v2/prompts/{name}`。以下规则适用�
 
 官方可用性标注：Hobby、Core 不提供；Pro 需 Team Add-on；Enterprise 完整支持；自托管需要 Enterprise Edition。
 
-受保护标签允许项目 Admin 和 Owner（详见 [RBAC](https://langfuse.com/docs/administration/rbac)）限制修改或删除重要标签，从而保护提示词部署。
+受保护标签允许项目 Admin 和 Owner（详见 [RBAC](/official/administration/rbac)）限制修改或删除重要标签，从而保护提示词部署。
 
 将 `production` 标记为受保护后：
 
@@ -139,7 +139,7 @@ SDK 调用的接口为 `GET /api/public/v2/prompts/{name}`。以下规则适用�
 ## 相关资源
 
 - Prompt 按项目隔离：不同环境位于不同项目时，参阅[跨环境同步](https://langfuse.com/faq/all/managing-different-environments)。
-- 将候选版本提升到生产标签前，可以先运行[实验](https://langfuse.com/docs/evaluation/core-concepts#experiments)。
+- 将候选版本提升到生产标签前，可以先运行[实验](/official/evaluation/core-concepts)。
 
 ---
 
