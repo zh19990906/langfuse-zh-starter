@@ -384,3 +384,7 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 未部署。
 
 补充：Unicode 中文锚点检查脚本已修正（`5edd7e0`），对应 GitHub Actions [run 37766745989](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37766745989) 静态检查及构建均成功，报告只剩 1 个需要修复的英文锚点：SDK Overview 指向 Score via SDK 的 `#browser-score-ingestion`，中文版该章节实际为 `#浏览器评分`。已修改链接（`b262100`），等待该修复提交的自动验证结果。网站未部署。
+
+### 最终内容验收首批（2026-10-08）
+
+独立记录见 [`FINAL-CONTENT-ACCEPTANCE.md`](FINAL-CONTENT-ACCEPTANCE.md)，已对照官方原文深入抽样 14/113 篇。**当前结论 BLOCKED，不得部署**：结构检查和 VitePress 构建通过不能证明翻译完整；若干文件正文明显缩写，部分表格解释仍英文，若干页面明确注明仍待全文验收。已针对 `public-api.md` 补充 Scores v3 类型、筛选、关联和 Observation v2 Cursor 契约（`d007cbd`），并将逐篇验收条件列入正式清单（`66d6a62`）。剩余 99 篇及 14 篇逐节对照、运行示例仍待继续，**不标 PASS**。未部署。
