@@ -94,6 +94,8 @@ graph LR
 
 ## 项目级角色
 
+**可用性限制：**项目级 Role 覆盖功能并非所有方案都有：官方能力表列出 Hobby、Core 不提供，Pro 需 Team Add-on，Enterprise 和符合条件的自托管 Enterprise 可用。具体订阅及实例许可仍以官方权限页面实时信息为准。
+
 可用性：Hobby、Core 不提供；Pro 需要 Team Add-on；Enterprise 完整支持；自托管需要 Enterprise Edition。
 
 默认情况下，成员继承组织角色；如果为 Project 显式分配 Role，则**覆盖该项目上的组织 Role**。
