@@ -252,6 +252,36 @@ curl \
 
 支持结构化 Filter、时间范围以及 Cursor Pagination。分页时固定筛选条件，传回上一页的 Cursor，直到没有新 Cursor 为止；不要用时间戳替代 Cursor 避免丢数据。
 
+### Observations API v2：固定参数与筛选边界
+
+与官方原文对照，以下固定查询参数是常用入口：
+
+| 参数 | 匹配范围 / 约束 |
+| --- | --- |
+| `fromStartTime`、`toStartTime` | ISO 8601，前者包含起点，后者不包含终点；查询应明确界定时间范围 |
+| `traceId`、`name` | 指定 Trace、精确 Observation 名称 |
+| `type` | `GENERATION`、`SPAN`、`EVENT`、`AGENT`、`TOOL`、`CHAIN`、`RETRIEVER`、`EVALUATOR`、`EMBEDDING`、`GUARDRAIL` |
+| `level` | `DEBUG`、`DEFAULT`、`WARNING`、`ERROR` |
+| `userId`、`sessionId` | 匹配所属 Trace 的用户或会话 |
+| `environment`、`version` | 前者可以重复传入多个环境；后者精确匹配 |
+| `parentObservationId` | 匹配物理父 Observation；传空值匹配无父节点的记录 |
+| `isRootObservation` | 逻辑根节点布尔条件 |
+| `fields` | 逗号分隔的返回字段组 |
+| `expandMetadata` | 需要完整返回的元数据键；默认可能被截断为前 200 字符 |
+| `limit`、`cursor` | 分页；`limit` 最大 1,000 |
+
+其他涉及标签、成本、延迟、Token、模型、Prompt、Input/Output、按键读取的 Metadata、否定与多值条件使用 **`filter`**：URL 编码后的 JSON 条件数组，每项通常为 `{ "type", "column", "operator", "value" }`，Metadata 条件另带 `key`。**只要传入 `filter`，它会优先于上述固定筛选参数**，不要误以为两套筛选会自动叠加。
+
+### Scores API v3：可选字段组
+
+无论 `fields` 选什么，都会返回核心字段：`id`、`projectId`、`name`、`value`、`dataType`、`source`、`timestamp`、`environment`、`createdAt`、`updatedAt`。另可请求：
+
+- `details`：`comment`、`configId`、`metadata`。
+- `subject`：评分关联的对象与其类型。
+- `annotation`：`authorUserId`、`queueId`。
+
+示例为 `?fields=details,subject,annotation`；未知字段组会返回 HTTP 400，而不是被静默忽略。
+
 ## Scores API v3
 
 **Score v3 接口示例：官方示例**
