@@ -22,7 +22,7 @@ Langfuse 的 Data Retention 功能用于控制事件数据在 Langfuse 中保存
 
 ![配置数据保留策略](https://langfuse.com/images/docs/data-retention.png)
 
-也可以通过[组织管理 API](https://langfuse.com/docs/administration/scim-and-org-api)配置保留策略。
+也可以通过[组织管理 API](/official/administration/scim-and-org-api)配置保留策略。
 
 这是项目级设置，不存在组织或团队级统一保留策略。需要统一管理多个项目时，必须在各项目分别设置。自托管实例可以使用 `LANGFUSE_INIT_PROJECT_RETENTION` 配置启动时创建的项目。
 
@@ -39,7 +39,7 @@ Langfuse 每晚筛选超过保留期限的 Trace、Observation、Score 和媒体
 | Score | `timestamp` |
 | 媒体资源 | `created_at` |
 
-**删除的数据不能恢复。** 如果需要在保留期限之外保存数据，可以配置 [Blob Storage Export](https://langfuse.com/docs/api-and-data-platform/features/export-to-blob-storage)，定期将 Trace、Observation 和 Score 同步到 S3、GCS 或 Azure。
+**删除的数据不能恢复。** 如果需要在保留期限之外保存数据，可以配置 [Blob Storage Export](/official/api-and-data-platform/features/export-to-blob-storage)，定期将 Trace、Observation 和 Score 同步到 S3、GCS 或 Azure。
 
 ## 项目数据保留策略会删除什么？
 
@@ -71,6 +71,10 @@ Langfuse 每晚筛选超过保留期限的 Trace、Observation、Score 和媒体
 与已保存数据集项关联的 Langfuse 托管媒体不受保留删除影响，即使源 Trace 过期也是如此。详见[多模态数据集项](https://langfuse.com/docs/evaluation/experiments/datasets#multi-modal-dataset-items)。
 
 外部 URL 仅是引用。将外部 URL 存入数据集不会复制文件，也无法保证外部文件持续可用。
+
+::: warning 保留策略不是备份与全域删除策略
+项目 Retention 删除到期 Trace、Observation、Score 和部分媒体，但不会清除 Audit Log 或 Dataset Item。它也不能保证删除已经导出至外部对象存储的数据；外部导出和备份应单独配置生命周期及删除机制。对于启用版本控制的 S3，删除标记和非当前版本还需额外生命周期规则。
+:::
 
 ## 自托管实例
 
