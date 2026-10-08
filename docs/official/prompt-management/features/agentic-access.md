@@ -4,7 +4,7 @@ description: 通过 Agent Skill、CLI 或 MCP Server，让 AI Agent 获取、创
 ---
 # Agent 提示词管理
 
-AI 编程 Agent 可以在修改应用程序代码的同时操作你的 Langfuse 提示词库。可以通过 [Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill)、CLI 和 MCP Server 访问。不同方式的操作步骤请参阅[官方页面](https://langfuse.com/docs/prompt-management/features/agentic-access)。
+AI 编程 Agent 可以在修改应用程序代码的同时操作你的 Langfuse 提示词库。可以通过 [Agent Skill](/official/api-and-data-platform/features/agent-skill)、CLI 和 MCP Server 访问。不同方式的操作步骤请参阅[官方页面](/official/prompt-management/features/agentic-access)。
 
 ## 工作流示例
 
