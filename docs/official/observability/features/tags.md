@@ -46,4 +46,92 @@ await startActiveObservation("my-operation", async () => {
 
 OpenAI、LangChain 集成同样可以通过属性传播和框架回调配置标签。另请查看[元数据](/official/observability/features/metadata)和[环境](/official/observability/features/environments)。
 
-原文：[Tags](https://langfuse.com/docs/observability/features/tags)。部分集成代码示例仍待补齐。
+
+## 更多集成示例
+
+### Python：手动 Observation
+
+```python
+from langfuse import get_client, propagate_attributes
+langfuse = get_client()
+with langfuse.start_as_current_observation(as_type="span", name="my-operation") as root_span:
+    with propagate_attributes(tags=["tag-1", "tag-2"]):
+        with root_span.start_as_current_observation(
+            as_type="generation", name="llm-call", model="gpt-4o"
+        ) as gen:
+            pass
+```
+
+### Python：OpenAI 集成
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.openai import openai
+langfuse = get_client()
+with langfuse.start_as_current_observation(as_type="span", name="openai-call"):
+    with propagate_attributes(tags=["tag-1", "tag-2"]):
+        completion = openai.chat.completions.create(
+            name="test-chat", model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a calculator."},
+                {"role": "user", "content": "1 + 1 = "},
+            ],
+            temperature=0,
+        )
+```
+
+也可以在不创建外层 Observation 时，给 OpenAI 调用传入 `metadata={"langfuse_tags": ["tag-1", "tag-2"]}`。
+
+### TypeScript：OpenAI 集成
+
+```typescript
+import OpenAI from "openai";
+import { observeOpenAI } from "@langfuse/openai";
+import { startActiveObservation, propagateAttributes } from "@langfuse/tracing";
+
+await startActiveObservation("openai-call", async () => {
+  await propagateAttributes({ tags: ["tag-1", "tag-2"] }, async () => {
+    await observeOpenAI(new OpenAI()).chat.completions.create({
+      messages: [{ role: "system", content: "Tell me a story about a dog." }],
+      model: "gpt-3.5-turbo", max_tokens: 300,
+    });
+  });
+});
+```
+
+### Python：LangChain 集成
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.langchain import CallbackHandler
+langfuse = get_client()
+langfuse_handler = CallbackHandler()
+with langfuse.start_as_current_observation(as_type="span", name="langchain-call"):
+    with propagate_attributes(tags=["tag-1", "tag-2"]):
+        response = chain.invoke(
+            {"topic": "cats"}, config={"callbacks": [langfuse_handler]}
+        )
+```
+
+也可以在 LangChain 的 `config.metadata` 中设置 `langfuse_tags`。
+
+### TypeScript：LangChain 集成
+
+```typescript
+import { propagateAttributes } from "@langfuse/tracing";
+import { CallbackHandler } from "@langfuse/langchain";
+const handler = new CallbackHandler();
+await propagateAttributes({ tags: ["tag-1", "tag-2"] }, async () => {
+  await chain.invoke({ input: "<user_input>" }, { callbacks: [handler] });
+});
+```
+
+另外可通过 `new CallbackHandler({ tags: ["tag-1", "tag-2"] })` 设置，或在 `chain.invoke()` 的配置中传入 `tags`。
+
+## 相关资源
+
+- [筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)
+- [Score 与 Tag 的区别](https://langfuse.com/docs/evaluation/scores/overview#scores-vs-tags)
+- [追踪最佳实践](https://langfuse.com/docs/observability/best-practices)
+
+原文：[Tags](https://langfuse.com/docs/observability/features/tags)。正文与主要 SDK 示例已翻译。
