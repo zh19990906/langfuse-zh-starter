@@ -388,3 +388,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### 最终内容验收首批（2026-10-08）
 
 独立记录见 [`FINAL-CONTENT-ACCEPTANCE.md`](FINAL-CONTENT-ACCEPTANCE.md)，已对照官方原文深入抽样 14/113 篇。**当前结论 BLOCKED，不得部署**：结构检查和 VitePress 构建通过不能证明翻译完整；若干文件正文明显缩写，部分表格解释仍英文，若干页面明确注明仍待全文验收。已针对 `public-api.md` 补充 Scores v3 类型、筛选、关联和 Observation v2 Cursor 契约（`d007cbd`），并将逐篇验收条件列入正式清单（`66d6a62`）。剩余 99 篇及 14 篇逐节对照、运行示例仍待继续，**不标 PASS**。未部署。
+
+### 指定清单 12+8 篇定点复查（2026-10-08）
+
+按用户指定顺序，已完成**第一优先级 12 篇 + 第二优先级 8 篇**的源文/中文稿定点对照，源 Blob SHA、逐篇核对结果及修复 Commit 见 [`PRIORITY-CONTENT-QA-2026-10-08.md`](PRIORITY-CONTENT-QA-2026-10-08.md)（commit `6829abc`）。累计重点修复包括 Public API Observation v2 filter 优先级、Compatibility 最低 Server 版本、RBAC 项目角色方案限制（组织/项目十组 Scope 列表一致）、SDK OTel/过滤/环境属性传播、Experiment Action 完整输入输出表、Dataset 版本语义、UI Webhook 签名和异步返回条件、评分类型限制、Blob 导出 114 处字段说明汉化，以及第二优先级 Webhook TS 正则错误、LLM Judge Rule 示例、Token/Cost 优先级与外部 S3 预览限制。
+
+最新文档修订提交 `b3b4187` 的 GitHub Actions [run 37769093730](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37769093730) **success**：扫描官方译文 113 篇，总 Markdown 121 篇，Errors 0、anchor warnings 0，VitePress Build 成功。**20/20 只代表这轮定点项目已有检查证据，不能宣称整篇最终内容 PASS**：深层全文翻译、真实 SDK/API/存储服务运行和其他动态内容仍需独立验收。保留 BLOCKED 发布门槛，未部署。
