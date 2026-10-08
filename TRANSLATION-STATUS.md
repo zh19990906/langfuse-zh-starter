@@ -353,3 +353,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 对照官方原文检查剩余 9 篇：agentic-access、config、folders、guaranteed-availability、link-to-traces、message-placeholders、n8n-node、prompt-version-control、variables。原文和中文译稿的围栏示例数量逐篇一致（依次为 0、6、0、4、0、6、0、6、6）。修复了 6 篇页面的 **11 处**指向同主题英文 `/docs/...` 的正文链接，改用本站 `/official/...` 路由；对于可能已失效的锚点链接保守移除片段，保留原文参考链接。提交：`d192001`、`541d609`、`37e00a1`、`ea86388`、`4a7770a`、`d4db148`。
 
 至此 `prompt-management/features/` 15/15 篇都经过至少一轮章节/示例静态检查，但不能称为全量译文验收；SDK 示例运行与 VitePress 构建尚未测试，未部署。
+
+### Administration 首轮安全边界校验（2026-10-08）
+
+已逐页静态核对 administration/ 的 10 篇中文版与官方同名源页的章节数及代码围栏数，重点抽查认证、RBAC、删除、保留的实际操作约束。发现删除和留存说明应更加明确数据保护边界，已在 `data-deletion.md` 补充级联删除不覆盖 Dataset/其他个人数据、删除异步与重新查询验证（`4549616`）；在 `data-retention.md` 补充保留策略不清理审计日志、数据集项和外部导出，版本化 S3 仍需生命周期规则（`74980be`）；在 `authentication-and-sso.md` 补充 OIDC-only、强制 SSO 避免锁定的上线核验提示（`7d86b4d`）。更正相关中文站内链接。
+
+10/10 篇已经进行首次**结构/风险扫描**，并非逐篇完整验收或执行测试；RBAC 的动态权限表还需字段级校验。未进行 VitePress Build，未部署。
