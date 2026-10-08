@@ -151,6 +151,39 @@ export function verifyLangfuseSignature(
 使用前应检查签名格式和长度；Node.js 的 `timingSafeEqual` 要求两个 Buffer 长度一致，恶意请求可能触发异常。生产环境还应按业务需要验证时间戳的有效期，防止重放。
 :::
 
+## Webhook 生产接入注意事项
+
+官方示例演示了 HMAC-SHA256 的签名计算方式；部署时还需要考虑恶意或错误格式的 Header。下面提供带格式校验的 TypeScript 验证函数，避免直接使用 `crypto.timingSafeEqual` 对不等长 Buffer 进行比较导致异常：
+
+```typescript
+import { createHmac, timingSafeEqual } from "node:crypto";
+
+export function verifyLangfuseWebhook(
+  rawBody: string,
+  signatureHeader: string | undefined,
+  signingSecret: string,
+  maxAgeSeconds = 300
+): boolean {
+  if (!signatureHeader) return false;
+  const match = /^t=(\\d+),v1=([a-fA-F0-9]{64})$/.exec(signatureHeader);
+  if (!match) return false;
+
+  const timestamp = Number(match[1]);
+  const now = Math.floor(Date.now() / 1000);
+  if (!Number.isSafeInteger(timestamp) || Math.abs(now - timestamp) > maxAgeSeconds) {
+    return false;
+  }
+
+  const expected = createHmac("sha256", signingSecret)
+    .update(`${match[1]}.${rawBody}`, "utf8")
+    .digest();
+  const received = Buffer.from(match[2], "hex");
+  return received.length === expected.length && timingSafeEqual(received, expected);
+}
+```
+
+必须传入收到的**原始请求体**，不能解析 JSON 后再序列化。签名密钥应保存在服务端安全配置中；通过事件 `id` 做幂等去重，避免 Webhook 重试引发重复部署或重复提交。上述 300 秒时间窗口属于接入端自行采用的防重放策略，并非对 Langfuse 服务端行为的保证。
+
 ## Slack 消息
 
 ### 1. 将 Slack 连接到 Langfuse
