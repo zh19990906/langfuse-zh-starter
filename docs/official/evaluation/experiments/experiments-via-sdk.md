@@ -55,6 +55,18 @@ Runner 通常支持任务函数、Evaluator、实验名、描述、元数据以�
 
 [相关实验比较](/official/evaluation/experiments/compare-experiments)。
 
+## 精校补充：Runner 的执行边界
+
+Experiment SDK 在**自己的应用环境**调用 Task，不是在 Langfuse 服务器上运行用户的 Python/TypeScript 业务函数。Runner 负责关联 DatasetItem、Trace、Evaluator Score 和 DatasetRun。
+
+**逐项 Evaluator** 对某个 Task Output 与 Expected Output 打分；**Run-level Evaluator** 则聚合整次 Experiment 的结果。两者适用对象不同，不能把 Run-level 指标误写为每个样本的 Score。
+
+使用托管 Dataset 时，应尽量固定 [Dataset Version](/official/evaluation/experiments/datasets)，否则在两次实验间增删或修改样本会影响可比性。异步 Task、Evaluator 的并发配置还应考虑模型限流、成本与工具副作用。
+
+### 通过 UI Webhook 触发外部执行
+
+UI 中设置的 Experiment Webhook 负责触发**外部运行器**，并不意味着 Langfuse 在 UI 内执行自定义 Task 代码。Webhook 接收端应校验来源、按事件 ID 幂等处理重试、记录运行失败并安全保存模型与项目密钥。
+
 ## 原文中的技术示例
 
 以下保留源文档所有代码与配置块，以避免翻译程序标识符造成错误。
