@@ -139,6 +139,12 @@ await startActiveObservation("langchain-call", async () => {
 });
 ```
 
-官方文档中的属性传播限制说明由复用组件渲染，可参考[原文 Session 文档](https://langfuse.com/docs/observability/features/sessions)。GitHub Discussions 为动态列表，未复制。
+## Session ID 的传播限制
+
+官方 `PropagationRestrictionsCallout` 对 `sessionId` 还规定：传播的值必须是**字符串**，每个值最长 200 个字符；本页源文对 Session ID 另建议使用**少于 200 个字符的 US-ASCII 字符串**，为兼容性建议遵守更保守的限制。
+
+应在 Trace 开始阶段尽早设置 `propagate_attributes(session_id=...)` 或 `propagateAttributes({ sessionId: ... }, callback)`，否则此前生成的 Observation 不会自动补上 Session ID，回放与按会话统计可能缺失部分数据。不合法的值会被丢弃并给出警告。详见[SDK 添加属性](/official/observability/sdk/instrumentation#添加属性)。
+
+官方 GitHub Discussions 为动态列表，未复制；详情见[原文 Session 文档](https://langfuse.com/docs/observability/features/sessions)。
 
 原文：[Sessions](https://langfuse.com/docs/observability/features/sessions)。正文及各框架 SDK 示例已补齐。
