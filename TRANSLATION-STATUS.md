@@ -317,3 +317,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### ## observability/sdk/ 第一批精校（2026-10-08）
 
 范围总计 9 篇（SDK 基础页与 Upgrade Path）。优先修复两个高风险的大型工作稿：`advanced-features.md` 的 31 个官方代码块、`instrumentation.md` 的 33 个官方代码块从文末集中编号附录重排回对应中文主题章节，保留原始代码文本和语言标识。提交分别为 `3bb11dd47e12d6f2b949ce530bfaa9a093326932` 和 `d6fdae667a3efa95f578a95c91d28175fc37db39`。静态检查两篇示例数量分别为 31 和 33，代码围栏均成对。本次不视为逐段完整翻译或 SDK 运行测试通过，目录状态 PARTIAL；无构建、无部署。
+
+### observability/sdk/ 第二批校验（2026-10-08）
+
+- 对照官方原文检查 SDK Overview、Troubleshooting/FAQ、Upgrade Path Index、JS v3→v4、JS v4→v5、Python v2→v3、Python v3→v4，共 **7 篇**。
+- 静态代码块数量（英文/中文）：Overview 12/13、Troubleshooting 0/0、Index 0/0、JS v3→v4 0/6、JS v4→v5 6/6、Python v2→v3 12/13、Python v3→v4 11/11。数量差异必须结合内容判断，不能等价为验收通过或代码丢失。
+- 修正 JS v3→v4 升级指南中的 SDK Overview 与后续 v4→v5 指南链接，改为本站中文页面（commit `4edaf52c7b61595af776dc09c5b4e521c6b8431c`）。
+- 特别注意：官方 Python v2→v3 源页面含 JS/TS v3→v4 的追加迁移章节，中文版本也保留此部分；这属于上游结构，暂不擅自删除。
+- 本轮属于目录结构、迁移关键点和示例数量核对，尚未完成逐句独立 PASS、实际 SDK 测试或 VitePress 构建；不部署。
