@@ -214,6 +214,9 @@ flowchart TD
   B -. "映射" .-> E["Langfuse Observation"]
   C -. "映射" .-> E
   E --> D
+  B -. "可设置 Trace 默认 Input/Output" .-> D
+  B -. "可带 Trace 属性" .-> D
+  C -. "可带 Trace 属性" .-> D
 ```
 
 - **OTel Trace**：请求或事务跨服务的完整生命周期，由首个根 Span 定义；自身没有独立的起止时间。
