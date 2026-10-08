@@ -13,7 +13,7 @@ description: 在 Trace 或 Observation 上保存更理想的模型输出，构�
 - **领域专家反馈**：由专家提供符合业务知识的理想输出；
 - **微调数据集**：导出原始输入及纠正后的输出，构建高质量训练数据；
 - **质量基准**：比较实际输出和预期输出，发现系统性问题；
-- **人工审核**：在审查流程中记录纠正，尤其适合[标注队列](https://langfuse.com/docs/evaluation/evaluation-methods/annotation-queues)。
+- **人工审核**：在审查流程中记录纠正，尤其适合[标注队列](/official/evaluation/evaluation-methods/annotation-queues)。
 
 ## 工作原理
 
@@ -104,7 +104,7 @@ curl -X POST https://cloud.langfuse.com/api/public/scores \
 
 ## 获取纠正数据
 
-纠正输出以 Score 存储，可以通过程序获取，用于构建数据集或分析模型表现。在 [Scores API](https://langfuse.com/docs/api-and-data-platform/features/public-api#v3) 中使用 `dataType=CORRECTION` 筛选，纠正后的内容位于 `value` 字段。
+纠正输出以 Score 存储，可以通过程序获取，用于构建数据集或分析模型表现。在 [Scores API](/official/api-and-data-platform/features/public-api#scores-api-v3) 中使用 `dataType=CORRECTION` 筛选，纠正后的内容位于 `value` 字段。
 
 #### Python
 
