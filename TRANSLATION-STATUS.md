@@ -398,3 +398,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 ### 其他页面内容证据补查：18 篇（2026-10-08）
 
 沿用 Issue #2 已有批次校验，不重做先前 12+8 篇。新检查的 18 篇及各自上游 Blob SHA、代码示例数量和逐项核对范围，见 [`FOLLOWUP-CONTENT-QA-2026-10-08.md`](FOLLOWUP-CONTENT-QA-2026-10-08.md)，提交 `42af2e2`。其中 `query-via-sdk` 15/15 源示例均存在、备注/排版有改动；`log-levels`、`sampling`、`trace-ids-and-distributed-tracing` 源示例完整保留；Prompt Data Model 的 Mermaid 和 Chat JSON 做过语义等效的本地化。修复四篇正文共 **28 处**跨到英文文档的链接和已知英文锚点（`ef25b18`、`1f3b2fc`、`884ca44`、`271a67d`）。Github Actions [#37770543384](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37770543384)：静态 Errors 0、anchor warnings 0、VitePress Build 成功。此批为**证据补查/定点审查**，不称 18 篇完整翻译 PASS，也未执行 SDK 示例或部署。
+
+### 后续内容证据核销（二）：8 篇（2026-10-08）
+
+追加检查 `administration/{scim-and-org-api,audit-logs}`、`api-and-data-platform/features/{cli,mcp-server}`、`prompt-management/features/guaranteed-availability`、`observability/features/{queuing-batching,masking,metadata}` 共 8 篇，源 Blob SHA、实际比对范围及修复提交已列入 [`FOLLOWUP-CONTENT-QA-BATCH2-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH2-2026-10-08.md)（`bdb7bbf`）。其中审计日志 28/28 资源动作核对、SCIM 19 处路由引用已覆盖；MCP 的 15 个上游地域/客户端配置合并为中文区域表和客户端模板，不等于丢失 9 个功能示例。**发现并修复真实启动竞态**：`guaranteed-availability.md` 的 Express 预取完成前就 `listen`（`5e3cd38`），现改为预取成功才开放端口，失败拒绝启动；同时清理 CLI 迁移文案重复（`9888223`），修正 SCIM 中文 RBAC 链接（`71cd608`）。
+
+最新文档修订的 GitHub Actions [run 37771941645](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37771941645) **success**：扫描 113 篇 official / 121 篇 Markdown，静态 Errors 0、anchor warnings 0、VitePress Build 成功。此轮仅完成上述定点检查，仍没有运行受外部服务/密钥影响的 SDK、SCIM、MCP 等代码；不可将这 8 篇标为**整篇内容最终 PASS**。未部署。
