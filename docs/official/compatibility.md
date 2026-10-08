@@ -126,7 +126,7 @@ Server 自动由官方更新，主要需要确认 SDK 主版本和所使用的 A
 
 ### 自托管 v3 搭配最新 Python v4 / JS v5，能用哪些功能？
 
-不能仅按 SDK 版本判断，必须核对[自托管最低 Server 版本](https://langfuse.com/self-hosting/upgrade/versioning#sdk-server)。旧 Server 不具备 Observation 优先模型的全部新读 API，可能需要 `api.legacy.*`；一些新功能仅在 v4 Server 上可用。
+不能仅按 SDK 版本判断，必须核对[自托管最低 Server 版本](https://langfuse.com/self-hosting/upgrade/versioning#sdk-server)。**当自托管 Server ≥ 3.63.0 时**，Python SDK v4 与 JS/TS SDK v5 的 Tracing、Prompt Management、Datasets 和 Scores 受支持。旧 Server 不具备 Observation 优先模型的全部新读 API：默认 `api.observations` 和 `api.metrics` 需要 Server v4，在 v3 上应使用 `api.legacy.*`。其他新功能也可能仅在 v4 Server 上可用。
 
 ### 为什么 Trace 过了几分钟才出现在 UI？
 
