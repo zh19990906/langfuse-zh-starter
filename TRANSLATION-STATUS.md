@@ -305,3 +305,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 已直接修复三篇的重要说明：`masking.md` 明确 Python `mask_otel_spans` 与旧 `mask` 的执行阶段、覆盖范围、异常/批次丢弃和其他 Exporter 独立脱敏风险（`c7a9d6c`）；`alerts.md` 增补 NO_DATA 通知边界与 Webhook HMAC 校验要求（`3c666e2`）；`filter-search-bar.md` 补充语法类型及 UI 版本注意事项（`412e469`）。
 
 本轮是目录结构及技术风险校验，仍未完成八篇逐句完整验收；没有运行 VitePress 构建，未部署，状态 PARTIAL。
+
+### ## observability/features/ 第四批目录范围检查（2026-10-08）
+
+检查剩余 9 篇：metadata、pulse、releases-and-versioning、sessions、tags、url、user-feedback、users、web-callouts。原文/中文版代码块数量分别为：metadata 10/10、pulse 0/0、releases 12/11、sessions 7/8、tags 12/7、url 7/7、user-feedback 3/3、users 7/8、web-callouts 1/1。数量差异可能包含合并或改写示例，不能直接认定运行错误。
+
+已在 `tags.md` 补入 5 组官方 SDK 标签传播用法（commit `6512b87`），覆盖 Python Decorator / 手动 Observation、TypeScript Context / observe 包装器、LangChain CallbackHandler。提醒：这仍可能与原先译写示例重复，需最终编辑整合。
+
+**至此 27/27 篇 features 页面已至少完成一轮结构/代码量扫描，但 0 篇被本任务据此正式标记 PASS。** 目录仍未执行逐句完整验收、示例运行和 VitePress Build；继续标记 PARTIAL，不部署。
