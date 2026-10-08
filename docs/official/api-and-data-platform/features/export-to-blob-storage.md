@@ -166,15 +166,15 @@ Scores 始终导出，不能配置其字段组。
 
 ## 导出字段完整参考
 
-以下表格保留上游的**字段名、数据类型与原始字段解释**，以确保 Schema 信息完整；字段解释中的英文可与上面的中文语义说明配合使用。类型对应 JSON/JSONL；时间戳统一 UTC，形式为 `YYYY-MM-DD HH:MM:SS.ffffff`。
+下表已将上游 Schema 的**字段说明翻译为中文**，保留原始字段名与数据类型，以便直接用于 ETL 与查询代码。类型对应 JSON/JSONL；时间戳统一 UTC，形式为 `YYYY-MM-DD HH:MM:SS.ffffff`。
 
 ### 文件类别
 
 | 文件类别               | 导出时机      | Schema                                          |
 | ------------------ | ------------------------ | ----------------------------------------------- |
-| `observations_v2/` | 当前 Enriched 导出  | [Enriched observations](#enriched-observations) |
-| `scores/`          | 每次导出             | [Scores](#scores)                               |
-| `traces/`          | 已弃用的旧版导出 | [Legacy exports](#legacy-export-paths)          |
+| `observations_v2/` | 当前 Enriched 导出  | Enriched Observation 字段表 |
+| `scores/`          | 每次导出             | Score 字段表                               |
+| `traces/`          | 已弃用的旧版导出 | 旧版导出字段表          |
 | `observations/`    | 已弃用的旧版导出 | [Legacy exports](#legacy-export-paths)          |
 
 
