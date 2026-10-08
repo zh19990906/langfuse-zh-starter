@@ -4,7 +4,7 @@ description: 使用 Langfuse 标注队列为 Trace、Observation、Session 组�
 ---
 # 标注队列（Annotation Queues）
 
-标注队列是一种人工[评估方法](https://langfuse.com/docs/evaluation/core-concepts#evaluation-methods)，供领域专家对 Trace、Observation 或 Session 添加[评分](https://langfuse.com/docs/evaluation/scores/overview)和评论。
+标注队列是一种人工[评估方法](/official/evaluation/core-concepts)，供领域专家对 Trace、Observation 或 Session 添加[评分](/official/evaluation/scores/overview)和评论。
 
 [观看标注队列演示](https://static.langfuse.com/docs-videos/2025-12-19-annotation-queues.mp4)。
 
@@ -13,14 +13,14 @@ description: 使用 Langfuse 标注队列为 Trace、Observation、Session 组�
 - 人工检查应用输出并添加评分与评论；
 - 邀请领域专家审核选定的一部分追踪；
 - 添加[纠正后的输出](/official/observability/features/corrections)，记录模型本应生成的内容；
-- 将 LLM-as-a-Judge 评估与人工标注对齐，通过[评分分析](https://langfuse.com/docs/evaluation/scores/score-analytics#human-vs-ai-annotation-agreement)测量一致性，并根据审核标签[校准裁判模型](https://langfuse.com/guides/llm-as-a-judge-calibration-skill)。
+- 将 LLM-as-a-Judge 评估与人工标注对齐，通过[评分分析](/official/evaluation/scores/score-analytics)测量一致性，并根据审核标签[校准裁判模型](https://langfuse.com/guides/llm-as-a-judge-calibration-skill)。
 
 ## 配置步骤
 
 ### 1. 创建标注队列
 
 1. 点击 `New Queue` 创建队列。
-2. 选择该队列使用的 [Score Config](https://langfuse.com/docs/evaluation/scores/data-model#score-config)。
+2. 选择该队列使用的 [Score Config](/official/evaluation/scores/data-model)。
 3. 设置 `Queue name` 和可选的 `Description`。
 4. 按需分配审核用户。
 
@@ -79,4 +79,4 @@ description: 使用 Langfuse 标注队列为 Trace、Observation、Session 组�
 
 ---
 
-原文：[Annotation Queues](https://langfuse.com/docs/evaluation/evaluation-methods/annotation-queues) · 非官方中文翻译。
+原文：[Annotation Queues](/official/evaluation/evaluation-methods/annotation-queues) · 非官方中文翻译。
