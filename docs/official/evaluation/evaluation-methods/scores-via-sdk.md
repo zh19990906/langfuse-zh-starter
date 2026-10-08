@@ -761,6 +761,13 @@ ScoreConfig 约束 Name、Type、范围与允许类别，统一不同来源的�
 
 SDK 可能根据传入 Value 或 Config 自动决定 Score DataType；生产系统推荐明确约定类型，避免随请求内容改变。
 
+- 写入 `NUMERIC` 可使用浮点数；指定 `ScoreConfig` 时会校验允许范围。
+- 写入 `CATEGORICAL` 时类别必须在配置允许的枚举中；即使没有数值映射也有字符串类别，只有指定 `ScoreConfig` 才生成数值映射。
+- 写入 `BOOLEAN` 的旧评分摄入 API 示例可传数值 `0` / `1`，但 **Scores API v3 读取**会返回 JSON 布尔 `false` / `true`。使用 Config 时名称及数据类型必须匹配。
+- 写入 `TEXT` 时要求 **1–500 个字符**、非空字符串。配置的名称和数据类型也必须匹配。
+
+若创建带 `configId` 的评分，需符合该配置的 Score 名称、数据类型及类别/范围约束；不要把非法输入的拒绝理解为自动类型转换。
+
 ## 更新已有 Score
 
 Score 的更新通常需要已知 ID 和对应 API 路径。请区分“创建新评分”“幂等写入”与“修改既有评分”，并确认相应 SDK 版本与服务器接口。
