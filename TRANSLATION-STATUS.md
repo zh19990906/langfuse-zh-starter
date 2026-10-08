@@ -102,11 +102,11 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `api-and-data-platform/features/agent-skill.mdx` → `docs/official/api-and-data-platform/features/agent-skill.md`（部分翻译/组件或示例待补）
 - `api-and-data-platform/features/cli.mdx` → `docs/official/api-and-data-platform/features/cli.md`（正文翻译，尚未最终验收）
 - `api-and-data-platform/overview.mdx` → `docs/official/api-and-data-platform/overview.md`（正文翻译，尚未最终验收）
-- `prompt-management/get-started.mdx` → `docs/official/prompt-management/get-started.md`（部分翻译/组件或示例待补）
+- `prompt-management/get-started.mdx` → `docs/official/prompt-management/get-started.md`（创建/使用共享组件的主要示例已迁移；动态 FAQ 未迁移）
 - `prompt-management/data-model.mdx` → `docs/official/prompt-management/data-model.md`（正文已补齐，发布前待验收）
 - `observability/features/log-levels.mdx` → `docs/official/observability/features/log-levels.md`（部分翻译/组件或示例待补）
-- `observability/features/sessions.mdx` → `docs/official/observability/features/sessions.md`（部分翻译/组件或示例待补）
-- `observability/features/users.mdx` → `docs/official/observability/features/users.md`（部分翻译/组件或示例待补）
+- `observability/features/sessions.mdx` → `docs/official/observability/features/sessions.md`（正文与 SDK 示例已补充；动态讨论未迁移）
+- `observability/features/users.mdx` → `docs/official/observability/features/users.md`（正文与 SDK 示例已补充；动态讨论未迁移）
 - `observability/features/tags.mdx` → `docs/official/observability/features/tags.md`（主要 SDK 集成示例已补齐，发布前待验收）
 - `observability/features/observation-types.mdx` → `docs/official/observability/features/observation-types.md`（部分翻译/组件或示例待补）
 
@@ -117,3 +117,10 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 已将 `prompt-management/data-model` 从概要扩展为对应上游完整正文：Text/Chat、动态渲染、缓存、版本、标签、发布与回滚。
 - 已为 `observability/features/tags` 补充 Python / TypeScript 的 OpenAI、LangChain 与手动 Observation 使用示例。
 - 中文映射总数仍为 **60 / 113**；这次是补齐已有页面，而非新增篇数。
+
+### 本轮继续补齐（未部署）
+
+- `observability/features/sessions.md` 补入 Python、TypeScript、OpenAI、LangChain 等完整上下文传播示例。
+- `observability/features/users.md` 补入手动 Observation、TypeScript 包装器、OpenAI 与 LangChain 接入示例。
+- `prompt-management/get-started.md` 从官方 `components-mdx/prompt-create.mdx` 与 `components-mdx/prompt-use.mdx` 迁入创建提示词和运行时使用示例，包含 Python、TypeScript、HTTP API、OpenAI、LangChain 和 Vercel AI SDK；动态 FAQ 仍须链接官方。
+- **中文映射页面数仍为 60 / 113。** 此轮是补齐，不新增映射。
