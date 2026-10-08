@@ -549,6 +549,10 @@ Experiment SDK 在**自己的应用环境**调用 Task，不是在 Langfuse 服�
 
 ### 通过 UI Webhook 触发外部执行
 
+配置时输入外部评估服务的 URL，并提供可由触发者修改的默认 Config。在 Dataset 的 **Custom Experiment → Run** 触发后，Langfuse 会将 Dataset 的 ID、名称及自定义配置发送至该服务。
+
+官方支持可选的 **HMAC 签名请求头 `x-langfuse-signature`**（与 Prompt Webhook 共用的签名格式）；在配置界面开启 Request Signing，并可在 **Advanced Options** 增加自定义 HTTP Header。旧配置未启用签名仍可工作，因此接收端不得默认所有请求都已验签。接收端应尽快返回 **2xx**，将耗时实验异步执行。可参阅[Prompt Webhook 签名校验](/official/prompt-management/features/webhooks-slack-integrations)。
+
 UI 中设置的 Experiment Webhook 负责触发**外部运行器**，并不意味着 Langfuse 在 UI 内执行自定义 Task 代码。Webhook 接收端应校验来源、按事件 ID 幂等处理重试、记录运行失败并安全保存模型与项目密钥。
 
 
