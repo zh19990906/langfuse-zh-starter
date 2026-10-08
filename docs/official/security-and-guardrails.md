@@ -37,7 +37,7 @@ LLM 安全指为模型及其基础设施实施保护措施，防止未经授权�
 2. 在 Dashboard 中追踪安全 Score 趋势。
 3. **验证安全检查**：使用 [Score](/official/evaluation/scores/overview)衡量工具效果。
    - [UI 标注与队列](/official/evaluation/evaluation-methods/annotation-queues)：标注一部分生产 Trace，建立人工基线，与安全库结果对比。
-   - [自动评估](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)：异步检测毒性、敏感信息与可疑风险，找出防护缺口。
+   - [自动评估](/official/evaluation/evaluation-methods/llm-as-a-judge)：异步检测毒性、敏感信息与可疑风险，找出防护缺口。
 4. **追踪延迟**：有些安全检查必须在模型调用前完成，有些会阻止响应；拆解各步骤延迟，判断安全收益与性能成本是否平衡。
 
 ## 快速开始：匿名化 PII
