@@ -56,4 +56,89 @@ await startActiveObservation("conversation", async () => {
 
 与把多条 Trace 合并到一个 Session 不同，跨服务共用一条 Trace 应使用[Trace ID 与分布式追踪](/official/observability/features/trace-ids-and-distributed-tracing)。
 
-原文：[Sessions](https://langfuse.com/docs/observability/features/sessions)。部分各框架示例待逐项补齐。
+## 各集成的详细设置示例
+
+### Python：嵌套 Observation
+
+```python
+from langfuse import get_client, propagate_attributes
+
+langfuse = get_client()
+with langfuse.start_as_current_observation(as_type="span", name="process-chat-message") as root_span:
+    with propagate_attributes(session_id="chat-session-123"):
+        with root_span.start_as_current_observation(
+            as_type="generation", name="generate-response", model="gpt-4o"
+        ) as gen:
+            pass
+```
+
+### TypeScript：`observe` 包装器
+
+```typescript
+import { observe, propagateAttributes } from "@langfuse/tracing";
+
+const processChatMessage = observe(
+  async (message: string) => {
+    return await propagateAttributes({ sessionId: "session-123" }, async () => {
+      const result = await processMessage(message);
+      return result;
+    });
+  },
+  { name: "process-chat-message" },
+);
+const result = await processChatMessage("Hello!");
+```
+
+### Python：OpenAI
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.openai import openai
+
+langfuse = get_client()
+with langfuse.start_as_current_observation(as_type="span", name="openai-call"):
+    with propagate_attributes(session_id="your-session-id"):
+        completion = openai.chat.completions.create(
+            name="test-chat",
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a calculator."},
+                {"role": "user", "content": "1 + 1 = "}
+            ],
+            temperature=0,
+        )
+```
+
+### Python：LangChain
+
+```python
+from langfuse import get_client, propagate_attributes
+from langfuse.langchain import CallbackHandler
+
+langfuse = get_client()
+handler = CallbackHandler()
+with langfuse.start_as_current_observation(as_type="span", name="langchain-call"):
+    with propagate_attributes(session_id="your-session-id"):
+        chain.invoke({"animal": "dog"}, config={"callbacks": [handler]})
+```
+
+### TypeScript：LangChain
+
+```typescript
+import { startActiveObservation, propagateAttributes } from "@langfuse/tracing";
+import { CallbackHandler } from "@langfuse/langchain";
+
+const langfuseHandler = new CallbackHandler();
+await startActiveObservation("langchain-call", async () => {
+  await propagateAttributes({ sessionId: "your-session-id" }, async () => {
+    await chain.invoke(
+      { input: "<user_input>" },
+      { callbacks: [langfuseHandler] },
+    );
+  });
+});
+```
+
+官方文档中的属性传播限制说明由复用组件渲染，可参考[原文 Session 文档](https://langfuse.com/docs/observability/features/sessions)。GitHub Discussions 为动态列表，未复制。
+
+原文：[Sessions](https://langfuse.com/docs/observability/features/sessions)。正文及各框架 SDK 示例已补齐。
