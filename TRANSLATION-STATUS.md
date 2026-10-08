@@ -220,3 +220,10 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 修正 `prompt-management/get-started.md` 的英文 Frontmatter 标题和包含 `MOVED TO R2` 的明显无效视频 URL（改为官方教程入口），并调整内部数据模型链接。
 - 修正 SDK 概览内部分章节锚点链接，减少无效跳转风险。
 - 未运行全量 VitePress Build、未验证所有代码示例或外部资源；其他概要式译稿仍需逐篇校对。
+
+### 第二轮 SDK 技术校验（2026-10-08，未部署）
+
+- `observability/sdk/advanced-features.md`：上游共 31 个代码块，中文版保留数量一致；校验并补充 Python 与 JS/TS Sampling、独立 TracerProvider 共享上下文和 Python 多项目路由的第三方 Span 交叉发送风险。
+- `observability/sdk/instrumentation.md`：上游共 33 个代码块，中文版保留数量一致；补充 Context Manager、Decorator、手动 Observation `.end()`、Python Environment 属性/跨服务 Baggage、Python Flush/Shutdown 与 JS/TS Serverless `forceFlush()` 的重要行为。
+- 两篇的原有代码仍集中在“官方示例”部分，尚未与中文步骤逐一重排，已添加明显的工作译稿提示。因此**不标记为完整译文验收通过**。
+- 未执行 VitePress 全量构建，也未部署。
