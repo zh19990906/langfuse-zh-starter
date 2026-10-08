@@ -10,8 +10,10 @@
 - `observability/overview.mdx` → `docs/official/observability/overview.md`
 - `prompt-management/overview.mdx` → `docs/official/prompt-management/overview.md`
 - `evaluation/overview.mdx` → `docs/official/evaluation/overview.md`
+- `observability/data-model.mdx` → `docs/official/observability/data-model.md`
+- `observability/troubleshooting-and-faq.mdx` → `docs/official/observability/troubleshooting-and-faq.md`（静态文字翻译，动态组件未翻译）
 
-**正文翻译进度：3 / 113**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
+**当前完成页面：5 / 113（其中疑难解答页的动态 FAQ 内容未复制，属于部分翻译）**。另外 V0.1 原有 6 篇中文导览属于独立编写的概念说明，不计入逐页翻译数量。
 
 ## 翻译约定
 
@@ -24,7 +26,7 @@
 
 ## 发布
 
-在 `master` 分支推送 `docs/**` 后由 `.github/workflows/deploy.yml` 免费部署 GitHub Pages。历史 Next.js 静态发布流程已停止自动部署，以免冲突。
+仅在一个文档板块完成并经过复核后，手动运行 `.github/workflows/deploy.yml` 发布 GitHub Pages；提交译文不自动部署。历史 Next.js 静态发布流程已停止自动部署，以免冲突。
 
 ## 许可
 
