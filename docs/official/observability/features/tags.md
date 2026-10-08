@@ -12,7 +12,7 @@ description: Langfuse 官方文档的中文翻译与适配。
 ## 界面中的用途
 
 - 按一个或多个标签筛选 Trace 和 Observation，例如 `tags:(billing AND urgent)`。
-- 在[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)或 [Metrics API](/official/metrics/features/metrics-api)中按标签分析成本、延迟等指标。
+- 在[自定义仪表盘](/official/metrics/features/custom-dashboards)或 [Metrics API](/official/metrics/features/metrics-api)中按标签分析成本、延迟等指标。
 - 按业务功能、API 端点或工作流分类，而不混淆环境、用户和 Session 属性。
 
 ![Trace 标签表格](https://langfuse.com/images/docs/tags-traces-table.png)
@@ -229,8 +229,8 @@ Langfuse 会自动聚合一个 Trace 内各 Observation 的 Tag，形成 Trace �
 
 ## 相关资源
 
-- [筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)
-- [Score 与 Tag 的区别](https://langfuse.com/docs/evaluation/scores/overview#scores-vs-tags)
-- [追踪最佳实践](https://langfuse.com/docs/observability/best-practices)
+- [筛选搜索栏](/official/observability/features/filter-search-bar)
+- [Score 与 Tag 的区别](/official/evaluation/scores/overview#选用-score-还是-tag)
+- [追踪最佳实践](/official/observability/best-practices)
 
 原文：[Tags](https://langfuse.com/docs/observability/features/tags)。已补充关键标签传播示例，仍需逐项核对所有 SDK 场景。
