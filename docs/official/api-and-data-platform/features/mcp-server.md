@@ -151,6 +151,32 @@ pi install npm:pi-mcp-adapter
 - Transport：`streamableHttp`
 - 认证：Authorization Header 中的 Basic Auth，格式为 `Authorization: Basic {your-base64-token}`。
 
+## 各 MCP 客户端配置核对
+
+官方英文页对 Claude Code、Codex、Cursor、Pi Agent 以及其他 MCP 客户端使用多个地域 Tab。中文版把地域 URL 汇总在前面的表中；下列核对表明确各客户端的**配置结构和验证步骤**，避免误把不同客户端格式混用。
+
+| 客户端 | 接入方式或配置路径 | 认证字段 | 验证方式 |
+| --- | --- | --- | --- |
+| Claude Code | `claude mcp add --transport http ... --header ...` | 命令行 `--header "Authorization: Basic ..."` | 让 Agent 调用 `listPrompts` |
+| Codex | `~/.codex/config.toml` 中的 `[mcp_servers.langfuse]` | `http_headers = { "Authorization" = "Basic ..." }` | 重启后运行 `codex mcp list`，再执行 `listPrompts` |
+| Cursor | Settings → Tools & Integrations → Add Custom MCP → `mcp.json` | `mcp.servers.langfuse.headers.Authorization` | 保存、重启后检查 MCP 状态 |
+| Pi Agent | 安装社区 `pi-mcp-adapter`；`~/.pi/agent/mcp.json` | `mcpServers.langfuse.headers.Authorization` | 重启 Pi，经 MCP Proxy 调用 `listPrompts` |
+| 其他 MCP 客户端 | HTTP MCP Server，Transport 为 `streamableHttp` | HTTP Header `Authorization: Basic ...` | 通过客户端读取工具清单并执行只读查询 |
+
+所有客户端的端点路径都是 `/api/public/mcp`，须按 Langfuse 项目所在区域替换主机名。Basic Token 是 **Base64 编码的 `publicKey:secretKey`**，编码**不是加密**；不要将真实 Token 提交到公开配置仓库、截图或日志中。
+
+::: warning 读写工具与凭据权限
+MCP Server 默认可以暴露读写工具。用于检索/排查的 Agent 应优先在客户端配置工具 Allowlist，仅开放必要的只读工具；任何写操作都应经过单独权限审核。项目密钥只应保存在可信环境，示例中的占位符绝不可当作真实凭据。
+:::
+
+### 配置完成后的核验清单
+
+- [ ] 选择正确区域 URL、项目级 Public Key 与 Secret Key，并验证 Basic Authorization Header。
+- [ ] 确保客户端使用 `streamableHttp` 或其 HTTP MCP 传输选项，而不是误配到 Stdio。
+- [ ] Codex、Cursor、Pi 分别采用 TOML、`mcp.servers` JSON、`mcpServers` JSON 的正确结构。
+- [ ] 重启客户端并通过 `listPrompts` 确认连接成功。
+- [ ] 对只需查询的 Agent 禁用不需要的写工具；自托管出现 Host/Origin `403` 时检查反向代理和 `LANGFUSE_MCP_ALLOWED_HOSTS`。
+
 ## 筛选逻辑根 Observation
 
 Observation 工具区分**逻辑根**与**物理父节点**：
@@ -171,7 +197,7 @@ Observation 工具区分**逻辑根**与**物理父节点**：
 - [MCP Reference](https://mcp.reference.langfuse.com)
 - [Agentic Prompt Management](/official/prompt-management/features/agentic-access)
 - [提示词管理概览](/official/prompt-management/overview)
-- [Public API](https://langfuse.com/docs/api-and-data-platform/features/public-api)
+- [Public API](/official/api-and-data-platform/features/public-api)
 - [Agent Skill](/official/api-and-data-platform/features/agent-skill)
 - [Langfuse for Agents](https://langfuse.com/agents)
 
