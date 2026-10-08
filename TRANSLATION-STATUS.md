@@ -227,3 +227,10 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - `observability/sdk/instrumentation.md`：上游共 33 个代码块，中文版保留数量一致；补充 Context Manager、Decorator、手动 Observation `.end()`、Python Environment 属性/跨服务 Baggage、Python Flush/Shutdown 与 JS/TS Serverless `forceFlush()` 的重要行为。
 - 两篇的原有代码仍集中在“官方示例”部分，尚未与中文步骤逐一重排，已添加明显的工作译稿提示。因此**不标记为完整译文验收通过**。
 - 未执行 VitePress 全量构建，也未部署。
+
+### 第三轮技术校验：Public API、Score 与 SDK 实验（2026-10-08，未部署）
+
+- `api-and-data-platform/features/public-api.md`：补齐官方 API 认证示例、Observations v2 Cursor 限制（默认 50、上限 1000、降序）、Scores v3 返回值类型（BOOLEAN 为 boolean，不是数字）、可选字段组、Python/JS 版本兼容和旧 Ingestion API 迁移说明。
+- `evaluation/evaluation-methods/scores-via-sdk.md`：澄清创建/读取评分 API、稳定评分 ID 与名称的区别、Browser 端密钥安全与 Score v3 读取类型。
+- `evaluation/experiments/experiments-via-sdk.md`：澄清 Runner 执行位置、逐项和 Run-level Evaluator、Dataset 固定版本及 UI Webhook 外部执行的关系。
+- 以上为局部技术修正，仍需把原来的按编号排列代码块逐一对应中文说明。尚未执行构建或部署，不标为整篇完整验收。
