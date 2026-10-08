@@ -55,7 +55,21 @@ for (const file of all) {
       // flag for manual review, don't wrongly fail a build.
       const [target, frag] = route.split("#");
       const slug = frag?.split("?")[0];
-      if (slug && !/^([\w-]+)$/.test(slug)) warnings.push(`${rel}: review anchor ${href}`);
+      if (slug) {
+        const dest = target === "/" ? "index" : target.replace(/^\\//, "");
+        const destFile = [path.join(root, dest + ".md"), path.join(root, dest, "index.md")].find(fs.existsSync);
+        if (destFile) {
+          const targetText = sourceTexts.get(destFile) ?? fs.readFileSync(destFile, "utf8");
+          const slugs = [...targetText.matchAll(/^#{1,6}\\s+(.+)$/gm)].map(m =>
+            m[1].replace(/\\s*\\[#([^\\]]+)\\]\\s*$/, "").replace(/\\s*#+\\s*$/, "")
+              .toLowerCase().replace(/[^\\p{L}\\p{N} _-]/gu, "").trim().replace(/\\s+/g, "-")
+          );
+          const explicit = targetText.includes(`id="${slug}"`) || targetText.includes(`id='${slug}'`);
+          if (!slugs.includes(decodeURIComponent(slug)) && !explicit) {
+            warnings.push(`${rel}: anchor needs review ${href}`);
+          }
+        }
+      }
     }
   }
 }
