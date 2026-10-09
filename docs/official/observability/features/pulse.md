@@ -9,7 +9,7 @@ Pulse 是位于 Observation 表格上方的一条紧凑图表带。每个柱条�
 [观看 Pulse 演示](https://static.langfuse.com/changelog-videos/2025-07-28-pulse.mp4)。
 
 ::: info
-Pulse 依赖 [Langfuse v4](https://langfuse.com/docs/v4) 以 Observation 为中心的数据模型，位于主 Observation 表格上方。当表格限定为单个用户或 Session 时不会显示。自托管部署需要[升级到 Langfuse v4](https://langfuse.com/self-hosting/upgrade/upgrade-guides/upgrade-v3-to-v4)。
+Pulse 依赖 [Langfuse v4](/official/v4) 以 Observation 为中心的数据模型，位于主 Observation 表格上方。当表格限定为单个用户或 Session 时不会显示。自托管部署需要[升级到 Langfuse v4](https://langfuse.com/self-hosting/upgrade/upgrade-guides/upgrade-v3-to-v4)。
 :::
 
 Pulse 在 Observation 表格上方持续可用。
@@ -48,7 +48,7 @@ Pulse 在 Observation 表格上方持续可用。
 
 ## 可继承的筛选器
 
-Pulse 使用下方 Observation 表格的相同筛选查询，包括时间范围、侧边栏筛选项和[筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)。
+Pulse 使用下方 Observation 表格的相同筛选查询，包括时间范围、侧边栏筛选项和[筛选搜索栏](/official/observability/features/filter-search-bar)。
 
 某些条件无法按时间聚合，因此不能应用到 Pulse：
 
@@ -70,7 +70,7 @@ Pulse 和[将表格转换成图表](/official/observability/features/events-tabl
 ## 相关资料
 
 - [表格图表](/official/observability/features/events-table-charts)
-- [筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)
+- [筛选搜索栏](/official/observability/features/filter-search-bar)
 
 ---
 
