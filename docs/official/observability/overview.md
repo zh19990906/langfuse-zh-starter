@@ -13,7 +13,7 @@ description: 了解 Langfuse 如何追踪 LLM 应用的请求、延迟、成本�
 
 ## 开始使用
 
-首先[创建第一条追踪记录](https://langfuse.com/docs/observability/get-started)，随后阅读[最佳实践](https://langfuse.com/docs/observability/best-practices)。如果刚接触 AI 可观测性，建议先理解[核心概念](https://langfuse.com/docs/observability/data-model)。
+首先[创建第一条追踪记录](/official/observability/get-started)，随后阅读[最佳实践](/official/observability/best-practices)。如果刚接触 AI 可观测性，建议先理解[核心概念](/official/observability/data-model)。
 
 ## 使用追踪数据
 
@@ -21,10 +21,10 @@ description: 了解 Langfuse 如何追踪 LLM 应用的请求、延迟、成本�
 
 常见的使用场景包括：
 
-- 追踪[模型使用量与成本](https://langfuse.com/docs/observability/features/token-and-cost-tracking)。
-- 使用[评分](https://langfuse.com/docs/evaluation/scores/overview)监控应用质量。
-- 通过[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)分析成本、延迟、请求量和质量。
-- 为超出阈值的指标设置[告警](https://langfuse.com/docs/observability/features/alerts)。
+- 追踪[模型使用量与成本](/official/observability/features/token-and-cost-tracking)。
+- 使用[评分](/official/evaluation/scores/overview)监控应用质量。
+- 通过[自定义仪表盘](/official/metrics/features/custom-dashboards)分析成本、延迟、请求量和质量。
+- 为超出阈值的指标设置[告警](/official/observability/features/alerts)。
 
 ## 常见问题
 
@@ -38,11 +38,11 @@ description: 了解 Langfuse 如何追踪 LLM 应用的请求、延迟、成本�
 
 ### Langfuse 和其他追踪解决方案有什么不同？
 
-Langfuse 专为 LLM 应用设计，原生理解 Token 使用量、模型参数、提示词与补全内容、评估分数等概念。除了通用追踪，还提供 [LLM-as-a-Judge 评估](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge)、[提示词管理](/official/prompt-management/overview)、[实验与数据集](https://langfuse.com/docs/evaluation/experiments/datasets)以及[自定义仪表盘](https://langfuse.com/docs/metrics/features/custom-dashboards)。它也是开源的，支持自托管。
+Langfuse 专为 LLM 应用设计，原生理解 Token 使用量、模型参数、提示词与补全内容、评估分数等概念。除了通用追踪，还提供 [LLM-as-a-Judge 评估](/official/evaluation/evaluation-methods/llm-as-a-judge)、[提示词管理](/official/prompt-management/overview)、[实验与数据集](/official/evaluation/experiments/datasets)以及[自定义仪表盘](/official/metrics/features/custom-dashboards)。它也是开源的，支持自托管。
 
 ### Langfuse 会增加应用延迟吗？
 
-通常不会显著影响响应时间。Langfuse SDK 在后台异步发送追踪数据：事件先在本地排队，再批量发送。详情参阅[队列与批处理](https://langfuse.com/docs/observability/features/queuing-batching)。
+通常不会显著影响响应时间。Langfuse SDK 在后台异步发送追踪数据：事件先在本地排队，再批量发送。详情参阅[队列与批处理](/official/observability/features/queuing-batching)。
 
 ---
 
