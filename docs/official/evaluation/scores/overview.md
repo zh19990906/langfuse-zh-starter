@@ -63,4 +63,4 @@ TEXT Score 用于开放式定性标注。由于自由文本无法有效聚合或
 
 ---
 
-原文：[Scores Overview](/official/evaluation/scores/overview) · 非官方中文翻译。
+原文：[Scores Overview](https://langfuse.com/docs/evaluation/scores/overview) · 非官方中文翻译。
