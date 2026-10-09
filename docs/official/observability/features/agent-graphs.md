@@ -17,7 +17,7 @@ Langfuse 的 Agent 图以可视化方式展示复杂 AI Agent 工作流，帮助
 1. **根据 Observation 推断**：当 Trace 中存在除 `span`、`event`、`generation` 之外类型的 Observation 时，Langfuse 会将其识别为 Agent 工作流，并根据各 Observation 的时间和嵌套关系自动生成图。
 2. **通过 LangGraph 集成**：使用 LangGraph 集成后，系统会自动展示对应图结构。
 
-参阅[Observation 类型](https://langfuse.com/docs/observability/features/observation-types)了解如何设置类型；[LangGraph 集成指南](https://langfuse.com/integrations/frameworks/langgraph)提供完整示例。
+参阅[Observation 类型](/official/observability/features/observation-types)了解如何设置类型；[LangGraph 集成指南](https://langfuse.com/integrations/frameworks/langgraph)提供完整示例。
 
 ## 两种视图：聚合与展开
 
