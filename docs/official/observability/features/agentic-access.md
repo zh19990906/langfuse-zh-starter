@@ -4,7 +4,7 @@ description: 使用 Agent Skill、CLI 或 MCP Server，让 AI Agent 分析 Langf
 ---
 # 通过 AI Agent 访问可观测性数据
 
-AI Agent 可以直接在 Langfuse 中分析生产环境的应用行为。Agent 能通过 [Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill)、CLI 或 MCP Server 等方式访问数据。具体操作方式参见[官方动态组件说明](https://langfuse.com/docs/observability/features/agentic-access)。
+AI Agent 可以直接在 Langfuse 中分析生产环境的应用行为。Agent 能通过 [Agent Skill](/official/api-and-data-platform/features/agent-skill)、CLI 或 MCP Server 等方式访问数据。具体操作方式参见[官方动态组件说明](https://langfuse.com/docs/observability/features/agentic-access)。
 
 ## 工作流示例
 
