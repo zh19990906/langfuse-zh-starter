@@ -6,7 +6,7 @@ description: 配置 Langfuse Playground、LLM-as-a-Judge 和提示词实验使�
 
 LLM Connection 用于在 Langfuse Playground 中调用模型，以及执行 LLM-as-a-Judge 评估。
 
-**它不会影响已摄入 Trace 的 Token 价格**，因为 Langfuse 根据[模型定义](https://langfuse.com/docs/observability/features/token-and-cost-tracking#infer)推断成本。对于内置定义不包含的模型，应[添加自定义模型定义](https://langfuse.com/docs/observability/features/token-and-cost-tracking#custom-model-definitions)，必要时配置[价格层级](https://langfuse.com/docs/observability/features/token-and-cost-tracking#pricing-tiers)。
+**它不会影响已摄入 Trace 的 Token 价格**，因为 Langfuse 根据[模型定义](/official/observability/features/token-and-cost-tracking)推断成本。对于内置定义不包含的模型，应[添加自定义模型定义](/official/observability/features/token-and-cost-tracking)，必要时配置[价格层级](/official/observability/features/token-and-cost-tracking)。
 
 ## 设置连接
 
