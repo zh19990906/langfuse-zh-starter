@@ -6,7 +6,7 @@ description: 从 Langfuse 中的 Trace、Observation 或 Session 手动触发 HT
 
 Web Callouts 允许项目成员从 Langfuse UI 中的 Trace、Observation 或 Session 发起预先配置的后端 HTTP 请求。可以将调试工作流连接到内部工具、客服系统、事件响应流程或自定义调查服务。
 
-与[提示词 Webhook](https://langfuse.com/docs/prompt-management/features/webhooks-slack-integrations)不同，Web Callouts 是用户在 UI 中**手动触发**的。用户点击操作后，Langfuse 后端同步发送请求。
+与[提示词 Webhook](/official/prompt-management/features/webhooks-slack-integrations)不同，Web Callouts 是用户在 UI 中**手动触发**的。用户点击操作后，Langfuse 后端同步发送请求。
 
 ::: info
 Web Callouts 仅发送标识符：Trace、Observation、Session ID 和项目 ID。如果需要其他数据，请在自己的后端通过 Langfuse API 查询。
