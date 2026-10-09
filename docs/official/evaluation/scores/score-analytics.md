@@ -166,7 +166,7 @@ Score Analytics 无需额外配置即可分析评估数据。不论是验证不�
 ## 相关资料
 
 - [校准 LLM 裁判](https://langfuse.com/guides/llm-as-a-judge-calibration-skill)
-- [自定义 Dashboard](https://langfuse.com/docs/metrics/features/custom-dashboards)
+- [自定义 Dashboard](/official/metrics/features/custom-dashboards)
 - [Metrics API](/official/metrics/features/metrics-api)
 
 动态 GitHub Discussions 未迁移。
