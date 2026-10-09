@@ -108,12 +108,19 @@ sequenceDiagram
     participant E as 后台导出器
     participant L as Langfuse 服务端
     A->>S: 创建 Trace
-    S->>E: 暂存 Trace
-    A->>S: 退出前调用 flush()
-    S->>E: 强制刷新
-    E->>L: 发送全部缓存追踪
-    L-->>E: 确认
-    A-->>A: 安全退出
+    S->>E: 放入内存缓冲队列
+    alt 未调用 flush()
+        Note over E: 等待下一次批量导出
+        A-->>A: 进程提前退出
+        Note over A,E: 未发送的追踪可能丢失
+    else 退出前调用 flush()
+        A->>S: flush()
+        S->>E: 强制导出缓冲数据
+        E->>L: 发送全部缓存追踪
+        L-->>E: 确认接收
+        Note over E: 缓冲队列清空
+        A-->>A: 完成任务并退出
+    end
 ```
 
 ---
