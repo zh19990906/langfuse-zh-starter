@@ -12,7 +12,7 @@ description: 在 Trace 和 Observation 的输入、输出与元数据中查找�
 
 使用 Trace 和 Observation 表格上方的搜索栏，可搜索 `input` 与 `output` 内容。匹配的结果会返回到表格中，还可以与已有筛选条件和时间范围组合使用。
 
-在 v4 版 Observation 与 Trace 表格中，也能通过[筛选搜索栏](https://langfuse.com/docs/observability/features/filter-search-bar)直接使用全文搜索，并与 `level:ERROR`、`latency:>2` 等结构化条件组合。
+在 v4 版 Observation 与 Trace 表格中，也能通过[筛选搜索栏](/official/observability/features/filter-search-bar)直接使用全文搜索，并与 `level:ERROR`、`latency:>2` 等结构化条件组合。
 
 ## 性能
 
@@ -22,7 +22,7 @@ description: 在 Trace 和 Observation 的输入、输出与元数据中查找�
 
 ## 通过 API 搜索
 
-[Observations API v2](https://langfuse.com/docs/api-and-data-platform/features/public-api#v2)支持 `matches` 运算符，对 `input`、`output` 及字符串类型的 `metadata` 执行基于 Token 的全文搜索。
+[Observations API v2](/official/api-and-data-platform/features/public-api)支持 `matches` 运算符，对 `input`、`output` 及字符串类型的 `metadata` 执行基于 Token 的全文搜索。
 
 使用 `/api/public/v2/observations` 构建筛选条件时：已知精确值时优先使用 `=`，需要 Token 搜索时使用 `matches`。
 
@@ -57,7 +57,7 @@ description: 在 Trace 和 Observation 的输入、输出与元数据中查找�
 ]
 ```
 
-把 JSON 数组进行 URL 编码，作为 `GET /api/public/v2/observations` 的 `filter` 查询参数传入。完整筛选 Schema 见 [Observations API v2](https://langfuse.com/docs/api-and-data-platform/features/public-api#v2)和 [API Reference](https://api.reference.langfuse.com/#tag/observations/GET/api/public/v2/observations)。
+把 JSON 数组进行 URL 编码，作为 `GET /api/public/v2/observations` 的 `filter` 查询参数传入。完整筛选 Schema 见 [Observations API v2](/official/api-and-data-platform/features/public-api)和 [API Reference](https://api.reference.langfuse.com/#tag/observations/GET/api/public/v2/observations)。
 
 官方页面还提供 GitHub Discussions 动态讨论模块，静态中文版暂未嵌入。
 
