@@ -431,3 +431,9 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 - 对 LLM Connections 的 3/3 官方示例核对原代码完全一致；Prompt Variables 的 6/6 示例为删减注释与折叠空行后的等价调用结构，不能用字符串不一致断言错误。Observability Get Started 的顶层代码块 **9 vs 26** 来自 MDX Tab 和扩展示例不同，**仍需单独验证每种接入路径**，不标记最终 PASS。
 - 最近一次正文修订 `26a4bb4` 的 [GitHub Actions](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37866190991) 已确认 **success**：扫描官方文档 113 篇、全部 Markdown 121 篇，Errors 0、Anchor Warnings 0、VitePress Build 成功。
 - 这是一轮**验收记录核销和定点修复**，不是声称 86 篇已完成全文最终 PASS。继续保持网站不部署。
+
+### 2026-10-09 全部文件级验收证据核销
+
+本日第六批 14 篇与第七批 13 篇内容核查记录已提交，见 `FOLLOWUP-CONTENT-QA-BATCH6-2026-10-09.md`、`FOLLOWUP-CONTENT-QA-BATCH7-2026-10-09.md`。`CONTENT-QA-INDEX.md` 现为 **113/113 篇有文件级定点检查记录**，未登记 0 篇。该结果不等于逐段最终验收 PASS 或真实服务运行通过。
+
+主要修改：Prompt Management Get Started 更正过时备注，Observability Overview 修复 11 处中文链接，Scores Overview 修复原文回链，v4 补回 Questions 迁移资源。最后内容修订 `b152676` 的 Actions `37867818285` 成功：113 official / 121 Markdown，Errors 0，Anchor Warnings 0，VitePress Build 成功。`FINAL-CONTENT-ACCEPTANCE.md` 已更新该统计口径。未部署。
