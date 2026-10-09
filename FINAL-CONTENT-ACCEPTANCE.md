@@ -1,5 +1,7 @@
 # Langfuse 中文文档最终内容验收记录
 
+> **更新状态（2026-10-09）**：全部 **113/113 篇已建立文件级定点验收证据**，可参阅 [CONTENT-QA-INDEX.md](CONTENT-QA-INDEX.md)、第六批及第七批报告。此前的“14 篇抽查”是历史批次，不再代表累计进度。**全文最终验收仍未 PASS，暂不部署。**
+
 > 2026-10-08，目标范围：`docs/official/` 113 篇。**验收尚未通过（BLOCKED）**，不得据此部署。本文记录可重复核实的现有证据和后续验收条件。
 
 ## 与结构检查的边界
@@ -65,3 +67,13 @@ GitHub Actions 已成功构建 VitePress，站内路径、导航和代码围栏�
 新增核销 **13 篇**：SDK Upgrade Path 5 篇、Observability Users/Feedback/Comments/Corrections/Tags/Environments/Sessions/Releases 8 篇。各页上游 Blob SHA、代码示例对照、核对范围见 [`FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md`](FOLLOWUP-CONTENT-QA-BATCH3-2026-10-08.md)（`1486611`）。实质修复为上游 `PropagationRestrictionsCallout` 中原先被略过的**传播值字符串限额、尽早设置及无效值被丢弃的说明**，涉及 Users `d0dd29a`、Sessions `eab0c4d`、Releases `5021b62`、Tags `a66cd81`；并在 6 篇文档中修复 15 处与本地中文页有对应目标的内部正文链接/锚点（`3ef9a1a`、`86382bc`、`5ffce50`、`f5674e3`、`8bf8ccc`、`8a8bac6`）。JS v3→v4 原文采用缩进代码围栏，不能按顶格围栏数量判断缺失；Release 的 12→11 是原文重复 `LANGFUSE_RELEASE` 示例在中文版合并。
 
 最新内容提交 `8a8bac6` 的 GitHub Actions [run 37773401731](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37773401731) **success**：113 篇 official / 121 篇 Markdown，Errors 0、anchor warnings 0，VitePress Build 成功。仍未执行实际 SDK/外部服务测试；本批定点核查不等于 13 篇全文最终 PASS；**未部署**。
+
+
+### 2026-10-09：113/113 文件级验收证据索引已补齐（未部署）
+
+- 已上传此前暂存的第六批 14 篇报告：[FOLLOWUP-CONTENT-QA-BATCH6-2026-10-09.md](FOLLOWUP-CONTENT-QA-BATCH6-2026-10-09.md)（`bef0f30`）。
+- 新增第七批剩余 13 篇报告：[FOLLOWUP-CONTENT-QA-BATCH7-2026-10-09.md](FOLLOWUP-CONTENT-QA-BATCH7-2026-10-09.md)（`b7d2f1d`）；涵盖首页、Demo、v4、Roadmap、Score Overview、Prompt Management Get Started、四份动态 FAQ 及其他入口。未复刻官方动态 FAQ、Demo 和 Glossary，静态版提供原站入口。
+- [CONTENT-QA-INDEX.md](CONTENT-QA-INDEX.md) 已把此前 **86/113** 更新为 **113/113 均有文件级定点检查记录**（`455829f`）；未登记项 0。该数字**不等于逐段翻译最终 PASS**，不能自动解除发布门槛。
+- 本轮内容修复：Prompt Management Get Started 删除已经失效的“示例待补齐”文字并修复两处中文链接（`3346a1b`）；Observability Overview 修复 11 处中文站内链接（`c61c425`）；Scores Overview 的“原文”链接改回官方页面（`2003775`）；v4 补回 Questions 与迁移资料入口（`b152676`）。
+- 最后一份内容修订 `b152676` 对应 [GitHub Actions run 37867818285](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37867818285) **success**：113 篇 official / 121 篇 Markdown、Errors 0、Anchor Warnings 0、VitePress Build 成功。
+- **发布结论仍为内容专项最终 PASS 未取得**：文件级定点证据齐全并不替代每篇的完整逐节检查，更不代表全部 SDK/API/认证/动态组件已真实执行。继续不部署。
