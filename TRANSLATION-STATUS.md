@@ -421,3 +421,13 @@ Langfuse 官方文档仓库使用 MIT License，转载与翻译时须保留该�
 正文修订 `ae4a0c5` 的 GitHub Actions [#37779116285](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779116285) 已成功：113 篇官方文档、121 篇 Markdown，Errors 0、Anchor Warnings 0、VitePress Build 通过。之后另有 GitHub Webhook 安全说明补充 `f7b8c4b`；其 CI 结果应单独核实。本批仅为**16 篇定点证据复查**，不等于全文 PASS；未部署。
 
 补充验证：GitHub Webhook 安全文档最终内容修订 `f7b8c4b` 的 [Actions run 37779472841](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37779472841) 已确认 **success**：113 篇官方中文页 / 121 篇 Markdown，静态 Errors 0、Anchor Warnings 0，VitePress Build 成功。仅为 Markdown/构建测试，未运行真正的 GitHub Dispatch 或 HMAC 服务器，未部署。
+
+
+### 2026-10-09 逐篇验收证据核销与新增八篇（未部署）
+
+- 新增 [CONTENT-QA-INDEX.md](CONTENT-QA-INDEX.md)，把 `docs/official` **113 篇**逐项列出并与六份专项内容 QA 报告对应；目前 **86 篇有明确文件级定点内容检查记录，27 篇未在专项报告中单独登记**。后者有部分已被此前目录级记录覆盖，不能误称“从未校验”。
+- 新增 [FOLLOWUP-CONTENT-QA-BATCH5-2026-10-09.md](FOLLOWUP-CONTENT-QA-BATCH5-2026-10-09.md)，将 `administration/{spend-alerts,llm-connection}`、`evaluation/evaluation-methods/scores-via-ui`、`evaluation/scores/score-analytics`、`metrics/overview`、`observability/features/pulse`、`observability/get-started`、`prompt-management/features/variables` 八篇按源 Blob SHA、技术条款、代码示例与未完事项逐篇登记。
+- 已将对应中文文档中 **15 处**重复指向官方英文页的内部链接改为本站中文地址，涉及 `llm-connection`、`score-analytics`、`metrics/overview` 和 `pulse` 四篇。外部提供商、视频、Academy 等链接保持原样。
+- 对 LLM Connections 的 3/3 官方示例核对原代码完全一致；Prompt Variables 的 6/6 示例为删减注释与折叠空行后的等价调用结构，不能用字符串不一致断言错误。Observability Get Started 的顶层代码块 **9 vs 26** 来自 MDX Tab 和扩展示例不同，**仍需单独验证每种接入路径**，不标记最终 PASS。
+- 最近一次正文修订 `26a4bb4` 的 [GitHub Actions](https://github.com/zh19990906/langfuse-zh-starter/actions/runs/37866190991) 已确认 **success**：扫描官方文档 113 篇、全部 Markdown 121 篇，Errors 0、Anchor Warnings 0、VitePress Build 成功。
+- 这是一轮**验收记录核销和定点修复**，不是声称 86 篇已完成全文最终 PASS。继续保持网站不部署。
