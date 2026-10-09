@@ -42,7 +42,7 @@ prompt = langfuse.get_prompt("my-prompt")
 compiled = prompt.compile(name="Alice")
 ```
 
-原文的详细创建与使用示例来自复用 MDX 组件，需在后续补齐，参见[官方快速开始](https://langfuse.com/docs/prompt-management/get-started)。
+官方使用复用 MDX 组件展示创建、获取与使用提示词的各语言示例；下面已展开整理这些主要示例。若 SDK 更新导致示例参数发生变化，请核对[官方最新快速开始](https://langfuse.com/docs/prompt-management/get-started)。
 
 ::: info
 Langfuse SDK 会在客户端缓存提示词，首次获取后通常从内存返回，避免增加请求延迟。全新实例需要更严格的可用性保障时，参阅[回退提示词](/official/prompt-management/features/guaranteed-availability)。
@@ -249,8 +249,8 @@ Chat 类型则将 `chatPrompt.compile(...)` 传入 `generateText({ messages: ...
 ## 后续步骤
 
 - [把提示词关联到 Trace](/official/prompt-management/features/link-to-traces)，分析不同版本的效果；
-- [通过实验评估提示词](https://langfuse.com/docs/evaluation/experiments/experiments-via-ui)；
-- [使用标签与版本控制发布](https://langfuse.com/docs/prompt-management/features/prompt-version-control#protected-prompt-labels)。
+- [通过实验评估提示词](/official/evaluation/experiments/experiments-via-ui)；
+- [使用标签与版本控制发布](/official/prompt-management/features/prompt-version-control)。
 
 原文中的动态 FAQ 组件不在此站复制，可通过[官方 FAQ](https://langfuse.com/docs/prompt-management/get-started)获取。
 
