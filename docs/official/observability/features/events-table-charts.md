@@ -11,7 +11,7 @@ Observation 表格工具栏提供 **Table | Chart** 开关。切换到 **Chart**
 如果你只想快速找异常峰值，可以使用 [Pulse](/official/observability/features/pulse)，它是表格上方的紧凑图表，不需要替换整张表格。
 
 ::: info
-图表视图基于 [Langfuse v4](https://langfuse.com/docs/v4) 数据模型。在 Langfuse Cloud 中需要启用 v4 预览；自托管环境需要[升级到 v4](https://langfuse.com/self-hosting/upgrade/upgrade-guides/upgrade-v3-to-v4)。
+图表视图基于 [Langfuse v4](/official/v4) 数据模型。在 Langfuse Cloud 中需要启用 v4 预览；自托管环境需要[升级到 v4](https://langfuse.com/self-hosting/upgrade/upgrade-guides/upgrade-v3-to-v4)。
 :::
 
 ## Visualize 面板
